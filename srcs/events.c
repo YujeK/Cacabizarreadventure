@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:39:04 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 03:00:51 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 07:30:56 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void event_mouse(t_plyr *player, t_data *data)
 	player->yaw = data->yaw + player->velocity.z * 0.5f;
 	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT) && data->weapon_state == 0)
 	{
-		if (ft_in_hitbox(data) == 1 && data->aim == 2)
-			printf("yoyo\n");
 		data->weapon_state = 1;
 		data->weapon_ammo += (data->weapon_ammo > 0) ? -1 : 100;
 	}
@@ -93,6 +91,10 @@ void inv_ev(t_data *data, Uint8 *state, float *move_vec)
 		data->zawarudo = 0;
 		data->toto = 0;
 	}
+	if (state[SDL_SCANCODE_KP_MINUS])
+		data->luminosity -= 0.0005;
+	if (state[SDL_SCANCODE_KP_PLUS] && data->luminosity < 0.9995)
+		data->luminosity += 0.0005;
 }
 
 void movement_ev(t_data *data, Uint8 *state, float *move_vec, t_plyr *player)

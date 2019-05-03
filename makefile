@@ -24,7 +24,8 @@ SRC			:=	main.c \
 				UI_comps.c \
 				stand_ev.c\
 				sprites.c \
-				init_sprites.c
+				init_sprites.c \
+				luminosity.c
 # directories :
 OBJDIR 		:=	objs
 INCDIR  	:=	includes

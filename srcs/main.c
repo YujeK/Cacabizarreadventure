@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 21:53:02 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/03 02:58:03 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 07:27:53 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int main()
 
 	ft_bzero(&data, sizeof(t_data));
 	data.weapon_ammo = 100;
+	data.luminosity = 0.99;
 	player.ground = 0;
 	player.falling = 1;
 	player.moving = 0;

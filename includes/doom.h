@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 21:23:19 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/03 02:24:30 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 07:25:04 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ typedef struct	s_data
 	int				sprite_nbr;
 	int				toto;
 	int				aim;
+	double			luminosity;
 }					t_data;
 
 void			put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel);
@@ -286,6 +287,7 @@ void			draw_items(t_data *data);
 void			draw_inventory(t_data *data);
 int 			render_sprite(t_plyr player, t_object *sprite, t_sector *sectors);
 void			draw_resized_column(t_data *data,t_object sprite, t_wind wind);
+int				luminosity(int r1, double z, double luminosity);
 
 
 /*
