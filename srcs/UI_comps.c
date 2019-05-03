@@ -6,11 +6,17 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 02:59:19 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/01 06:16:06 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/03 07:50:18 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void        cap_framerate(t_data *data)
+{
+    if ((1000 / FPS) > SDL_GetTicks() - data->starting_tick)
+        SDL_Delay(1000 / FPS - (SDL_GetTicks() - data->starting_tick));
+}
 
 void		wpn_bobbing(t_data *data)
 {

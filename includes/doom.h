@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 21:23:19 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/03 02:24:30 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 08:37:26 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define vfov (.2f * SCREEN_HEIGHT)
 # define CROSSHAIR_X 500
 # define CROSSHAIR_Y 500
+# define FPS 60
 
 typedef struct  s_pixels
 {
@@ -171,9 +172,13 @@ typedef struct  s_object
 
 typedef struct	s_data
 {
+	float			sprint;
+	Uint32			starting_tick;
 	int				greyscale_step;
 	int				msg_readen;
 	TTF_Font		*font;
+	time_t			timer;
+	time_t			stand_timer;
 	time_t			timer_start;
 	Mix_Chunk		*stand_warudo;
 	Mix_Music		*menutheme;
@@ -238,6 +243,7 @@ float			ft_iatof(char *wall, int index);
 int				ft_draw_line3(t_wind wind, t_coord point, t_coord next_point, t_line line);
 void   			display_img(int x, int y, t_wind wind, int size, unsigned int *res_img);
 int         	ft_in_hitbox(t_data *data);
+void        	cap_framerate(t_data *data);
 
 
 /*

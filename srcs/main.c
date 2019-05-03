@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 21:53:02 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/03 02:58:03 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 08:50:49 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,24 @@ int main()
 	player = Load_Player(sectors, map[ft_tablen(map) - 2]);
 	rect.x = 1000;
 	rect.y = 1000;
-	Mix_PlayMusic(data.menutheme, 1);
+	//Mix_PlayMusic(data.menutheme, 1);
 	while(1)
 	{
-		/* render */
+		/* starting data */
+		data.sprint = 1;
+		data.starting_tick = SDL_GetTicks();
+		if (data.zawarudo == 1)
+	{
+		Mix_PauseMusic();
+		if (time(0) - data.stand_timer > 14)
+		{
+			data.zawarudo = 0;
+			data.timer_start += 15;
+		}
+	}
+		else
+			Mix_ResumeMusic();
+			/* render */
 		draw_screen(&data, &player, sectors, NumSectors);
 		draw_inventory(&data);
 		draw_items(&data);
@@ -177,11 +191,11 @@ int main()
 		float move_vec[2] = {0.f, 0.f};
 		event_keyboard(&player, &data, move_vec) == 1 ? pushing = 1 : 0;
 		float acceleration = pushing ? 0.4 : 0.2;
-		player.velocity.x = player.velocity.x * (1-acceleration) + move_vec[0] * acceleration;
-		player.velocity.y = player.velocity.y * (1-acceleration) + move_vec[1] * acceleration;
+		player.velocity.x = player.velocity.x * (1-acceleration) + move_vec[0] * acceleration * data.sprint;
+		player.velocity.y = player.velocity.y * (1-acceleration) + move_vec[1] * acceleration * data.sprint;
 		if(pushing)
 			player.moving = 1;
-		SDL_Delay(10);
+		cap_framerate(&data);
 		SDL_UpdateWindowSurface(window);
 	}
 	ft_exit(&data);
