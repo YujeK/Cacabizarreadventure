@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vline.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:11:11 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 02:40:17 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 08:48:26 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,12 @@ void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom,
 	y2 = clamp(y2, 0, SCREEN_HEIGHT - 1);
 	if (data->zawarudo == 1)
 	{
-		data->greyscale_step++;
-		if (data->greyscale_step >= 3800000)
+		if (time(0) - data->stand_timer > 4)
+		{
 			top = return_grayscale(top);
-		if (data->greyscale_step >= 3800000)
 			middle = return_grayscale(middle);
-		if (data->greyscale_step >=	3800000)
 			bottom = return_grayscale(bottom);
+		}
 	}
 	if(y1 == y2)
 	{

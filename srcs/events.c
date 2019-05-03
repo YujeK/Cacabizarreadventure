@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 23:39:04 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 07:30:56 by dhorvill         ###   ########.fr       */
+/*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
+/*   Updated: 2019/05/03 22:37:18 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void event_mouse(t_plyr *player, t_data *data)
 	player->yaw = data->yaw + player->velocity.z * 0.5f;
 	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT) && data->weapon_state == 0)
 	{
+		//if (ft_in_hitbox(data) == 1 && data->aim == 2)
 		data->weapon_state = 1;
 		data->weapon_ammo += (data->weapon_ammo > 0) ? -1 : 100;
 	}
@@ -127,7 +128,13 @@ void movement_ev(t_data *data, Uint8 *state, float *move_vec, t_plyr *player)
 		if (data->wpn_y < 15 && data->wpn_repos == 0 && data->which_weapon != 0)
 			data->wpn_y += 1;
 	}
+		if (state[SDL_SCANCODE_LSHIFT])
+			data->sprint = 1.3;
+		if (state[SDL_SCANCODE_LALT])
+			data->sprint = 0.4;
 	player->ducking = (state[SDL_SCANCODE_LCTRL] || state[SDL_SCANCODE_RCTRL]);
+	if (player->ducking)
+		data->sprint = 0.3;
 }
 
 int event_keyboard(t_plyr *player, t_data *data, float *move_vec)

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 23:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 05:00:49 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/03 08:31:21 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,13 @@ void			ft_start_game(t_data *data)
 	if (data->timer_start && data->zawarudo == 0)
 	{
 		rect = (SDL_Rect){431, 50, 60, 60};
-		ft_set_nbrstring((time(0) - data->timer_start), rect, ft_color_nb_state(1), data);
+		data->timer = time(0) - data->timer_start;
+		ft_set_nbrstring(data->timer, rect, ft_color_nb_state(1), data);
 	}
-	if (data->zawarudo == 1)
+	if (data->zawarudo == 1 && data->timer_start)
 	{
-		rect = (SDL_Rect){350, 50, 60, 60};
-		ft_set_string(rect, "Time has stopped", ft_hex_to_rgb(0xFF1493FF), data);
+		rect = (SDL_Rect){431, 50, 60, 60};
+		ft_set_nbrstring(data->timer, rect, ft_color_nb_state(1), data);
 	}
 	if (data->story_step == 0 && data->msg_readen == 0)
 	{
