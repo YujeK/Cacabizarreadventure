@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:15:17 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 04:46:31 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/03 06:49:42 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ void draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int N
 					cnya = clamp(nya, ytop[x], ybottom[x]);
 					nyb = (x - x1) * (ny2b - ny1b) / (x2 - x1) + ny1b;
 					cnyb = clamp(nyb, ytop[x], ybottom[x]);
-					r1 = 0x010101 * (255 - z);
+					r1 = luminosity(r1, z);
 					r2 = r1;//0x040007 * (31 - z / 8);
 					vline(data, x, cya, cnya - 1, 0, x == x1 || x == x2 ? 0 : r1, 0, data->wind.screen, res_img);
 					ytop[x] = clamp(max(cya, cnya), ytop[x], SCREEN_HEIGHT - 1);
@@ -261,7 +261,7 @@ void draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int N
 
 				else
 				{
-					r = 0x010101 * (255 - z);
+					r = luminosity(r1, z);
 					point_in_image = ratio * 600;
 					//vline2(point_in_image, x, cya, cyb, 0, x == x1 || x == x2 ? 0 : r, 0, data->wind.screen, res_img, ya, yb);
 					vline(data, x, cya, cyb, 0, x == x1 || x == x2 ? 0 : r, 0, data->wind.screen, res_img);
