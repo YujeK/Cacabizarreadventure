@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resize_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 19:14:40 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/03 02:43:16 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 05:20:57 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,18 @@ unsigned int *resize(unsigned int *pixels, t_tga specs, double size)
 	prop = specs.width / size;
 	if ((res_img = (unsigned int *)malloc((sizeof(res_img)) * size * size)) == 0)
 		return (0);
-	while (j < specs.height)
+	while (res_j >= 0)
 	{
 		res_i = size - 1;
 		i = 0;
-		while (i < specs.width)
+		while (res_i >= 0)
 		{
 			if (pixels[(int)j * specs.width + (int)i] != 0xffffffff)
-			{
-				pixels[(int)j * specs.width + (int)i] -= 0xff000000; 
-			}
+				pixels[(int)j * specs.width + (int)i] -= 0xff000000;
 			res_img[res_j * (int)size + res_i] = pixels[(int)j * specs.width + (int)i];
 			i += prop;
 			res_i--;
 		}
-		if (i > specs.width)
-			res_img[res_j * (int)size + res_i] = pixels[(int)j * specs.width + specs.width - 1];
 		j += prop;
 		res_j--;
 	}

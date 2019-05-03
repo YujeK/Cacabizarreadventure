@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tga.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 21:41:43 by snicolet          #+#    #+#             */
-/*   Updated: 2019/04/05 03:55:29 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 05:21:34 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char					*ft_readfile(const char *filepath, size_t *usize)
 	char			*data;
 
 	data = NULL;
-	if ((!size) || (!(data = malloc(sizeof(char) * (size + 1)))) ||
+	if ((!size) || (!(data = malloc(sizeof(char) * (size)))) ||
 			(!(fd = open(filepath, O_RDONLY))))
 	{
 		if (usize)

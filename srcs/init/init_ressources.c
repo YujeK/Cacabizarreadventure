@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ressources.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 20:50:50 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 01:10:57 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 05:00:04 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_img(t_data *data)
 	data->invon.res_img = resize(data->invon.img, data->invon.specs, 600);
 	if (!(data->invoff.img = tga_load("ressources/inventory/invoff.tga", &data->invoff.specs)))
 		ft_error_exit("I couldnt load tga invoff", data);
+	printf("%d\n", data->invoff.specs.width);
 	data->invoff.res_img = resize(data->invoff.img, data->invoff.specs, 100);
 	if (!(data->sprite[0].img = tga_load("ressources/inventory/toiletashkan.tga", &data->sprite[0].specs)))
 		ft_error_exit("I couldnt load tga toiletashkan", data);

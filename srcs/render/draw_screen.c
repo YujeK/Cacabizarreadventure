@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:15:17 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 02:42:44 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/03 04:46:31 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,6 @@ void draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int N
 					head = queue;
 			}
 		}
-		printf("%i\n", data->aim);
 		++renderedsectors[now.sectorno];
 	}
 }
