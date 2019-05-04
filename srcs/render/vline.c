@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:11:11 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/04 10:06:27 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/04 14:38:15 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ int		return_grayscale(int color)
 	return (color);
 }
 
+int		return_redscale(int color)
+{
+	int	r;
+	int	g;
+	int	b;
+	int	average;
+
+	b = color % 255;
+	color /= 255;
+	g = color % 255;
+	r = color % 255;
+	average = (r + g + b) / 3;
+	color = average * 0x010000;
+	return (color);
+}
+
 void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img)
 {
 	int *pix;
@@ -43,9 +59,9 @@ void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom,
 		{
 			data->prev_lum = data->luminosity;
     		data->luminosity = 0.999995;
-			top = return_grayscale(top);
-			middle = return_grayscale(middle);
-			bottom = return_grayscale(bottom);
+			top = return_redscale(top);
+			middle = return_redscale(middle);
+			bottom = return_redscale(bottom);
 		}
 	}
 	if(y1 == y2)
