@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 19:14:40 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/03 05:20:57 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/04 13:01:23 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ unsigned int *resize(unsigned int *pixels, t_tga specs, double size)
 	return(res_img);
 }
 
-void		draw_resized_column(t_data *data, t_object sprite, t_wind wind)
+void		draw_resized_column(t_data *data, t_object *sprite, t_wind wind, int ytop, int ybot)
 {
 	double prop;
 	double i;
@@ -52,19 +52,28 @@ void		draw_resized_column(t_data *data, t_object sprite, t_wind wind)
 	int res_j;
 	double width;
 
-	width = sprite.specs.width;
+	width = sprite->specs.width;
 	j = width - 1;
-	res_j = sprite.y1;
-	prop = width / sprite.size;
-	i = sprite.x_count * prop;
-	while (j > 0 && res_j < sprite.y2)
+	res_j = sprite->y1;
+	prop = width / sprite->size;
+	i = sprite->x_count * prop;
+	//srintf("%i\n", sprite->status);
+	while (j > 0 && res_j < sprite->y2)
 	{
-		if (sprite.img[(int)j * sprite.specs.width + (int)i] != 0xffffffff)
-			sprite.img[(int)j * sprite.specs.width + (int)i] -= 0xff000000;
-		
-		if (res_j == SCREEN_HEIGHT / 2 && sprite.x + sprite.x_count == SCREEN_WIDTH / 2)
-			data->aim = 2;
-		put_pixel32(wind.screen, sprite.x + sprite.x_count, res_j, sprite.img[(int)j * sprite.specs.width + (int)i]);
+		if (sprite->img[(int)j * sprite->specs.width + (int)i] != 0xffffffff)
+			sprite->img[(int)j * sprite->specs.width + (int)i] -= 0xff000000;
+		if (res_j == SCREEN_HEIGHT / 2 && sprite->x + sprite->x_count == SCREEN_WIDTH / 2)
+		{
+			data->aim = sprite->i;
+		}
+		if(sprite->status == 1)
+		{
+			put_pixel32(wind.screen, sprite->x + sprite->x_count, res_j, sprite->dead_img[(int)j * sprite->specs.width + (int)i]);
+			if (time(0) - sprite->death_timer >= 1)
+				sprite->status = 2;
+		}
+		if (sprite->status == 0)
+			put_pixel32(wind.screen, sprite->x + sprite->x_count, res_j, sprite->img[(int)j * sprite->specs.width + (int)i]);
 		j -= prop;
 		res_j++;
 	}

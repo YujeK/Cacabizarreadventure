@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 02:26:57 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 09:03:39 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/04 02:34:25 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void    stand_ev(t_data *data, Uint8 *state)
     if (Mix_PlayChannel(0, data->stand_warudo, 0) == -1)
 		ft_error_exit("cant play zawarudo", data);
     }
+    // over the rainbow
     if (state[SDL_SCANCODE_KP_7] && state[SDL_SCANCODE_KP_5] && state[SDL_SCANCODE_KP_3])
       ft_putstr("over the rainbow");
+    // eyes of the dead
 }

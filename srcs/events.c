@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/03 22:37:18 by dhorvill         ###   ########.fr       */
+/*   Updated: 2019/05/04 13:00:00 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ void event_mouse(t_plyr *player, t_data *data)
 	player->yaw = data->yaw + player->velocity.z * 0.5f;
 	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT) && data->weapon_state == 0)
 	{
-		//if (ft_in_hitbox(data) == 1 && data->aim == 2)
+		if(data->aim >= 0)
+		{
+			data->sprite[data->aim].status = 1;
+			data->sprite[data->aim].death_timer = time(0);
+		}
 		data->weapon_state = 1;
 		data->weapon_ammo += (data->weapon_ammo > 0) ? -1 : 100;
 	}
@@ -156,7 +160,7 @@ int event_keyboard(t_plyr *player, t_data *data, float *move_vec)
 			player->falling = 1;
 		}
 	}
-	if (state[SDL_SCANCODE_Q])
+	if (state[SDL_SCANCODE_ESCAPE])
 		exit(EXIT_FAILURE);
 	change = 1;
 	return (change);

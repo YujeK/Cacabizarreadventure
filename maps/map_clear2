@@ -1,15 +1,15 @@
-vertex	0	0 60 280 z 
-vertex	20	10 175 z
-vertex	50	40 60 180 210 z
-vertex	65	90 110 130 135 175 z
-vertex	70	50 70 80 90 110 130 135 150 170 190 210 z
-vertex	75	40 60 z
-vertex	105	40 60 z
-vertex	110	50 70 80 90 110 130 135 150 170 190 210 z
-vertex	115	90 110 130 135 175 z
-vertex	130	40 60 180 210 z
-vertex	160	10 175 z
-vertex	180	0 60 280 z
+vertex	0	0 6 28 z 
+vertex	2	1 17.5 z
+vertex	5	4 6 18 21 z
+vertex	6.5	9 11 13 13.5 17.5 z
+vertex	7	5 7 8 9 11 13 13.5 15 17 19 21 z
+vertex	7.5	4 6 z
+vertex	10.5	4 6 z
+vertex	11	5 7 8 9 11 13 13.5 15 17 19 21 z
+vertex	11.5	9 11 13 13.5 17.5 z
+vertex	13	4 6 18 21 z
+vertex	16	1 17.5 z
+vertex	18	0 6 28 z
 z
 sector	0 20	 3 14 29 49             -1 1 11 22 z
 sector	0 20	 17 15 14 3 9           -1 12 11 0 21 z
@@ -37,4 +37,4 @@ sector	0 20	 29 30 32 40 49         0 11 12 -1 2 z
 sector	16 36	 1 6 5 0                -1 7 -1 24 z
 sector	16 36	 0 5 25 27 45 51        -1 23 -1 9 -1 8 z
 z
-player	20 60	0	0 z
+player	2 6	0	0 z

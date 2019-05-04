@@ -25,7 +25,8 @@ SRC			:=	main.c \
 				stand_ev.c\
 				sprites.c \
 				init_sprites.c \
-				luminosity.c
+				luminosity.c \
+				start_menu.c
 # directories :
 OBJDIR 		:=	objs
 INCDIR  	:=	includes
@@ -46,7 +47,7 @@ LIB			:=	$(LFT_LIB) $(LSDL_LIB)
 INC			:=	-I $(INCDIR) $(LFT_INC) $(LSDL_INC)
 # **************************************************************************** #
 CC			:=	clang
-CFLAGS		:=	-g #-Werror -Wall -Wextra
+#CFLAGS		:=	-Werror -Wall -Wextra
 # **************************************************************************** #
 all : $(NAME)
 .PHONY: all

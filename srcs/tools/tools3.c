@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   tools3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:31:33 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 01:10:29 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/04 04:12:35 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+int             rbw(int x)
+{
+    int         color;
+    int         whichcolor;
+    int         thiscolor;
+    static int  rainbow[7] = {RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE};
+    color = 0;
+    whichcolor = (SCREEN_WIDTH) / 7;
+    thiscolor = 0;
+    while (color < 6)
+    {
+        thiscolor = thiscolor + whichcolor;
+        if (x <= thiscolor)
+            return (rainbow[color]);
+        color++;
+    }
+    return (rainbow[color]);
+}
 
 t_vector	Intersect(float x1, float y1, float x2, float y2, float x3, float  y3, float x4, float y4)
 {

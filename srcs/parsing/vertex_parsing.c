@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertex_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:47:49 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 00:36:53 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/04 06:27:02 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_vector	*fill_vertex(t_vector *vert, char *str, int *c)
 	i = 0;
 	while (t < v - 1 + *c)
 	{
-		vert[t].y = ft_iatof(str, y);
+		vert[t].y = ft_iatof(str, y) / 10;
 		t++;
 	}
 	i = y + 1;
@@ -42,7 +42,7 @@ t_vector	*fill_vertex(t_vector *vert, char *str, int *c)
 	{
 		if (str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
 		{
-			vert[*c].x  = ft_iatof(str, i);
+			vert[*c].x  = ft_iatof(str, i) / 10;
 			*c += 1;
 			while((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
 				i++;
@@ -97,7 +97,7 @@ t_vector	*Load_vertex(char **map)
 		j= 0;
 		while(map[i][j])
 		{
-			if (map[i][j] && (map[i][0] == 'v' || map[i][1] == 'v' || map[i][2] == 'v') && map[i][j] >= '0' 
+			if (map[i][j] && (map[i][0] == 'v' || map[i][1] == 'v' || map[i][2] == 'v') && map[i][j] >= '0'
 			&& map[i][j] <= '9' && (map[i][j - 1] == ' ' || map[i][j - 1] == '\t'))
 				vt++;
 			j++;

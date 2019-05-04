@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 19:59:28 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/02 22:59:06 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/04 12:40:49 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,36 @@ void    draw_player(t_plyr player, t_wind wind)
     ui_draw_vector(wind, coord, player.angle, 0, 50);
 }
 
+void    draw_sprites(t_data *data, t_wind wind)
+{
+    int x;
+    int y;
+    int i;
+
+    i = -1;
+    y = 0;
+    while (++i < data->sprite_nbr)
+    {
+        if (data->sprite[i].status != 2)
+        {
+            y = 0;
+            while (y < 5)
+            {
+                x = 0;
+                while (x < 5)
+                {
+                    if (data->sprite[i].where.x + x * 10 + 200 < 0 || data->sprite[i].where.x + x * 10 + 200 > SCREEN_WIDTH || data->sprite[i].where.y + y * 10 + 10 < 0 || data->sprite[i].where.y + y * 10 + 10 > SCREEN_HEIGHT)
+                        break;
+                    put_pixel32(wind.screen, data->sprite[i].where.x * 10 + 200 + x - 2.5,
+                                data->sprite[i].where.y * 10 + 10 + y - 2.5, BLUE);
+                    x++;
+                }
+                y++;
+            }
+        }
+    }
+}
+
 void    fillrect(SDL_Rect rect, int color, t_wind wind)
 {
     int x;
@@ -79,7 +109,7 @@ void    fillrect(SDL_Rect rect, int color, t_wind wind)
     }
 }
 
-void    draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_wind wind, t_plyr player)
+void    draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_wind wind, t_plyr player, t_data *data)
 {
     unsigned int i;
     unsigned int j;
@@ -110,4 +140,5 @@ void    draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_w
         i++;
     }
     draw_player(player, wind);
+    draw_sprites(data, wind);
 }

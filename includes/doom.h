@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/03 22:36:05 by dhorvill         ###   ########.fr       */
+/*   Updated: 2019/05/04 12:28:55 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@
 # define CROSSHAIR_Y 500
 # define FPS 60
 
+# define RED 0xFF0001
+# define CYAN 0x00CCCC
+# define BLUE 0x0000f
+# define PURPLE 0x800080
+# define YELLOW 0xFFFF00
+# define ORANGE 0xffa500
+# define GREEN 0x008000
+# define INDIGO 0x4B0082
+# define WHITE 0xF0FFF0
 typedef struct  s_pixels
 {
         Uint32          *pixels;
@@ -163,14 +172,23 @@ typedef struct  s_object
     int             y1;
     int             y2;
     int             x;
+	int				i;
     int             x_count;
 	float			dist;
     t_tga           specs;
+	t_tga           specs1;
 	unsigned int	*res_img;
+	unsigned int	*dead_img;
+	int				status;
+	time_t			death_timer;
 }               t_object;
 
 typedef struct	s_data
 {
+	int				count_frames;
+	int				which_menu;
+	int				menu_state;
+	int				game_start;
 	float			sprint;
 	Uint32			starting_tick;
 	int				greyscale_step;
@@ -178,6 +196,7 @@ typedef struct	s_data
 	TTF_Font		*font;
 	time_t			timer;
 	time_t			stand_timer;
+	time_t			startgame_timer;
 	time_t			timer_start;
 	Mix_Chunk		*stand_warudo;
 	Mix_Music		*menutheme;
@@ -201,6 +220,8 @@ typedef struct	s_data
 	int				which_weapon;
 	/* inventory tga load */
 	t_object		widoff;
+	t_object		menustart;
+	t_object		menu;
 	t_object		widon;
 	t_object		handoff;
 	t_object		handon;
@@ -213,6 +234,12 @@ typedef struct	s_data
 	int				toto;
 	int				aim;
 	double			luminosity;
+	double			prev_lum;
+	int				numsectors;
+	int				x_draw;
+	int				sectqueue[33];
+	int				now_sect;
+	int				flag;
 }					t_data;
 
 void			put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel);
@@ -244,7 +271,11 @@ int				ft_draw_line3(t_wind wind, t_coord point, t_coord next_point, t_line line
 void   			display_img(int x, int y, t_wind wind, int size, unsigned int *res_img);
 int         	ft_in_hitbox(t_data *data);
 void        	cap_framerate(t_data *data);
-
+void    		fillrect(SDL_Rect rect, int color, t_wind wind);
+int             rbw(int x);
+SDL_Color		ft_hex_to_rgb(int hexa);
+t_object 		get_sprite_coords(t_data *data, t_object *sprite, t_plyr *player, t_sector *sectors, int ytop, int ybottom);
+t_object 		*sprite_size(t_object *sprite, t_plyr player, t_data data);
 
 /*
 ** EVENTS
@@ -262,16 +293,16 @@ void    		stand_ev(t_data *data, Uint8 *state);
 
 int 			count_vertex(char *str);
 t_vector		*Load_vertex(char **map);
-t_plyr 			Load_Player(t_sector *sectors, char *str);
+t_plyr			Load_Player(t_sector *sectors, char **map);
 t_sector		*Load_sectors(char **map, unsigned int *NumSectors, t_vector *vertex);
-void			init_sprites(t_data *data);
-
 
 /*
 **	INIT FONCTIONS
 */
 t_wind			init_wind(t_wind wind);
 void			init_img(t_data *data);
+void			start_menu(t_data *data);
+void			init_sprites(t_data *data, char **map);
 
 
 /*
@@ -287,11 +318,11 @@ void			ft_error_exit(char *str, t_data *data);
 void			vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int ya, int yb);
 void			vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img);
 void 			draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int NumSectors);
-void			draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_wind wind, t_plyr player);
+void			draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_wind wind, t_plyr player, t_data *data);
 void			draw_items(t_data *data);
 void			draw_inventory(t_data *data);
 int 			render_sprite(t_plyr player, t_object *sprite, t_sector *sectors);
-void			draw_resized_column(t_data *data,t_object sprite, t_wind wind);
+void			draw_resized_column(t_data *data,t_object *sprite, t_wind wind, int ytop, int ybot);
 int				luminosity(int r1, double z, double luminosity);
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/03 22:35:39 by dhorvill         ###   ########.fr       */
+/*   Updated: 2019/05/04 10:38:25 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,36 +90,39 @@ int main()
 				SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	data.wind.screen = SDL_GetWindowSurface(window);
 	/* weapon load */
-	init_sprites(&data);
-	init_img(&data);
 	if (SDL_SetRelativeMouseMode(TRUE) < 0)
 		ft_error_exit("Wolf3d: Unable to set relative mode", &data);
 	str = ft_strnew(1);
-	fd = open("maps/map_clear", O_CREAT | O_RDWR | O_APPEND, 0777);
+	fd = open("maps/map2", O_CREAT | O_RDWR | O_APPEND, 0777);
 	while ((ret = get_next_line(fd, &buf)) == 1)
 	{
 		str = ft_strjoin2(str, buf);
 		ft_strdel(&buf);
 	}
 	map = ft_strsplit(str, 'z');
-	int i;
-	i = 0;
+	init_sprites(&data, map);
+	init_img(&data);
 	vert = Load_vertex(map);
 	sectors = Load_sectors(map, &NumSectors, vert);
-	player = Load_Player(sectors, map[ft_tablen(map) - 2]);
+	player = Load_Player(sectors, map);
 	rect.x = 1000;
 	rect.y = 1000;
-	//Mix_PlayMusic(data.menutheme, 1);
+	data.startgame_timer = time(0);
+	Mix_PlayMusic(data.menutheme, 1);
 	while(1)
+	{
+	data.starting_tick = SDL_GetTicks();
+	if (data.game_start == 1)
 	{
 		/* starting data */
 		data.sprint = 1;
-		data.starting_tick = SDL_GetTicks();
+		data.aim = -1;
 		if (data.zawarudo == 1)
 	{
 		Mix_PauseMusic();
 		if (time(0) - data.stand_timer > 14)
 		{
+			data.luminosity = data.prev_lum;
 			data.zawarudo = 0;
 			data.timer_start += 15;
 		}
@@ -130,7 +133,7 @@ int main()
 		draw_screen(&data, &player, sectors, NumSectors);
 		draw_inventory(&data);
 		draw_items(&data);
-		draw_map(vert, sectors, NumSectors, data.wind, player);
+		draw_map(vert, sectors, NumSectors, data.wind, player, &data);
 		/* render */
 		ft_value_display(&data);
 		eyeheight = player.ducking ? DuckHeight : Eyeheight;
@@ -196,8 +199,11 @@ int main()
 		player.velocity.y = player.velocity.y * (1-acceleration) + move_vec[1] * acceleration * data.sprint;
 		if(pushing)
 			player.moving = 1;
-		cap_framerate(&data);
-		SDL_UpdateWindowSurface(window);
+	}
+	else
+		start_menu(&data);
+	cap_framerate(&data);
+	SDL_UpdateWindowSurface(window);
 	}
 	ft_exit(&data);
 	return 0;

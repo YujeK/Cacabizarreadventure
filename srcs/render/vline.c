@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:11:11 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 08:48:26 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/04 10:06:27 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom,
 	{
 		if (time(0) - data->stand_timer > 4)
 		{
+			data->prev_lum = data->luminosity;
+    		data->luminosity = 0.999995;
 			top = return_grayscale(top);
 			middle = return_grayscale(middle);
 			bottom = return_grayscale(bottom);
@@ -55,9 +57,9 @@ void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom,
 		pix[y1 * SCREEN_WIDTH + x] = top;
 		y = y1 + 1;
 		while (y < y2)
-		{
+		{/* 
 			if (y == SCREEN_HEIGHT / 2 && x == SCREEN_WIDTH / 2)
-				data->aim = 1;
+				data->aim = 1; */
 			pix[y * SCREEN_WIDTH + x] = middle;
 			pix[y2 * SCREEN_WIDTH + x] = bottom;
 			y++;
