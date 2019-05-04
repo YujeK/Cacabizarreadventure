@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/04 10:38:25 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/04 13:26:39 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ int main()
 	rect.x = 1000;
 	rect.y = 1000;
 	data.startgame_timer = time(0);
-	Mix_PlayMusic(data.menutheme, 1);
+	//Mix_PlayMusic(data.menutheme, 1);
 	while(1)
 	{
 	data.starting_tick = SDL_GetTicks();
-	if (data.game_start == 1)
+	if (data.game_start == 0)
 	{
 		/* starting data */
 		data.sprint = 1;

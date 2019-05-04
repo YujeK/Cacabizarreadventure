@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/04 12:28:55 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/04 13:49:55 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,85 @@ typedef struct	s_data
 	int				now_sect;
 	int				flag;
 }					t_data;
+typedef struct		s_bas
+{
+	t_item queue[32];
+	t_item *head;
+	t_item *tail;
+	t_item now;
+	int	sectqueue[33];
+	int ytop[SCREEN_WIDTH];
+	int ybottom[SCREEN_WIDTH];
+	int renderedsectors[25];
+	int i;
+	t_sector sect;
+	int x;
+	int pixel;
+	int s;
+	int y1a;
+	int y2a;
+	int ny1a;
+	int ny2a;
+	int beginx;
+	int y1b;
+	int y2b;
+	int ny1b;
+	int ny2b;
+	int endx;
+	int x1;
+	int x2;
+	int z;
+	int ya;
+	int yb;
+	int cya;
+	int nya;
+	int nyb;
+	int cyb;
+	int cnya;
+	int cnyb;
+	float vx1;
+	float vy1;
+	float vx2;
+	float vy2;
+	float pcos;
+	float psin;
+	float tx1;
+	float tx2;
+	float tz1;
+	float tz2;
+	float ttx1;
+	float ttx2;
+	float ttz1;
+	float ttz2;
+	float nearz;
+	float farz;
+	float nearside;
+	float farside;
+	float xscale1;
+	float xscale2;
+	float yscale1;
+	float yscale2;
+	float yceil;
+	float yfloor;
+	float nyceil;
+	float nyfloor;
+	float ratio;
+	float width;
+	float float_x;
+	float to_intersection;
+	float to_end;
+	float point_in_image;
+	t_vector intersection;
+	int neighbor;
+	unsigned int r;
+	unsigned int r1;
+	unsigned int r2;
+	t_vector i1;
+	t_vector i2;
+	unsigned int *img;
+	unsigned int *res_img;
+	float dist;
+}					t_bas;
 
 void			put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel);
 int				ft_iatoi(char *wall, int index);
