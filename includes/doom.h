@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/05 10:12:00 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 11:53:31 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ typedef struct	s_data
 	int				now_sect;
 	int				flag;
 }					t_data;
+
 typedef struct		s_bas
 {
 	t_item queue[32];
@@ -377,6 +378,7 @@ void    		stand_activation(t_data *data, t_plyr *player);
 */
 
 int 			count_vertex(char *str);
+int				ft_iatoi(char *str, int i);
 t_vector		*Load_vertex(char **map);
 t_plyr			Load_Player(t_sector *sectors, char **map);
 t_sector		*Load_sectors(char **map, unsigned int *NumSectors, t_vector *vertex);

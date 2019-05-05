@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:15:17 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 08:10:28 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 13:07:05 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int N
 			bas.vy1 = bas.sect.vertex[bas.s + 0].y - player->where.y;
 			bas.vx2 = bas.sect.vertex[bas.s + 1].x - player->where.x;
 			bas.vy2 = bas.sect.vertex[bas.s + 1].y - player->where.y;
+			//xprintf("%i %f %f %f %f\n\n", bas.s, bas.sect.vertex[bas.s + 0].x, bas.sect.vertex[bas.s].y, bas.sect.vertex[bas.s + 1].x, bas.sect.vertex[bas.s + 1].y);
 			//dist = sqrt(pow(bas.vx1 - player.where.x, 2) + pow(bas.vy1 - player.where.y, 2));
 			bas.pcos = player->anglecos, bas.psin = player->anglesin;
 			bas.tx1 = bas.vx1 * bas.psin - bas.vy1 * bas.pcos;

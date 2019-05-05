@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 19:59:28 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/05 09:51:22 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 14:52:32 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void    draw_player(t_plyr player, t_wind wind)
             if (player.where.x + x * 5 + 749 < 0 || player.where.x + x * 5 + 749 > SCREEN_WIDTH
             || player.where.y + y  * 5 + 10 < 0 || player.where.y + y  * 5 + 10 > SCREEN_HEIGHT)
                 break ;
-            put_pixel32(wind.screen, player.where.x * 5 + 749 + x - 2.5,
+            put_pixel32(wind.screen, player.where.x * 5 + 200 + x - 2.5,
             player.where.y * 5 + 10 + y - 2.5, 0x700000);
             x++;
         }
         y++;
     }
     t_coord coord = (t_coord){
-        player.where.x * 5 + 749,
+        player.where.x * 5 + 200,
         player.where.y * 5 + 10};
     ui_draw_vector(wind, coord, player.angle, 0, 50);
 }
@@ -79,7 +79,7 @@ void    draw_sprites(t_data *data, t_wind wind)
                 {
                     if (data->sprite[i].where.x + x * 5 + 749 < 0 || data->sprite[i].where.x + x * 5 + 749 > SCREEN_WIDTH || data->sprite[i].where.y + y * 5 + 10 < 0 || data->sprite[i].where.y + y * 5 + 10 > SCREEN_HEIGHT)
                         break;
-                    put_pixel32(wind.screen, data->sprite[i].where.x * 5 + 749 + x - 2.5,
+                    put_pixel32(wind.screen, data->sprite[i].where.x * 5 + 200 + x - 2.5,
                                 data->sprite[i].where.y * 5 + 10 + y - 2.5, BLUE);
                     x++;
                 }
@@ -130,11 +130,14 @@ void    draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_w
         j = 0;
         while(j < sectors[i].npoints)
         {
-            point.x = sectors[i].vertex[j].x * 5 + 749;
-            point.y = sectors[i].vertex[j].y * 5;
-            next_point.x = sectors[i].vertex[j + 1].x * 5 + 749;
-            next_point.y = sectors[i].vertex[j + 1].y * 5;
-            ft_draw_line3(wind, point, next_point, line);
+            if(sectors[i].neighbors[j] == -1)
+            {
+                point.x = sectors[i].vertex[j].x * 5 + 200;
+                point.y = sectors[i].vertex[j].y * 5;
+                next_point.x = sectors[i].vertex[j + 1].x * 5 + 200;
+                next_point.y = sectors[i].vertex[j + 1].y * 5;
+                ft_draw_line3(wind, point, next_point, line);
+            }
             j++;
         }
         i++;

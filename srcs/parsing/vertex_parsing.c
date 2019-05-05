@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:47:49 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 07:38:51 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 14:40:13 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,16 @@ int 	count_vertex(char *str)
 	int c;
 
 	c = 0;
-	i = 13;
+	i = 0;
 
+	while(str[i] < '0' || str[i] > '9')
+		i++;
+	while(str[i] >= '0' && str[i] >= '9')
+		i++;
+	i++;
+	while(str[i] >= '0' && str[i] >= '9')
+		i++;
+	i++;
 	while (str[i])
 	{
 		if (str[i] == ' ' && str[i + 1] == ' ')

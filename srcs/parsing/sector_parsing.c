@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:49:55 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 07:38:22 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 14:41:35 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,64 @@ t_sector *fill_sectors(t_sector *sectors, char *str, int *c, t_vector *vertex)
 	int f;
 	int part;
 	int v;
-	int t;
+	int save;
+	int save2;
 	int n;
 
 	n = 0;
 	f = 0;
-	t = 1;
+	save = 0;
+	save2 = 0;
 	i = 0;
 	part = 0;
-	v = count_vertex(str);
+	v = count_vertex(str) - 1;
 	sectors[*c].npoints = v;
+	printf("%i\n\n\n", sectors[*c].npoints);
 	sectors[*c].vertex = (t_vector*)malloc(sizeof(t_vector) * v + 1);
-	sectors[*c].neighbors = (signed char*)malloc(sizeof(signed char) * v + 1);
+	sectors[*c].neighbors = (signed char*)malloc(sizeof(signed char) * v + 10);
 	while (str[i])
 	{
-		if (part == 0 && str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
+		while (str[i] && (str[i] < '0' || str[i] > '9'))
+			i++;
+		sectors[*c].floor = ft_iatof(str, i);
+		while (str[i] && str[i] >= '0' && str[i] <= '9')
+			i++;
+		sectors[*c].ceil = ft_iatof(str, ++i);
+		while (str[i] && str[i] >= '0' && str[i] <= '9')
+			i++;
+		save2 = i;
+		while (str[i] && str[i] != 'c')
+			i++;
+		i--;
+		while (str[i] && (str[i] < '0' || str[i] > '9'))
+			i--;
+		while (str[i] && str[i] >= '0' && str[i] <= '9')
+			i--;
+		save = ++i;
+		sectors[*c].vertex[n] = vertex[ft_iatoi(str, i)];
+		n++;
+		while (i != save2)
+			i--;
+		while (str[++i] != 'c')
 		{
-			sectors[*c].floor = ft_iatof(str, i);
-			part++;
-		}
-		else if (part == 1 && str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
-		{
-			sectors[*c].ceil = ft_iatof(str, i);
-			part++;
-		}
-		else if (part == 2 && t < v + 1 && str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
-		{
-			sectors[*c].vertex[t] = vertex[(int)ft_iatof(str, i)];
-			t++;
-		}
-		else if (t > v && (str[i] == '-' || (str[i] >= '0' && str[i] <= '9')) && (str[i - 1] == ' ' || str[i - 1] == '\t'))
-		{
-			sectors[*c].neighbors[n] = (unsigned char)ft_iatof(str, i);
+			sectors[*c].vertex[n] = vertex[ft_iatoi(str, i)];
+			while (str[i] && str[i] >= '0' && str[i] <= '9')
+				i++;
 			n++;
 		}
-		i++;
+		while (str[i] && str[i] >= '0' && str[i] <= '9')
+			i++;
+		while (str[i] && (str[i] < '0' || str[i] > '9') && str[i] != '-')
+			i++;
+		while(str[i])
+		{
+			sectors[*c].neighbors[f] = ft_iatoi(str, i);
+			while(str[i] && ((str[i] >= '0' && str[i] <= '9') || str[i] == '-'))
+				i++;
+			i++;
+			f++;
+		}
 	}
-	sectors[*c].vertex[0] = sectors[*c].vertex[t - 1];
 	return (sectors);
 }
 

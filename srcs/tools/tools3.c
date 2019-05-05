@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:31:33 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/04 04:12:35 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 11:03:06 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,26 @@ int         ft_in_hitbox(t_data *data)
         && CROSSHAIR_Y > data->sprite[0].y1 && CROSSHAIR_Y < data->sprite[0].y1 + data->sprite[0].size)
             return (1);
     return (0);
+}
+
+int		ft_iatoi(char *wall, int index)
+{
+	int number;
+	int i;
+	int	negative;
+
+	i = index;
+	negative = 1;
+	number = 0;
+	if (wall[index] == '-')
+	{
+		i++;
+		negative = -1;
+	}
+	while (wall[i] && wall[i] >= '0' && wall[i] <= '9')
+	{
+		number = number * 10 + wall[i] - '0';
+		i++;
+	}
+	return (number * negative);
 }

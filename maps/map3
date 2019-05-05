@@ -1,65 +1,29 @@
-vertex 608 196 z
-vertex 609 248 z
-vertex 673 247 z
-vertex 677 198 z
-vertex 641 251 456 z
-vertex 483 195 z
-vertex 488 246 z
-vertex 534 247 z
-vertex 492 351 z
-vertex 537 354 z
-vertex 536 308 z
-vertex 628 340 z
-vertex 629 305 z
-vertex 589 349 z
-vertex 606 482 z
-vertex 597 425 z
-vertex 402 428 624 z
-vertex 411 485 z
-vertex 456 427 z
-vertex 441 222 z
-vertex 387 223 z
-vertex 389 263 z
-vertex 235 237 z
-vertex 238 274 z
-vertex 292 271 z
-vertex 233 604 z
-vertex 285 608 z
-vertex 288 530 z
-vertex 400 549 z
-vertex 404 682 z
-vertex 409 514 z
-vertex 478 717 z
-vertex 496 513 z
-vertex 490 595 z
-vertex 487 635 z
-vertex 667 653 z
-vertex 670 614 z
-vertex 621 649 z
-vertex 617 822 z
-vertex 663 826 z
-vertex 551 829 z
-vertex 724 843 z
-vertex 557 944 z
-vertex 716 952 z
-vertex 553 877 z
-vertex 554 907 z
+vertex 200 200 400 z
+vertex 400 400 200 z
+vertex 313 402 z
+vertex 239 809 z
+vertex 288 802 z
+vertex 293 744 z
+vertex 523 795 z
+vertex 527 747 z
+vertex 481 738 z
+vertex 522 589 z
+vertex 484 573 z
+vertex 529 619 z
+vertex 804 521 z
+vertex 797 496 z
+vertex 749 510 z
+vertex 836 476 z
+vertex 721 508 z
+vertex 786 383 z
+vertex 671 415 z
 z
-sector  480 520 0 1 4 2 3 c  -1 1 -1 -1 -1  z
-sector  480 520 0 5 6 7 1 c  0 -1 -1 2 -1  z
+sector  480 520 0 1 4 2 3 c  -1 -1 1 -1 -1  z
+sector  480 520 1 5 6 7 4 c  0 -1 -1 2 -1  z
 sector  480 520 6 8 9 10 7 c  1 -1 -1 3 -1  z
 sector  480 520 9 13 11 12 10 c  2 -1 4 -1 -1  z
-sector  480 520 13 16 14 5 11 c  3 -1 5 -1 -1  z
-sector  480 520 16 19 17 18 14 c  4 -1 6 -1 -1  z
-sector  480 520 19 20 21 22 17 c  5 -1 -1 7 -1  z
-sector  480 520 21 23 24 25 22 c  6 -1 -1 8 -1  z
-sector  480 520 24 26 27 28 25 c  7 -1 -1 9 -1  z
-sector  480 520 27 18 30 28 c  8 -1 10 -1  z
-sector  480 520 18 31 32 30 c  9 -1 11 -1  z
-sector  480 520 31 33 36 35 34 32 c  10 -1 -1 12 -1 -1  z
-sector  480 520 36 39 37 38 35 c  11 -1 13 -1 -1  z
-sector  480 520 39 40 41 37 c  12 -1 14 -1  z
-sector  480 520 40 42 43 41 c  13 -1 15 -1  z
-sector  480 520 42 46 47 44 45 43 c  14 -1 -1 -1 -1 -1  z
+sector  480 520 13 14 15 16 11 c  3 -1 -1 5 -1  z
+sector  480 520 15 17 18 16 c  4 -1 6 -1  z
+sector  480 520 17 19 20 18 c  5 -1 -1 -1  z
 z
-player 210 642 0 0 z
+player 300 300 0 0 z

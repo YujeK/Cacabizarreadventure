@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/05 10:17:02 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 14:49:13 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int main()
 	if (SDL_SetRelativeMouseMode(TRUE) < 0)
 		ft_error_exit("Wolf3d: Unable to set relative mode", &data);
 	str = ft_strnew(1);
-	fd = open("maps/map2", O_CREAT | O_RDWR | O_APPEND, 0777);
+	fd = open("maps/map3", O_CREAT | O_RDWR | O_APPEND, 0777);
 	while ((ret = get_next_line(fd, &buf)) == 1)
 	{
 		str = ft_strjoin2(str, buf);
@@ -107,15 +107,26 @@ int main()
 	player = Load_Player(sectors, map);
 	int i;
 	int j;
+	int t;
 	i = -1;
-/* 	while(++i < NumSectors)
+	t = -1;
+	/*sectors[0].vertex[4].x = 0.0;
+	sectors[0].vertex[4].y = 50.0;
+	sectors[0].neighbors[4] = -1;*/
+		//printf("%i\n\n\n",sectors[0].npoints);
+
+ 	while(++i < NumSectors)
 	{
+		t = - 1;
 		j = -1;
+		//printf("sectors[%i]\n", i);
 		while(++j < sectors[i].npoints)
 		{
-			printf("sect[%i] vert[%i] x: %f y: %f\n", i, j, sectors[i].vertex[j].x, sectors[i].vertex[j].y);
+			printf("sect[%i] vert[%i] x: %f y: %f nei[%i]\n", i, j, sectors[i].vertex[j].x, sectors[i].vertex[j].y, sectors[i].neighbors[j]);
+			//printf(" neighbor[%i]: %i\n\n", j, sectors[i].neighbors[j]);
+			//printf("\n");
 		}
-	} */
+	}
 	rect.x = 1000;
 	rect.y = 1000;
 	data.startgame_timer = time(0);
