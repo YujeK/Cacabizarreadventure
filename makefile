@@ -47,7 +47,7 @@ LIB			:=	$(LFT_LIB) $(LSDL_LIB)
 INC			:=	-I $(INCDIR) $(LFT_INC) $(LSDL_INC)
 # **************************************************************************** #
 CC			:=	clang
-#CFLAGS		:=	-Werror -Wall -Wextra
+CFLAGS		:=	-O3 #-Wall -Wextra -Werror
 # **************************************************************************** #
 all : $(NAME)
 .PHONY: all

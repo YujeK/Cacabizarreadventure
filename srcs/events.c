@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/04 13:00:00 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 10:14:12 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,20 @@ void event_mouse(t_plyr *player, t_data *data)
 	player->yaw = data->yaw + player->velocity.z * 0.5f;
 	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT) && data->weapon_state == 0)
 	{
-		if(data->aim >= 0)
+		if(data->aim >= 0 && data->which_weapon != 0 && data->weapon_ammo > 0)
 		{
 			data->sprite[data->aim].status = 1;
-			data->sprite[data->aim].death_timer = time(0);
+			data->death_timer = time(0);
+			data->score++;
+			if(data->zawarudo == 1)
+			data->score++;
 		}
-		data->weapon_state = 1;
-		data->weapon_ammo += (data->weapon_ammo > 0) ? -1 : 100;
+		if (data->weapon_ammo > 0 && data->is_cd == 0)
+		{
+			data->weapon_ammo--;
+			data->weapon_state = 1;
+			data->is_cd = 1;
+		}
 	}
 	else if (data->weapon_state == 1)
 		data->weapon_state = 0;
@@ -82,20 +89,8 @@ void inv_ev(t_data *data, Uint8 *state, float *move_vec)
 		Mix_PlayMusic(data->maintheme, -1);
 		data->story_step = 3;
 	}
-	if (state[SDL_SCANCODE_R] && data->story_step == 0)
+	if (state[SDL_SCANCODE_J] && data->story_step == 0)
 		data->msg_readen = 1;
-	if (data->zawarudo == 1)
-	{
-		Mix_PauseMusic();
-		data->toto++;
-	}
-	else
-		Mix_ResumeMusic();
-	if (data->toto == 700)
-	{
-		data->zawarudo = 0;
-		data->toto = 0;
-	}
 	if (state[SDL_SCANCODE_KP_MINUS])
 		data->luminosity -= 0.0005;
 	if (state[SDL_SCANCODE_KP_PLUS] && data->luminosity < 0.9995)
@@ -150,7 +145,7 @@ int event_keyboard(t_plyr *player, t_data *data, float *move_vec)
 	state = (Uint8 *)SDL_GetKeyboardState(0);
 	movement_ev(data, state, move_vec, player);
 	wpn_bobbing(data);
-	stand_ev(data, state);
+	stand_ev(data, state, player);
 	inv_ev(data, state, move_vec);
 	if (state[SDL_SCANCODE_SPACE])
 	{

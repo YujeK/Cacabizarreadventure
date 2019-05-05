@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/04 13:49:55 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 10:12:00 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,11 +180,13 @@ typedef struct  s_object
 	unsigned int	*res_img;
 	unsigned int	*dead_img;
 	int				status;
-	time_t			death_timer;
 }               t_object;
 
 typedef struct	s_data
 {
+	time_t			death_timer;
+	int				score;
+	int				eyesofthedead;
 	int				count_frames;
 	int				which_menu;
 	int				menu_state;
@@ -199,7 +201,9 @@ typedef struct	s_data
 	time_t			startgame_timer;
 	time_t			timer_start;
 	Mix_Chunk		*stand_warudo;
+	Mix_Chunk		*tp_sound;
 	Mix_Music		*menutheme;
+	Mix_Chunk		*eye_sound;
 	Mix_Music		*zawarudotheme;
 	Mix_Music		*maintheme;
 	SDL_Event		*ev;
@@ -213,6 +217,8 @@ typedef struct	s_data
 	int				wpn_x;
 	int				weapon_state;
 	int				weapon_ammo;
+	int				weap_cd;
+	int				is_cd;
 /* 	t_tga			lava_specs;
 	unsigned int	*lava;
 	unsigned int 	*res_lava; */
@@ -231,7 +237,6 @@ typedef struct	s_data
 	t_object		invon;
 	t_object		*sprite;
 	int				sprite_nbr;
-	int				toto;
 	int				aim;
 	double			luminosity;
 	double			prev_lum;
@@ -355,6 +360,7 @@ int             rbw(int x);
 SDL_Color		ft_hex_to_rgb(int hexa);
 t_object 		get_sprite_coords(t_data *data, t_object *sprite, t_plyr *player, t_sector *sectors, int ytop, int ybottom);
 t_object 		*sprite_size(t_object *sprite, t_plyr player, t_data data);
+void    		pick_up(t_data *data, t_plyr *player, t_object *sprite);
 
 /*
 ** EVENTS
@@ -364,8 +370,8 @@ int				check_keydown(t_wind wind);
 int				event_keyboard(t_plyr *player, t_data *data, float *move_vec);
 void			event_mouse(t_plyr *player, t_data *data);
 t_plyr			Move_player(float dx, float dy, t_plyr player, t_sector *sectors);
-void    		stand_ev(t_data *data, Uint8 *state);
-
+void    		stand_ev(t_data *data, Uint8 *state, t_plyr *player);
+void    		stand_activation(t_data *data, t_plyr *player);
 /*
 **  Parsing
 */

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/04 13:26:39 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 10:17:02 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int main()
 	SDL_Rect rect;
 
 	ft_bzero(&data, sizeof(t_data));
-	data.weapon_ammo = 100;
+	data.weapon_ammo = 30;
 	data.luminosity = 0.99;
 	player.ground = 0;
 	player.falling = 1;
@@ -105,30 +105,39 @@ int main()
 	vert = Load_vertex(map);
 	sectors = Load_sectors(map, &NumSectors, vert);
 	player = Load_Player(sectors, map);
+	int i;
+	int j;
+	i = -1;
+/* 	while(++i < NumSectors)
+	{
+		j = -1;
+		while(++j < sectors[i].npoints)
+		{
+			printf("sect[%i] vert[%i] x: %f y: %f\n", i, j, sectors[i].vertex[j].x, sectors[i].vertex[j].y);
+		}
+	} */
 	rect.x = 1000;
 	rect.y = 1000;
 	data.startgame_timer = time(0);
-	//Mix_PlayMusic(data.menutheme, 1);
+	Mix_PlayMusic(data.menutheme, 1);
 	while(1)
 	{
 	data.starting_tick = SDL_GetTicks();
-	if (data.game_start == 0)
+	if (data.is_cd == 1)
 	{
+		data.weap_cd++;
+		if (data.weap_cd == 7)
+		{
+			data.weap_cd = 0;
+			data.is_cd = 0;
+		}
+	}
+	if (data.game_start == 1)
+	{
+		stand_activation(&data, &player);
 		/* starting data */
 		data.sprint = 1;
 		data.aim = -1;
-		if (data.zawarudo == 1)
-	{
-		Mix_PauseMusic();
-		if (time(0) - data.stand_timer > 14)
-		{
-			data.luminosity = data.prev_lum;
-			data.zawarudo = 0;
-			data.timer_start += 15;
-		}
-	}
-		else
-			Mix_ResumeMusic();
 			/* render */
 		draw_screen(&data, &player, sectors, NumSectors);
 		draw_inventory(&data);

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 23:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 08:31:21 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 10:00:28 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void			ft_start_game(t_data *data)
 	if (data->story_step == 0 && data->msg_readen == 0)
 	{
 		rect = (SDL_Rect){60, 310, 25, 25};
-		ft_set_string(rect, "1 new message, press 'R' to read", ft_hex_to_rgb(0xFF1493FF), data);
+		ft_set_string(rect, "1 new message, press 'J' to read", ft_hex_to_rgb(0xFF1493FF), data);
 	}
 	if (data->story_step == 0 && data->msg_readen == 1)
 	{
@@ -139,6 +139,10 @@ void			ft_value_display(t_data *data)
 		ft_set_string(rect, "AMMO", ft_color_nb_state(data->weapon_ammo), data);
 		rect = (SDL_Rect){0, 120, 60, 30};
 		ft_set_nbrstring(data->weapon_ammo, rect, ft_color_nb_state(data->weapon_ammo), data);
+		rect = (SDL_Rect){200, 0, 60, 60};
+		ft_set_string(rect, "SCORE", ft_color_nb_state(data->score), data);
+		rect = (SDL_Rect){240, 50, 60, 60};
+		ft_set_nbrstring(data->score, rect, ft_color_nb_state(data->score), data);
 	}
 	ft_crosshair(data);
 	ft_start_game(data);

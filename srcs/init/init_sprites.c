@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 04:37:02 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/04 12:59:02 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 09:19:20 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	init_sprites(t_data *data, char **map)
 	t = ft_tablen(map);
 	i = 0;
 	data->sprite_nbr = count_sprites(map);
-	//printf("%i\n", data->sprite_nbr);
 	if ((data->sprite = (t_object *)malloc(sizeof(t_object) * data->sprite_nbr + 100)) == NULL)
 		ft_error_exit("quand je essaye de mallocer les sprites car le putain de ashkan ne se rien faire ta mere", data);
 	while (i < data->sprite_nbr)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdlpixels.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 20:30:14 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/02 01:55:26 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/05 05:36:23 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ void	put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
 	Uint32 *pixels;
 	Uint32 alpha;
-	
+
 	alpha = pixel & 0xff000000;
 	pixels = (Uint32 *)surface->pixels;
 	if (x >= 0 && y >= 0 && x < SCREEN_WIDTH && y < SCREEN_HEIGHT && alpha != 0xff000000)
 		pixels[y * surface->w + x] = pixel;
-	//printf("%X\n", pixels[y * surface->w + x]);
 }
 
 Uint32	get_pixel32(SDL_Surface *surface, int x, int y)

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:11:11 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/04 14:38:15 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 05:36:14 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom,
 		{
 			data->prev_lum = data->luminosity;
     		data->luminosity = 0.999995;
-			top = return_redscale(top);
-			middle = return_redscale(middle);
-			bottom = return_redscale(bottom);
+			top = return_grayscale(top);
+			middle = return_grayscale(middle);
+			bottom = return_grayscale(bottom);
 		}
 	}
 	if(y1 == y2)
@@ -101,7 +101,6 @@ void	vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_
 	y2 = clamp(y2, 0, SCREEN_HEIGHT - 1);
 	img_y = (y1 - ya) * ratio;
 	//img_y = 0;
-	//printf("%i %i %i\n", y1, y2, y2 - y1);
 	//height = height < 300 ? height + 200 : height;
 	if(y1 == y2)
 		pix[y1 * SCREEN_WIDTH + x] = middle;
@@ -112,7 +111,6 @@ void	vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_
 		while (y < y2)
 		{
 			pix[y * SCREEN_WIDTH + x] = img[(int)img_y * 600 + x] ;
-			//printf("%X\n", img[(int)img_y * 600 + x]);
 	        pix[y2 * SCREEN_WIDTH + x] = bottom;
 			y++;
 			img_y += ratio;

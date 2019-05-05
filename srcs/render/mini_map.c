@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 19:59:28 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/04 12:40:49 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 09:51:22 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ void    draw_player(t_plyr player, t_wind wind)
         x = 0;
         while (x < 5)
         {
-            if (player.where.x + x * 10 + 200 < 0 || player.where.x + x * 10 + 200 > SCREEN_WIDTH
-            || player.where.y + y  * 10 + 10 < 0 || player.where.y + y  * 10 + 10 > SCREEN_HEIGHT)
+            if (player.where.x + x * 5 + 749 < 0 || player.where.x + x * 5 + 749 > SCREEN_WIDTH
+            || player.where.y + y  * 5 + 10 < 0 || player.where.y + y  * 5 + 10 > SCREEN_HEIGHT)
                 break ;
-            put_pixel32(wind.screen, player.where.x * 10 + 200 + x - 2.5,
-            player.where.y * 10 + 10 + y - 2.5, 0x700000);
+            put_pixel32(wind.screen, player.where.x * 5 + 749 + x - 2.5,
+            player.where.y * 5 + 10 + y - 2.5, 0x700000);
             x++;
         }
         y++;
     }
     t_coord coord = (t_coord){
-        player.where.x * 10 + 200,
-        player.where.y * 10 + 10};
+        player.where.x * 5 + 749,
+        player.where.y * 5 + 10};
     ui_draw_vector(wind, coord, player.angle, 0, 50);
 }
 
@@ -77,10 +77,10 @@ void    draw_sprites(t_data *data, t_wind wind)
                 x = 0;
                 while (x < 5)
                 {
-                    if (data->sprite[i].where.x + x * 10 + 200 < 0 || data->sprite[i].where.x + x * 10 + 200 > SCREEN_WIDTH || data->sprite[i].where.y + y * 10 + 10 < 0 || data->sprite[i].where.y + y * 10 + 10 > SCREEN_HEIGHT)
+                    if (data->sprite[i].where.x + x * 5 + 749 < 0 || data->sprite[i].where.x + x * 5 + 749 > SCREEN_WIDTH || data->sprite[i].where.y + y * 5 + 10 < 0 || data->sprite[i].where.y + y * 5 + 10 > SCREEN_HEIGHT)
                         break;
-                    put_pixel32(wind.screen, data->sprite[i].where.x * 10 + 200 + x - 2.5,
-                                data->sprite[i].where.y * 10 + 10 + y - 2.5, BLUE);
+                    put_pixel32(wind.screen, data->sprite[i].where.x * 5 + 749 + x - 2.5,
+                                data->sprite[i].where.y * 5 + 10 + y - 2.5, BLUE);
                     x++;
                 }
                 y++;
@@ -120,20 +120,20 @@ void    draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_w
 
     line.color = 0x285091;
     i = 0;
-    rect.h = 180;
-    rect.w = 280;
-    rect.x = 700;
-    rect.y = 10;
+    rect.h = 248;
+    rect.w = 247;
+    rect.x = 749;
+    rect.y = 0;
     fillrect(rect, 0x2a303a, wind);
     while(i < NumSectors)
     {
         j = 0;
         while(j < sectors[i].npoints)
         {
-            point.x = sectors[i].vertex[j].x * 10 + 200;
-            point.y = sectors[i].vertex[j].y * 10 + 10;
-            next_point.x = sectors[i].vertex[j + 1].x * 10 + 200;
-            next_point.y = sectors[i].vertex[j + 1].y * 10 + 10;
+            point.x = sectors[i].vertex[j].x * 5 + 749;
+            point.y = sectors[i].vertex[j].y * 5;
+            next_point.x = sectors[i].vertex[j + 1].x * 5 + 749;
+            next_point.y = sectors[i].vertex[j + 1].y * 5;
             ft_draw_line3(wind, point, next_point, line);
             j++;
         }

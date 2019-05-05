@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 18:57:44 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/04 12:23:39 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 09:17:03 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_object *sprite_size(t_object *sprite, t_plyr player, t_data data)
 
 t_object  get_sprite_coords(t_data *data, t_object *sprite, t_plyr *player, t_sector *sectors, int ytop, int ybottom)
 {
-
+    pick_up(data, player, sprite);
     sprite->x = render_sprite(*player, sprite, sectors) - sprite->size / 2;
     sprite->y2 = sprite->y1 + sprite->size;
     //sprite->y1 = clamp(sprite->y1, ytop, 999);
