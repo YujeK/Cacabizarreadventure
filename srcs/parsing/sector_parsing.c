@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:49:55 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 14:41:35 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 19:03:57 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_sector *fill_sectors(t_sector *sectors, char *str, int *c, t_vector *vertex)
 	part = 0;
 	v = count_vertex(str) - 1;
 	sectors[*c].npoints = v;
-	printf("%i\n\n\n", sectors[*c].npoints);
 	sectors[*c].vertex = (t_vector*)malloc(sizeof(t_vector) * v + 1);
 	sectors[*c].neighbors = (signed char*)malloc(sizeof(signed char) * v + 10);
 	while (str[i])

@@ -6,72 +6,69 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:15:17 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 13:07:05 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 19:04:23 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_vars(t_bas *bas, t_data *data, t_plyr *player,unsigned int NumSectors)
-{
-	bas->head = bas->queue;
-	bas->tail = bas->queue;
-	bas->x = -1;
-	data->sprite = sprite_size(data->sprite, *player, *data);
-	while(++bas->x < 32)
-		data->sectqueue[bas->x] = 100;
-	bas->x = -1;
-	while (++bas->x < SCREEN_HEIGHT)
-		bas->ybottom[bas->x] = SCREEN_HEIGHT - 1;
-	bas->x = -1;
-	while (++bas->x < SCREEN_HEIGHT)
-		bas->ytop[bas->x] = 0;
-	bas->x = -1;
-	while (++bas->x < NumSectors)
-		bas->renderedsectors[bas->x] = 0;
-	bas->head->sectorno = player->sector;
-	bas->head->sx1 = 0;
-	bas->head->sx2 = SCREEN_WIDTH - 1;
-	if (++bas->head == bas->queue + 32)
-		bas->head = bas->queue;
-}
-
-int		var_indraw(t_bas *bas, t_data *data, t_sector *sectors, unsigned int NumSectors)
-{
-	bas->now = *bas->tail;
-	data->now_sect = bas->now.sectorno;
-	if (++bas->tail == bas->queue + 32)
-		bas->tail = bas->queue;
-	if (bas->i < NumSectors /* && data->sectqueue[bas->now.sectorno] == 100 */)
-	{
-		data->sectqueue[bas->now.sectorno] = bas->i;
-		bas->i++;
-	}
-	if (bas->renderedsectors[bas->now.sectorno] & 0x21)
-		return (-1);
-	++bas->renderedsectors[bas->now.sectorno];
-	bas->sect = sectors[bas->now.sectorno];
-	bas->s = -1;
-	bas->i = -1;
-	while (++bas->i < data->sprite_nbr)
-		data->sprite[bas->i].x_count = 0;
-	return (0);
-}
 void draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int NumSectors)
 {
+	int ytop[SCREEN_WIDTH] = {0};
 	t_bas bas;
-	init_vars(&bas, data, player, NumSectors);
+	bas.head = bas.queue;
+	bas.tail = bas.queue;
+	bas.x = 0;
+	data->sprite = sprite_size(data->sprite, *player, *data);
+	bas.i = 0;
+	while(bas.i < 32)
+	{
+		data->sectqueue[bas.i] = -1;
+		bas.i++;
+	}
+	bas.i = 0;
+	while (bas.x < SCREEN_HEIGHT)
+	{
+		bas.ybottom[bas.x] = SCREEN_HEIGHT - 1;
+		bas.x++;
+	}
+	bas.x = 0;
+	while (bas.x < NumSectors)
+	{
+		bas.renderedsectors[bas.x] = 0;
+		bas.x++;
+	}
+	bas.head->sectorno = player->sector;
+	bas.head->sx1 = 0;
+	bas.head->sx2 = SCREEN_WIDTH - 1;
+	if (++bas.head == bas.queue + 32)
+		bas.head = bas.queue;
 	while (bas.head != bas.tail)
 	{
-		if(var_indraw(&bas, data, sectors, NumSectors) == -1)
+		bas.i = 0;
+		bas.now = *bas.tail;
+		data->now_sect = bas.now.sectorno;
+		if (++bas.tail == bas.queue + 32)
+			bas.tail = bas.queue;
+		if(bas.i < NumSectors)
+		{
+			data->sectqueue[bas.now.sectorno] = bas.i;
+			bas.i++;
+		}
+		if (bas.renderedsectors[bas.now.sectorno] & 0x21)
 			continue;
+		++bas.renderedsectors[bas.now.sectorno];
+		bas.sect = sectors[bas.now.sectorno];
+		bas.s = -1;
+		bas.i = -1;
+		while(++bas.i < data->sprite_nbr)
+			data->sprite[bas.i].x_count = 0;
 		while (++bas.s < bas.sect.npoints)
 		{
 			bas.vx1 = bas.sect.vertex[bas.s + 0].x - player->where.x;
 			bas.vy1 = bas.sect.vertex[bas.s + 0].y - player->where.y;
 			bas.vx2 = bas.sect.vertex[bas.s + 1].x - player->where.x;
 			bas.vy2 = bas.sect.vertex[bas.s + 1].y - player->where.y;
-			//xprintf("%i %f %f %f %f\n\n", bas.s, bas.sect.vertex[bas.s + 0].x, bas.sect.vertex[bas.s].y, bas.sect.vertex[bas.s + 1].x, bas.sect.vertex[bas.s + 1].y);
 			//dist = sqrt(pow(bas.vx1 - player.where.x, 2) + pow(bas.vy1 - player.where.y, 2));
 			bas.pcos = player->anglecos, bas.psin = player->anglesin;
 			bas.tx1 = bas.vx1 * bas.psin - bas.vy1 * bas.pcos;
@@ -152,31 +149,31 @@ void draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int N
 				data->x_draw = bas.x;
 				bas.z = ((bas.x - bas.x1) * (bas.tz2 - bas.tz1) / (bas.x2 - bas.x1) + bas.tz1) * 8;
 				bas.ya = (bas.x - bas.x1) * (bas.y2a - bas.y1a) / (bas.x2 - bas.x1) + bas.y1a;
-				bas.cya = clamp(bas.ya, bas.ytop[bas.x], bas.ybottom[bas.x]);
+				bas.cya = clamp(bas.ya, ytop[bas.x], bas.ybottom[bas.x]);
 				bas.yb = (bas.x - bas.x1) * (bas.y2b - bas.y1b) / (bas.x2 - bas.x1) + bas.y1b;
-				bas.cyb = clamp(bas.yb, bas.ytop[bas.x], bas.ybottom[bas.x]);
+				bas.cyb = clamp(bas.yb, ytop[bas.x], bas.ybottom[bas.x]);
 				bas.i = -1;
 				while(++bas.i < data->sprite_nbr)
 				{
-					if(data->sectqueue[data->sprite[bas.i].sectorno] <= data->sectqueue[data->now_sect] && data->sprite[bas.i].status != 2)
-						data->sprite[bas.i] = get_sprite_coords(data, &data->sprite[bas.i], player, sectors, bas.ytop[bas.x], bas.ybottom[bas.x]);
+					if(data->sectqueue[data->sprite[bas.i].sectorno] <= data->sectqueue[data->now_sect] && data->sprite[bas.i].status != 2 && data->sectqueue[data->sprite[bas.i].sectorno] != -1)
+							data->sprite[bas.i] = get_sprite_coords(data, &data->sprite[bas.i], player, sectors, ytop[bas.x], bas.ybottom[bas.x]);
 				}
-				vline(data, bas.x, bas.ytop[bas.x], bas.cya - 1, 0x111111, 0x3f3f3f, 0x111111, data->wind.screen, bas.res_img);
+				vline(data, bas.x, ytop[bas.x], bas.cya - 1, 0x111111, 0x3f3f3f, 0x111111, data->wind.screen, bas.res_img);
 				vline(data, bas.x, bas.cyb + 1, bas.ybottom[bas.x], 0x992c42, 0x6b3636, 0x992c42, data->wind.screen, bas.res_img);
 				if (bas.neighbor >= 0)
 				{
 					bas.nya = (bas.x - bas.x1) * (bas.ny2a - bas.ny1a) / (bas.x2 - bas.x1) + bas.ny1a;
-					bas.cnya = clamp(bas.nya, bas.ytop[bas.x], bas.ybottom[bas.x]);
+					bas.cnya = clamp(bas.nya, ytop[bas.x], bas.ybottom[bas.x]);
 					bas.nyb = (bas.x - bas.x1) * (bas.ny2b - bas.ny1b) / (bas.x2 - bas.x1) + bas.ny1b;
-					bas.cnyb = clamp(bas.nyb, bas.ytop[bas.x], bas.ybottom[bas.x]);
+					bas.cnyb = clamp(bas.nyb, ytop[bas.x], bas.ybottom[bas.x]);
 					bas.r1 = luminosity(bas.r1, bas.z, data->luminosity);
 					bas.r2 = bas.r1;
 					vline(data, bas.x, bas.cya, bas.cnya - 1, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r1, 0, data->wind.screen, bas.res_img);
-					bas.ytop[bas.x] = clamp(max(bas.cya, bas.cnya), bas.ytop[bas.x], SCREEN_HEIGHT - 1);
+					ytop[bas.x] = clamp(max(bas.cya, bas.cnya), ytop[bas.x], SCREEN_HEIGHT - 1);
 					vline(data, bas.x, bas.cnyb + 1, bas.cyb, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r2, 0, data->wind.screen, bas.res_img);
 					bas.ybottom[bas.x] = clamp(min(bas.cyb, bas.cnyb), 0, bas.ybottom[bas.x]);/*
 					if(data->sectqueue[data->sprite[0].sectorno] <= data->sectqueue[data->now_sect])
-						data->sprite = get_sprite_coords(data, player, sectors, bas.ytop[bas.x], bas.ybottom[bas.x]); */
+						data->sprite = get_sprite_coords(data, player, sectors, ytop[bas.x], bas.ybottom[bas.x]); */
 				}
 				else
 				{

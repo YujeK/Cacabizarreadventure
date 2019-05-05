@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 02:26:57 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 10:04:43 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 18:30:01 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void    stand_ev(t_data *data, Uint8 *state, t_plyr *player)
 						ft_error_exit("cant play tp", data);
 					player->where.y = data->sprite[data->aim].where.y;
 					player->where.x = data->sprite[data->aim].where.x;
+					player->sector = data->sprite[data->aim].sectorno;
 					data->score++;
 					data->weapon_ammo += 3;
 					data->sprite[data->aim].status = 2;
