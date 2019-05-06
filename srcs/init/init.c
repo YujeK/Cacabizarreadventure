@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:40:28 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 13:31:40 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 01:19:16 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ void	init_main_v(t_data *data, t_b *b, char *arg)
 
 void        init_ingame_vars(t_data *data, t_b *b)
 {
-
+	b->eyeheight = b->player.ducking ? DuckHeight : Eyeheight;
     b->move_vec[0] = 0.f;
     b->move_vec[1] = 0.f;
-    b->eyeheight = b->player.ducking ? DuckHeight : b->eyeheight;
     b->player.ground = !b->player.falling;
     stand_activation(data, &b->player);
     data->sprint = 1;

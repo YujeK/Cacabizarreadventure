@@ -6,13 +6,13 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:47:55 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 12:24:22 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 01:19:44 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void    game_loop(t_data *data, t_b *b)
+void	game_loop(t_data *data, t_b *b)
 {
 	while (1)
 	{
@@ -20,14 +20,14 @@ void    game_loop(t_data *data, t_b *b)
 		if (data->game_start == 1)
 		{
 			init_ingame_vars(data, b);
-			draw_screen(data, &b->player, b->sectors, b->NumSectors); // norme S
+			draw_screen(data, &b->player, b->sectors, b->NumSectors);
 			draw_inventory(data);
 			draw_items(data);
 			end_game(data);
 			//draw_map(b, data); // norme S
 			ft_value_display(data);
-			engine_interaction(b); // norme S
-			event_manager(data, b); // norme A
+			engine_interaction(b);
+			event_manager(data, b);
 		}
 		else
 			start_menu(data);
