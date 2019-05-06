@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 19:59:28 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/05 14:52:32 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 10:58:55 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void    fillrect(SDL_Rect rect, int color, t_wind wind)
     }
 }
 
-void    draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_wind wind, t_plyr player, t_data *data)
+void    draw_map(t_b *b, t_data *data)
 {
     unsigned int i;
     unsigned int j;
@@ -124,24 +124,24 @@ void    draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_w
     rect.w = 247;
     rect.x = 749;
     rect.y = 0;
-    fillrect(rect, 0x2a303a, wind);
-    while(i < NumSectors)
+    fillrect(rect, 0x2a303a, data->wind);
+    while(i < b->NumSectors)
     {
         j = 0;
-        while(j < sectors[i].npoints)
+        while(j < b->sectors[i].npoints)
         {
-            if(sectors[i].neighbors[j] == -1)
+            if(b->sectors[i].neighbors[j] == -1)
             {
-                point.x = sectors[i].vertex[j].x * 5 + 200;
-                point.y = sectors[i].vertex[j].y * 5;
-                next_point.x = sectors[i].vertex[j + 1].x * 5 + 200;
-                next_point.y = sectors[i].vertex[j + 1].y * 5;
-                ft_draw_line3(wind, point, next_point, line);
+                point.x = b->sectors[i].vertex[j].x * 5 + 200;
+                point.y = b->sectors[i].vertex[j].y * 5;
+                next_point.x = b->sectors[i].vertex[j + 1].x * 5 + 200;
+                next_point.y = b->sectors[i].vertex[j + 1].y * 5;
+                ft_draw_line3(data->wind, point, next_point, line);
             }
             j++;
         }
         i++;
     }
-    draw_player(player, wind);
-    draw_sprites(data, wind);
+    draw_player(b->player, data->wind);
+    draw_sprites(data, data->wind);
 }

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/06 10:05:26 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 10:57:16 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,7 +450,7 @@ void			ft_error_exit(char *str, t_data *data);
 void			vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int ya, int yb);
 void			vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int color_change);
 void 			draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int NumSectors);
-void			draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_wind wind, t_plyr player, t_data *data);
+void			draw_map(t_b *b, t_data *data);
 void			draw_items(t_data *data);
 void			draw_inventory(t_data *data);
 int 			render_sprite(t_plyr player, t_object *sprite, t_sector *sectors);
