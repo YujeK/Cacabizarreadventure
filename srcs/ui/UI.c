@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 23:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 12:11:34 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 13:25:19 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void			ft_start_game(t_data *data)
 	story_2and3(data, rect);
 	if (data->story_step == 4)
 	{
-		//data->timer_start = 0;
-		//rect = (SDL_Rect){431, 50, 60, 60};
-		//ft_set_nbrstring(data->timer, rect, ft_color_nb_state(1), data);
+		data->timer_start = 0;
+		rect = (SDL_Rect){431, 50, 60, 60};
+		ft_set_nbrstring(data->timer, rect, ft_color_nb_state(1), data);
 		if (data->win == 1)
 		{
 			rect = (SDL_Rect){400, 400, 100, 100};

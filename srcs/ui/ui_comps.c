@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 02:59:19 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 12:24:13 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 13:06:25 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void		cap_framerate(t_data *data)
 
 void		wpn_bobbing(t_data *data)
 {
-	if (data->wpn_x == 15 || data->wpn_x == -15 || //dunno norme
-			data->wpn_y == -15 || data->wpn_y == 15)
+	if (data->wpn_x == 15 || data->wpn_x == -15
+	|| data->wpn_y == -15 || data->wpn_y == 15)
 		data->wpn_repos = 1;
 	if (data->wpn_x == 0 && data->wpn_y == 0)
 		data->wpn_repos = 0;

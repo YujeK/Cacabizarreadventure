@@ -6,19 +6,31 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:33:22 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 12:38:52 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 12:48:44 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-
-int event_keyboard(t_plyr *player, t_data *data, float *move_vec, t_sector *sector)
+int		check_keydown(t_wind wind)
 {
-	SDL_Event ev;
+	if (wind.event.key.keysym.sym == SDLK_ESCAPE)
+	{
+		SDL_DestroyWindow(wind.window);
+		SDL_Quit();
+		return (-1);
+	}
+	return (0);
+}
+
+int		event_keyboard(t_plyr *player, t_data *data,
+			float *move_vec, t_sector *sector)
+{
+	SDL_Event	ev;
+	int			change;
+	Uint8		*state;
+
 	SDL_PollEvent(&ev);
-	int change;
-	Uint8 *state;
 	state = (Uint8 *)SDL_GetKeyboardState(0);
 	movement_ev(data, state, move_vec, player);
 	wpn_bobbing(data);
@@ -26,7 +38,8 @@ int event_keyboard(t_plyr *player, t_data *data, float *move_vec, t_sector *sect
 	inv_ev(data, state, move_vec);
 	if (state[SDL_SCANCODE_SPACE])
 	{
-		if (player->velocity.z + 0.05 < sector[player->sector].ceil && data->zawarudo == 1 && time(0) - data->stand_timer > 4)
+		if (player->velocity.z + 0.05 < sector[player->sector].ceil &&
+			data->zawarudo == 1 && time(0) - data->stand_timer > 4)
 			player->velocity.z += 0.05;
 		else if (player->ground)
 		{
@@ -34,7 +47,6 @@ int event_keyboard(t_plyr *player, t_data *data, float *move_vec, t_sector *sect
 			player->falling = 1;
 		}
 	}
-		player->ducking = (state[SDL_SCANCODE_LCTRL] || state[SDL_SCANCODE_RCTRL]);
 	if (state[SDL_SCANCODE_ESCAPE])
 		exit(EXIT_FAILURE);
 	change = 1;
@@ -82,6 +94,7 @@ void	movement_ev(t_data *data, Uint8 *state, float *move_vec, t_plyr *player)
 			data->wpn_x -= 1;
 	}
 	move_ev(data, move_vec, player, state);
+	player->ducking = (state[SDL_SCANCODE_LCTRL] || state[SDL_SCANCODE_RCTRL]);
 	if (player->ducking)
 		data->sprint = 0.3;
 }
