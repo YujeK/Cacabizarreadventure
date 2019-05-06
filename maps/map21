@@ -1,0 +1,27 @@
+vertex 200 200 400 z
+vertex 400 400 200 z
+vertex 324 402 z
+vertex 327 605 z
+vertex 403 605 z
+vertex 322 690 z
+vertex 398 690 z
+vertex 288 607 z
+vertex 283 692 z
+vertex 249 610 z
+vertex 244 695 z
+vertex 364 85 z
+vertex 325 88 z
+z
+sector  480 520 0 1 4 2 3 c  -1 -1 -1 1 -1  z
+sector  480 520 4 5 6 2 c  0 -1 2 -1  z
+sector  480 520 5 7 8 6 c  1 3 -1 -1  z
+sector  480 520 5 9 10 7 c  2 -1 4 -1  z
+sector  480 520 9 11 12 10 c  3 5 -1 -1  z
+sector  480 520 9 13 14 11 c  4 -1 -1 -1  z
+z
+player 300 300 0 0 z
+z
+object  126 345 5 z
+object  389 371 0 z
+object  676 376 2 z
+object  666 264 4 z

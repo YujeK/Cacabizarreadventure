@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:46:50 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/04 06:29:00 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 01:20:12 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	get_string(char **map)
 	int line;
 	int t;
 
+	line = 0;
 	t = ft_tablen(map);
 	i = -1;
 	while(++i < t)
@@ -28,6 +29,8 @@ int	get_string(char **map)
 			break;
 		}
 	}
+	if(line == 0)
+		exit(EXIT_FAILURE);
 	return(line);
 }
 
@@ -46,7 +49,8 @@ t_plyr Load_Player(t_sector *sectors, char **map)
 	player.anglecos = 0;
 	player.anglesin = 0;
 	player.yaw = 0;
-	str = map[get_string(map)];
+	if (map[get_string(map)])
+		str = map[get_string(map)];
 	while (str[i])
 	{
 		if(f == 0 && str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))

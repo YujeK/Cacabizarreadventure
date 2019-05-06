@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/05 11:53:31 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 02:57:23 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ typedef struct	s_data
 	time_t			timer_start;
 	Mix_Chunk		*stand_warudo;
 	Mix_Chunk		*tp_sound;
+	Mix_Chunk		*ak;
 	Mix_Music		*menutheme;
 	Mix_Chunk		*eye_sound;
 	Mix_Music		*zawarudotheme;
@@ -368,7 +369,7 @@ void    		pick_up(t_data *data, t_plyr *player, t_object *sprite);
 */
 
 int				check_keydown(t_wind wind);
-int				event_keyboard(t_plyr *player, t_data *data, float *move_vec);
+int				event_keyboard(t_plyr *player, t_data *data, float *move_vec, t_sector *sector);
 void			event_mouse(t_plyr *player, t_data *data);
 t_plyr			Move_player(float dx, float dy, t_plyr player, t_sector *sectors);
 void    		stand_ev(t_data *data, Uint8 *state, t_plyr *player);

@@ -1,6 +1,0 @@
-vertex	0	0 500 z
-vertex	500	0 500 z
-z
-sector 0 20	0 1 3 2 c  -1 -1 -1 -1 z
-z
-player 250 250 0 0 z

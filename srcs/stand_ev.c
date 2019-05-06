@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 02:26:57 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 18:30:01 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/05 22:55:37 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 	if (player->where.y <= sprite->where.y + 2 && player->where.x <= sprite->where.x + 2  && player->where.y >= sprite->where.y - 2 && player->where.x >= sprite->where.x - 2&& sprite->status == 1)
 	{
 		data->score++;
-		data->weapon_ammo += 3;
+		data->weapon_ammo += 1;
 		sprite->status = 2;
 	}
 }
@@ -70,7 +70,7 @@ void    stand_ev(t_data *data, Uint8 *state, t_plyr *player)
 					player->where.x = data->sprite[data->aim].where.x;
 					player->sector = data->sprite[data->aim].sectorno;
 					data->score++;
-					data->weapon_ammo += 3;
+					data->weapon_ammo += 1;
 					data->sprite[data->aim].status = 2;
 				}
 			}

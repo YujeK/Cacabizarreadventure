@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:49:55 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 19:03:57 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 02:01:51 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,16 @@ t_sector *fill_sectors(t_sector *sectors, char *str, int *c, t_vector *vertex)
 	save2 = 0;
 	i = 0;
 	part = 0;
-	v = count_vertex(str) - 1;
-	sectors[*c].npoints = v;
-	sectors[*c].vertex = (t_vector*)malloc(sizeof(t_vector) * v + 1);
-	sectors[*c].neighbors = (signed char*)malloc(sizeof(signed char) * v + 10);
+	v = count_vertex(str);
+	//printf("%d\n", v);
+	sectors[*c].npoints = v - 1;
+	//printf("%i\n\n", v);
+	if (v < 4)
+		exit(EXIT_FAILURE);
+	if (!(sectors[*c].vertex = (t_vector*)malloc(sizeof(t_vector) * v + 100)))
+		exit(EXIT_FAILURE);
+	if (!(sectors[*c].neighbors = (signed char*)malloc(sizeof(signed char) * v + 10)))
+		exit(EXIT_FAILURE);
 	while (str[i])
 	{
 		while (str[i] && (str[i] < '0' || str[i] > '9'))
@@ -107,15 +113,19 @@ t_sector	*Load_sectors(char **map, unsigned int *NumSectors, t_vector *vertex)
 	}
 	*NumSectors = st;
 	sectors = (t_sector *)malloc(sizeof(t_sector) * st);
+	st = 0;
 	i = 0;
 	while(i < t)
 	{
 		if(map[i][1] == 's')
 		{
+			st = 1;
 			sectors = fill_sectors(sectors, map[i], &c, vertex);
 			c++;
 		}
 		i++;
 	}
+	if(!st)
+		exit(EXIT_FAILURE);
 	return(sectors);
 }

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 23:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 10:00:28 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 02:49:53 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,22 +109,6 @@ void			ft_start_game(t_data *data)
 		ft_set_string(rect, "si tu veux comprendre les regles demande aux 3 bolosses ou a YujeKok, bonne chance", ft_hex_to_rgb(0xFF1493FF), data);
 	}
 	if (data->story_step == 3)
-	{
-/* 		rect = (SDL_Rect){500, 400, 25, 25};
-		ft_set_string(rect, "CA VA START", ft_hex_to_rgb(0xFFFF00FF), data);
-		SDL_Delay(100);
-		rect = (SDL_Rect){500, 500, 25, 25};
-		ft_set_string(rect, "3", ft_hex_to_rgb(0xFFFF00FF), data);
-		SDL_Delay(100);
-		rect = (SDL_Rect){520, 520, 25, 25};
-		ft_set_string(rect, "2", ft_hex_to_rgb(0xFFFF00FF), data);
-		SDL_Delay(100);
-		rect = (SDL_Rect){540, 540, 25, 25};
-		ft_set_string(rect, "1", ft_hex_to_rgb(0xFFFF00FF), data);
-		SDL_Delay(100); */
-		data->story_step = 4;
-	}
-	if (data->story_step == 4)
 	{
 		rect = (SDL_Rect){400, 0, 60, 60};
 		ft_set_string(rect, "TIMER", ft_color_nb_state(0), data);

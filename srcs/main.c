@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/05 19:07:10 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 02:57:03 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_plyr	Move_player(float dx, float dy, t_plyr player, t_sector *sectors)
 	return (player);
 }
 
-int main()
+int main(int argc, char **argv)
 {
 	t_plyr player;
 	t_sector *sectors;
@@ -71,8 +71,10 @@ int main()
 	int pushing;
 	SDL_Rect rect;
 
+	if (argc != 2 || argv[1][0] != 'm')
+		return (0);
+
 	ft_bzero(&data, sizeof(t_data));
-	data.weapon_ammo = 30;
 	data.luminosity = 0.99;
 	player.ground = 0;
 	player.falling = 1;
@@ -93,7 +95,7 @@ int main()
 	if (SDL_SetRelativeMouseMode(TRUE) < 0)
 		ft_error_exit("Wolf3d: Unable to set relative mode", &data);
 	str = ft_strnew(1);
-	fd = open("maps/map7", O_CREAT | O_RDWR | O_APPEND, 0777);
+	fd = open(argv[1], O_CREAT | O_RDWR | O_APPEND, 0777);
 	while ((ret = get_next_line(fd, &buf)) == 1)
 	{
 		str = ft_strjoin2(str, buf);
@@ -101,6 +103,7 @@ int main()
 	}
 	map = ft_strsplit(str, 'z');
 	init_sprites(&data, map);
+	data.weapon_ammo = data.sprite_nbr;
 	init_img(&data);
 	vert = Load_vertex(map);
 	sectors = Load_sectors(map, &NumSectors, vert);
@@ -115,7 +118,7 @@ int main()
 	sectors[0].neighbors[4] = -1;*/
 		//printf("%i\n\n\n",sectors[0].npoints);
 
- 	while(++i < NumSectors)
+	while(++i < NumSectors)
 	{
 		t = - 1;
 		j = -1;
@@ -145,7 +148,6 @@ int main()
 	}
 	if (data.game_start == 1)
 	{
-		//printf("%i\n", player.sector);
 		stand_activation(&data, &player);
 		/* starting data */
 		data.sprint = 1;
@@ -154,7 +156,7 @@ int main()
 		draw_screen(&data, &player, sectors, NumSectors);
 		draw_inventory(&data);
 		draw_items(&data);
-		draw_map(vert, sectors, NumSectors, data.wind, player, &data);
+		//draw_map(vert, sectors, NumSectors, data.wind, player, &data);
 		/* render */
 		ft_value_display(&data);
 		eyeheight = player.ducking ? DuckHeight : Eyeheight;
@@ -214,7 +216,7 @@ int main()
 		event_mouse(&player, &data);
 		player = Move_player(0 , 0, player, sectors);
 		float move_vec[2] = {0.f, 0.f};
-		event_keyboard(&player, &data, move_vec) == 1 ? pushing = 1 : 0;
+		event_keyboard(&player, &data, move_vec, sectors) == 1 ? pushing = 1 : 0;
 		float acceleration = pushing ? 0.4 : 0.2;
 		player.velocity.x = player.velocity.x * (1-acceleration) + move_vec[0] * acceleration * data.sprint;
 		player.velocity.y = player.velocity.y * (1-acceleration) + move_vec[1] * acceleration * data.sprint;

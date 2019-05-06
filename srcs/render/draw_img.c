@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 20:45:44 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/04 00:48:18 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 02:51:04 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	draw_inventory(t_data *data)
 {
 	if (data->inventory_state == 1)
 		display_img(-15, 400, data->wind, 600, data->invon.res_img);
-	if (data->story_step != 4)
+	if (data->story_step != 3)
 		display_img(-15, 290, data->wind, 100, data->invoff.res_img);
 }

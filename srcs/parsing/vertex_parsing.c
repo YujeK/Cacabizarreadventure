@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:47:49 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 14:40:13 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 02:00:56 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,21 @@ int 	count_vertex(char *str)
 		}
 		i++;
 	}
+	if (c == 0)
+		exit(EXIT_FAILURE);
 	return(c);
 }
 
 t_vector	*Load_vertex(char **map)
 {
-	size_t i;
+	int i;
 	int j;
 	int v;
 	int vt;
 	int st;
 	int s;
 	int c;
-	size_t t;
+	int t;
 	t_vector *vertex;
 
 	i = 0;
@@ -99,11 +101,11 @@ t_vector	*Load_vertex(char **map)
 	s = 0;
 	vt = 0;
 	st = 0;
-	t = ft_tablen(map);
+	t = (int)ft_tablen(map);
 	while (i < t - 3)
 	{
 		j= 0;
-		while(map[i][j])
+		while(map[i] && j < ft_strlen(map[i]))
 		{
 			if (map[i][j] && (map[i][0] == 'v' || map[i][1] == 'v' || map[i][2] == 'v') && map[i][j] >= '0'
 			&& map[i][j] <= '9' && (map[i][j - 1] == ' ' || map[i][j - 1] == '\t'))
@@ -112,7 +114,9 @@ t_vector	*Load_vertex(char **map)
 		}
 		i++;
 	}
-	vt = 66;
+	if(vt == 0)
+		exit(EXIT_FAILURE);
+	//vt = 66;
 	i = 0;
 	vertex = (t_vector*)malloc(sizeof(t_vector) * vt);
 	while(i < vt)

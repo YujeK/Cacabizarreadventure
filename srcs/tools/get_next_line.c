@@ -6,55 +6,52 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/03 19:21:19 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/04/04 19:59:15 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 02:16:47 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	give_to_line(char **line, char *extra)
+int		ft_subjoinfree(char **line, char *buff, int len)
 {
-	char	*c;
+	char	*tmp;
+	char	*tmp2;
 
-	if ((c = ft_strchr(extra, '\n')))
-	{
-		*c = '\0';
-		*line = ft_strdup(extra);
-		c++;
-		ft_memmove(extra, c, ft_strlen(c) + 1);
-		return (1);
-	}
-	if (ft_strlen(extra) > 0)
-	{
-		*line = ft_strdup(extra);
-		*extra = '\0';
-		return (1);
-	}
-	return (0);
+	len = 0;
+	while (buff[len] && buff[len] != '\n')
+		len++;
+	tmp = *line;
+	tmp2 = ft_strsub(buff, 0, len);
+	if (!(*line = ft_strjoin(tmp, tmp2)))
+		return (-1);
+	free(tmp);
+	free(tmp2);
+	return (len);
 }
 
-int			get_next_line(const int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
-	static char	*extra = NULL;
-	char		buf[BUFF_SIZE + 1];
-	char		*tmp;
+	static char	buff[BUFF_SIZE + 1] = {'\0'};
 	int			ret;
+	int			len;
 
-	if (!line || fd < 0)
+	if (!line || fd < 0 || !(*line = ft_strnew(0)))
 		return (-1);
-	if (extra == NULL)
-		extra = ft_strnew(0);
-	while (!ft_strchr(extra, '\n'))
+	ret = 1;
+	while (ret)
 	{
-		ret = read(fd, buf, BUFF_SIZE);
-		if (ret == -1)
+		if (!(*buff) && (ret = read(fd, buff, BUFF_SIZE)) == -1)
 			return (-1);
-		if (ret == 0)
-			return (give_to_line(line, extra));
-		buf[ret] = '\0';
-		tmp = ft_strjoin(extra, buf);
-		ft_strdel(&extra);
-		extra = tmp;
+		if ((len = ft_subjoinfree(line, buff, len)) == -1)
+			return (-1);
+		if (buff[len] == '\n')
+		{
+			ft_strncpy(buff, buff + len + 1, BUFF_SIZE);
+			return (1);
+		}
+		ft_strncpy(buff, buff + len, BUFF_SIZE);
+		if (!(*buff) && ret == 0 && **line)
+			return (1);
 	}
-	return (give_to_line(line, extra));
+	return (0);
 }
