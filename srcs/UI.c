@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 23:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 02:49:53 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 04:27:23 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,26 @@ void			ft_start_game(t_data *data)
 		rect = (SDL_Rect){60, 350, 25, 25};
 		ft_set_string(rect, "si tu veux comprendre les regles demande aux 3 bolosses ou a YujeKok, bonne chance", ft_hex_to_rgb(0xFF1493FF), data);
 	}
-	if (data->story_step == 3)
+	if (data->story_step == 3 || data->story_step == 4)
 	{
 		rect = (SDL_Rect){400, 0, 60, 60};
 		ft_set_string(rect, "TIMER", ft_color_nb_state(0), data);
+	}
+	if (data->story_step == 4)
+	{
+		data->timer_start = 0;
+		rect = (SDL_Rect){431, 50, 60, 60};
+		ft_set_nbrstring(data->timer, rect, ft_color_nb_state(1), data);
+		if (data->win == 1)
+		{
+		rect = (SDL_Rect){400, 400, 100, 100};
+		ft_set_string(rect, "You win", ft_hex_to_rgb(GREEN), data);
+		}
+		else
+		{
+		rect = (SDL_Rect){400, 400, 100, 100};
+		ft_set_string(rect, "You lose", ft_hex_to_rgb(RED), data);
+		}
 	}
 }
 void			ft_value_display(t_data *data)

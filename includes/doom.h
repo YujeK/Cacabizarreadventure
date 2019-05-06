@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/06 02:57:23 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 06:12:58 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@
 # define CROSSHAIR_Y 500
 # define FPS 60
 
-# define RED 0xFF0001
-# define CYAN 0x00CCCC
-# define BLUE 0x0000f
-# define PURPLE 0x800080
-# define YELLOW 0xFFFF00
-# define ORANGE 0xffa500
-# define GREEN 0x008000
-# define INDIGO 0x4B0082
-# define WHITE 0xF0FFF0
+# define RED 0xad1313
+# define CYAN 0x2d6f9b
+# define BLUE 0x114fb2
+# define PURPLE 0x67438c
+# define YELLOW 0xFd1c657
+# define ORANGE 0xfd6824f
+# define GREEN 0x27a348
+# define INDIGO 0x1ea3cc
+# define WHITE 0xa53e75
 typedef struct  s_pixels
 {
         Uint32          *pixels;
@@ -92,6 +92,11 @@ typedef struct	s_vector
 	double		y;
 }				t_vector;
 
+typedef struct	s_all
+{
+	t_vector	start;
+	t_vector	end;
+}				t_wall;
 typedef struct	s_wind
 {
 	SDL_Window	*window;
@@ -184,6 +189,7 @@ typedef struct  s_object
 
 typedef struct	s_data
 {
+	int				win;
 	time_t			death_timer;
 	int				score;
 	int				eyesofthedead;
@@ -236,6 +242,8 @@ typedef struct	s_data
 	t_object		akimboff;
 	t_object		invoff;
 	t_object		invon;
+	t_object		rbw;
+	t_object		pepo;
 	t_object		*sprite;
 	int				sprite_nbr;
 	int				aim;
@@ -250,6 +258,7 @@ typedef struct	s_data
 
 typedef struct		s_bas
 {
+	unsigned int numsectors;
 	t_item queue[32];
 	t_item *head;
 	t_item *tail;
@@ -358,12 +367,12 @@ void   			display_img(int x, int y, t_wind wind, int size, unsigned int *res_img
 int         	ft_in_hitbox(t_data *data);
 void        	cap_framerate(t_data *data);
 void    		fillrect(SDL_Rect rect, int color, t_wind wind);
-int             rbw(int x);
+int             rbw(int x, unsigned int NumSectors);
 SDL_Color		ft_hex_to_rgb(int hexa);
 t_object 		get_sprite_coords(t_data *data, t_object *sprite, t_plyr *player, t_sector *sectors, int ytop, int ybottom);
 t_object 		*sprite_size(t_object *sprite, t_plyr player, t_data data);
 void    		pick_up(t_data *data, t_plyr *player, t_object *sprite);
-
+int				in_sector_full(t_sector *sectors, t_vector point, unsigned int NumSectors);
 /*
 ** EVENTS
 */
@@ -371,9 +380,10 @@ void    		pick_up(t_data *data, t_plyr *player, t_object *sprite);
 int				check_keydown(t_wind wind);
 int				event_keyboard(t_plyr *player, t_data *data, float *move_vec, t_sector *sector);
 void			event_mouse(t_plyr *player, t_data *data);
-t_plyr			Move_player(float dx, float dy, t_plyr player, t_sector *sectors);
+t_plyr			Move_player(float dx, float dy, t_plyr player, t_sector *sectors, unsigned int NumSectors);
 void    		stand_ev(t_data *data, Uint8 *state, t_plyr *player);
 void    		stand_activation(t_data *data, t_plyr *player);
+
 /*
 **  Parsing
 */
@@ -391,6 +401,7 @@ t_wind			init_wind(t_wind wind);
 void			init_img(t_data *data);
 void			start_menu(t_data *data);
 void			init_sprites(t_data *data, char **map);
+void			end_game(t_data *data);
 
 
 /*
@@ -404,7 +415,7 @@ void			ft_error_exit(char *str, t_data *data);
 */
 
 void			vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int ya, int yb);
-void			vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img);
+void			vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int color_change);
 void 			draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int NumSectors);
 void			draw_map(t_vector *vert, t_sector *sectors, unsigned int NumSectors, t_wind wind, t_plyr player, t_data *data);
 void			draw_items(t_data *data);

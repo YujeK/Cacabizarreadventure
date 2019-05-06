@@ -6,12 +6,23 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 01:15:43 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 10:08:31 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 04:26:07 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+
+void	end_game(t_data *data)
+{
+	if (data->score == data->sprite_nbr * 2)
+	{
+		data->story_step = 4;
+		data->win = 1;
+	}
+	if (data->weapon_ammo == 0)
+		data->story_step = 4;
+}
 void    fillerect(SDL_Rect rect, int color, t_wind wind)
 {
     int x;

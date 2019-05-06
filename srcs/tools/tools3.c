@@ -6,20 +6,20 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:31:33 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 11:03:06 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 05:11:37 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int             rbw(int x)
+int             rbw(int x, unsigned int NumSectors)
 {
     int         color;
     int         whichcolor;
     int         thiscolor;
-    static int  rainbow[7] = {RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE};
+    static int  rainbow[8] = {INDIGO, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE};
     color = 0;
-    whichcolor = (SCREEN_WIDTH) / 7;
+    whichcolor = (NumSectors) / 8;
     thiscolor = 0;
     while (color < 6)
     {
@@ -28,7 +28,7 @@ int             rbw(int x)
             return (rainbow[color]);
         color++;
     }
-    return (rainbow[color]);
+    return (rainbow[x % 7]);
 }
 
 t_vector	Intersect(float x1, float y1, float x2, float y2, float x3, float  y3, float x4, float y4)

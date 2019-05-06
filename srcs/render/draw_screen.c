@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:15:17 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 19:04:23 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 07:18:48 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,8 +158,8 @@ void draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int N
 					if(data->sectqueue[data->sprite[bas.i].sectorno] <= data->sectqueue[data->now_sect] && data->sprite[bas.i].status != 2 && data->sectqueue[data->sprite[bas.i].sectorno] != -1)
 							data->sprite[bas.i] = get_sprite_coords(data, &data->sprite[bas.i], player, sectors, ytop[bas.x], bas.ybottom[bas.x]);
 				}
-				vline(data, bas.x, ytop[bas.x], bas.cya - 1, 0x111111, 0x3f3f3f, 0x111111, data->wind.screen, bas.res_img);
-				vline(data, bas.x, bas.cyb + 1, bas.ybottom[bas.x], 0x992c42, 0x6b3636, 0x992c42, data->wind.screen, bas.res_img);
+				vline(data, bas.x, ytop[bas.x], bas.cya - 1, 0x111111, 0x3f3f3f, 0x111111, data->wind.screen, bas.res_img, -1);
+				vline(data, bas.x, bas.cyb + 1, bas.ybottom[bas.x], 0x992c42, 0x6b3636, 0x992c42, data->wind.screen, bas.res_img, -1);
 				if (bas.neighbor >= 0)
 				{
 					bas.nya = (bas.x - bas.x1) * (bas.ny2a - bas.ny1a) / (bas.x2 - bas.x1) + bas.ny1a;
@@ -168,19 +168,20 @@ void draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int N
 					bas.cnyb = clamp(bas.nyb, ytop[bas.x], bas.ybottom[bas.x]);
 					bas.r1 = luminosity(bas.r1, bas.z, data->luminosity);
 					bas.r2 = bas.r1;
-					vline(data, bas.x, bas.cya, bas.cnya - 1, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r1, 0, data->wind.screen, bas.res_img);
+					vline(data, bas.x, bas.cya, bas.cnya - 1, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r1, 0, data->wind.screen, bas.res_img, -1);
 					ytop[bas.x] = clamp(max(bas.cya, bas.cnya), ytop[bas.x], SCREEN_HEIGHT - 1);
-					vline(data, bas.x, bas.cnyb + 1, bas.cyb, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r2, 0, data->wind.screen, bas.res_img);
+					vline(data, bas.x, bas.cnyb + 1, bas.cyb, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r2, 0, data->wind.screen, bas.res_img, -1);
+					//vline2(500, bas.x, bas.cnyb + 1, bas.cyb, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r2, 0, data->wind.screen, data->pepo.img, bas.ya, bas.yb);
 					bas.ybottom[bas.x] = clamp(min(bas.cyb, bas.cnyb), 0, bas.ybottom[bas.x]);/*
 					if(data->sectqueue[data->sprite[0].sectorno] <= data->sectqueue[data->now_sect])
 						data->sprite = get_sprite_coords(data, player, sectors, ytop[bas.x], bas.ybottom[bas.x]); */
 				}
 				else
 				{
-					bas.r = luminosity(bas.r, bas.z, data->luminosity);
-					bas.point_in_image = bas.ratio * 600;
-					//vline2(bas.point_in_image, bas.x, bas.cya, bas.cyb, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r, 0, data->wind.screen, bas.res_img, bas.ya, bas.yb);
-					vline(data, bas.x, bas.cya, bas.cyb, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r, 0, data->wind.screen, bas.res_img);
+					//bas.r = luminosity(bas.r, bas.z, data->luminosity);
+					//bas.point_in_image = bas.ratio * 600;
+					vline2(500, bas.x, bas.cya, bas.cyb, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r, 0, data->wind.screen, data->pepo.img, bas.ya, bas.yb);
+					//vline(data, bas.x, bas.cya, bas.cyb, 0, bas.x == bas.x1 || bas.x == bas.x2 ? 0 : bas.r, 0, data->wind.screen, bas.res_img, bas.now.sectorno);
 				}
 			}
 			if (bas.neighbor >= 0 && bas.endx >= bas.beginx && (bas.head + 32 + 1 - bas.tail) % 32)

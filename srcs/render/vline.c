@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:11:11 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 05:36:14 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 07:19:08 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		return_redscale(int color)
 	return (color);
 }
 
-void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img)
+void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int color_change)
 {
 	int *pix;
 	int y;
@@ -76,7 +76,10 @@ void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom,
 		{/* 
 			if (y == SCREEN_HEIGHT / 2 && x == SCREEN_WIDTH / 2)
 				data->aim = 1; */
-			pix[y * SCREEN_WIDTH + x] = middle;
+			if (color_change > 1)
+				pix[y * SCREEN_WIDTH + x] = rbw(color_change, data->numsectors);
+			else
+				pix[y * SCREEN_WIDTH + x] = middle;
 			pix[y2 * SCREEN_WIDTH + x] = bottom;
 			y++;
 		}
@@ -108,9 +111,9 @@ void	vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_
 	{
 		pix[y1 * SCREEN_WIDTH + x] = top;
 		y = y1 + 1;
-		while (y < y2)
+		while (y < y2 && img_y < 599)
 		{
-			pix[y * SCREEN_WIDTH + x] = img[(int)img_y * 600 + x] ;
+			pix[y * SCREEN_WIDTH + x] = img[(int)img_y * 599];
 	        pix[y2 * SCREEN_WIDTH + x] = bottom;
 			y++;
 			img_y += ratio;

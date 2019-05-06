@@ -26,7 +26,8 @@ SRC			:=	main.c \
 				sprites.c \
 				init_sprites.c \
 				luminosity.c \
-				start_menu.c
+				start_menu.c \
+				tools4.c
 # directories :
 OBJDIR 		:=	objs
 INCDIR  	:=	includes

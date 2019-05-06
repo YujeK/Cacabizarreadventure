@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 20:50:50 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/05 22:45:37 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 06:18:41 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	init_img(t_data *data)
 	if (!(data->menustart.img = tga_load("ressources/inventory/cacamenustarter.tga", &data->menustart.specs)))
 		ft_error_exit("I couldnt load tga menu", data);
 	data->menustart.res_img = resize(data->menustart.img, data->menustart.specs, 1001);
+	if (!(data->rbw.img = tga_load("ressources/enemies/rbww.tga", &data->rbw.specs)))
+		ft_error_exit("I couldnt load tga rbw", data);
+	if (!(data->pepo.img = tga_load("ressources/enemies/popow.tga", &data->pepo.specs)))
+		ft_error_exit("I couldnt load tga popow", data);
 	//texture init
 /* 	data->wall_tex = tga_load("ressources/lava.tga", &specs);
 	data->res_wall_tex = resize(data->wall_tex, specs, 600);

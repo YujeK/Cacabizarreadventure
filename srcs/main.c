@@ -6,20 +6,23 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/06 02:57:03 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 07:23:06 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-t_plyr	Move_player(float dx, float dy, t_plyr player, t_sector *sectors)
+t_plyr	Move_player(float dx, float dy, t_plyr player, t_sector *sectors, unsigned int NumSectors)
 {
-	float px = player.where.x;
-	float py = player.where.y;
+	float px;
+	float py;
+	int s;
+	t_vector temp;
+
+	px = player.where.x;
+	py = player.where.y;
 	t_sector sect = sectors[player.sector];
 	t_vector *vert = sect.vertex;
-	int s;
-
 	s = 0;
 	while(s < sect.npoints)
 	{
@@ -32,10 +35,16 @@ t_plyr	Move_player(float dx, float dy, t_plyr player, t_sector *sectors)
 		}
 		s++;
 	}
-	player.where.x += dx;
-	player.where.y += dy;
 	player.anglesin = sinf(player.angle);
 	player.anglecos = cosf(player.angle);
+	temp.x = player.where.x + dx * 4;
+	temp.y = player.where.y + dy * 4;
+	if(in_sector_full(sectors, temp, NumSectors) == -1)
+		return(player);
+	player.where.x = temp.x - dx * 3;
+	player.where.y = temp.y - dy * 3;
+	if (sectors[player.sector].floor == 481)
+		sectors[player.sector].floor = 440;
 	return (player);
 }
 
@@ -133,7 +142,8 @@ int main(int argc, char **argv)
 	rect.x = 1000;
 	rect.y = 1000;
 	data.startgame_timer = time(0);
-	Mix_PlayMusic(data.menutheme, 1);
+	data.numsectors = NumSectors;
+	//Mix_PlayMusic(data.menutheme, 1);
 	while(1)
 	{
 	data.starting_tick = SDL_GetTicks();
@@ -156,6 +166,7 @@ int main(int argc, char **argv)
 		draw_screen(&data, &player, sectors, NumSectors);
 		draw_inventory(&data);
 		draw_items(&data);
+		end_game(&data);
 		//draw_map(vert, sectors, NumSectors, data.wind, player, &data);
 		/* render */
 		ft_value_display(&data);
@@ -209,12 +220,12 @@ int main(int argc, char **argv)
 					}
 				}
 			}
-			player = Move_player(dx, dy, player, sectors);
+			player = Move_player(dx, dy, player, sectors, NumSectors);
 			player.falling = 1;
 		}
 		//events//
 		event_mouse(&player, &data);
-		player = Move_player(0 , 0, player, sectors);
+		player = Move_player(0 , 0, player, sectors, NumSectors);
 		float move_vec[2] = {0.f, 0.f};
 		event_keyboard(&player, &data, move_vec, sectors) == 1 ? pushing = 1 : 0;
 		float acceleration = pushing ? 0.4 : 0.2;
