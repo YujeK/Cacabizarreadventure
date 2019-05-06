@@ -27,7 +27,10 @@ SRC			:=	main.c \
 				init_sprites.c \
 				luminosity.c \
 				start_menu.c \
-				tools4.c
+				tools4.c \
+				engine_interaction.c \
+				init.c \
+				game_loop.c
 # directories :
 OBJDIR 		:=	objs
 INCDIR  	:=	includes

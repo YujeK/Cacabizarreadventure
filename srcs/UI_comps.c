@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 02:59:19 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/03 07:50:18 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 09:59:54 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ void        cap_framerate(t_data *data)
 {
     if ((1000 / FPS) > SDL_GetTicks() - data->starting_tick)
         SDL_Delay(1000 / FPS - (SDL_GetTicks() - data->starting_tick));
+	if (data->is_cd == 1)
+	{
+		data->weap_cd++;
+		if (data->weap_cd == 7)
+		{
+			data->weap_cd = 0;
+			data->is_cd = 0;
+		}
+	}
 }
 
 void		wpn_bobbing(t_data *data)

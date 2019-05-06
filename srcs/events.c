@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/06 04:28:49 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 09:37:02 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,4 +163,16 @@ int event_keyboard(t_plyr *player, t_data *data, float *move_vec, t_sector *sect
 		exit(EXIT_FAILURE);
 	change = 1;
 	return (change);
+}
+
+void	event_manager(t_data *data, t_b *b)
+{
+	event_mouse(&b->player, data);
+	b->player = Move_player(0, 0, b->player, b->sectors, b->NumSectors);
+	event_keyboard(&b->player, data, b->move_vec, b->sectors) == 1 ? b->pushing = 1 : 0;
+	b->acceleration = b->pushing ? 0.4 : 0.2;
+	b->player.velocity.x = b->player.velocity.x * (1 - b->acceleration) + b->move_vec[0] * b->acceleration * data->sprint;
+	b->player.velocity.y = b->player.velocity.y * (1 - b->acceleration) + b->move_vec[1] * b->acceleration * data->sprint;
+	if (b->pushing)
+		b->player.moving = 1;
 }

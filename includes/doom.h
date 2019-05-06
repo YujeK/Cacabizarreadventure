@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/06 06:12:58 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 10:05:26 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,36 @@ typedef struct	s_data
 	int				flag;
 }					t_data;
 
+//basura main
+typedef	struct		s_b
+{
+	t_plyr 		player;
+	t_sector 	*sectors;
+	t_sector 	sect;
+	t_vector	*vert;
+	unsigned int NumSectors;
+	unsigned int s;
+	char		*str;
+	int 		fd;
+	int 		ret;
+	char 		*buf;
+	char 		**map;
+	float 		xd;
+	float 		yd;
+	float 		eyeheight;
+	float 		nextz;
+	float 		hole_low;
+	float		 hole_high;
+	float 		dx;
+	float 		dy;
+	float 		px;
+	float 		py;
+	int 		pushing;
+	float		acceleration;
+	float		move_vec[2];
+}					t_b;
+
+//basura draw screen
 typedef struct		s_bas
 {
 	unsigned int numsectors;
@@ -383,6 +413,8 @@ void			event_mouse(t_plyr *player, t_data *data);
 t_plyr			Move_player(float dx, float dy, t_plyr player, t_sector *sectors, unsigned int NumSectors);
 void    		stand_ev(t_data *data, Uint8 *state, t_plyr *player);
 void    		stand_activation(t_data *data, t_plyr *player);
+void			event_manager(t_data *data, t_b *b);
+
 
 /*
 **  Parsing
@@ -402,6 +434,7 @@ void			init_img(t_data *data);
 void			start_menu(t_data *data);
 void			init_sprites(t_data *data, char **map);
 void			end_game(t_data *data);
+void        	init_ingame_vars(t_data *data, t_b *b);
 
 
 /*
@@ -423,7 +456,9 @@ void			draw_inventory(t_data *data);
 int 			render_sprite(t_plyr player, t_object *sprite, t_sector *sectors);
 void			draw_resized_column(t_data *data,t_object *sprite, t_wind wind, int ytop, int ybot);
 int				luminosity(int r1, double z, double luminosity);
-
+void			engine_interaction(t_b *b);
+void    		game_loop(t_data *data, t_b *b);
+void			init_main_v(t_data *data, t_b *b, char *arg);
 
 /*
 **	UI
