@@ -6,12 +6,11 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 03:29:08 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/06 04:16:22 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 11:50:01 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
 
 int	orientation(t_vector p, t_vector q, t_vector r)
 {

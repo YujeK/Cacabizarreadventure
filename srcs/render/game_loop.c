@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:47:55 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 11:17:35 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 12:24:22 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void    game_loop(t_data *data, t_b *b)
 			draw_screen(data, &b->player, b->sectors, b->NumSectors); // norme S
 			draw_inventory(data);
 			draw_items(data);
-			end_game(data); // norme A
+			end_game(data);
 			//draw_map(b, data); // norme S
-			ft_value_display(data); // norme A
+			ft_value_display(data);
 			engine_interaction(b); // norme S
 			event_manager(data, b); // norme A
 		}

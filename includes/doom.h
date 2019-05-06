@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/06 10:57:16 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 12:39:29 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -403,6 +403,10 @@ t_object 		get_sprite_coords(t_data *data, t_object *sprite, t_plyr *player, t_s
 t_object 		*sprite_size(t_object *sprite, t_plyr player, t_data data);
 void    		pick_up(t_data *data, t_plyr *player, t_object *sprite);
 int				in_sector_full(t_sector *sectors, t_vector point, unsigned int NumSectors);
+void	        ft_set_nbrstring(int value, SDL_Rect rect, SDL_Color color, t_data *data);
+void	        ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_data *data);
+SDL_Color   	ft_color_nb_state(int nb);
+
 /*
 ** EVENTS
 */
@@ -414,6 +418,8 @@ t_plyr			Move_player(float dx, float dy, t_plyr player, t_sector *sectors, unsig
 void    		stand_ev(t_data *data, Uint8 *state, t_plyr *player);
 void    		stand_activation(t_data *data, t_plyr *player);
 void			event_manager(t_data *data, t_b *b);
+void			movement_ev(t_data *data, Uint8 *state, float *move_vec, t_plyr *player);
+void 			inv_ev(t_data *data, Uint8 *state, float *move_vec);
 
 
 /*
@@ -431,10 +437,10 @@ t_sector		*Load_sectors(char **map, unsigned int *NumSectors, t_vector *vertex);
 */
 t_wind			init_wind(t_wind wind);
 void			init_img(t_data *data);
-void			start_menu(t_data *data);
 void			init_sprites(t_data *data, char **map);
 void			end_game(t_data *data);
 void        	init_ingame_vars(t_data *data, t_b *b);
+void			start_menu(t_data *data);
 
 
 /*
@@ -465,4 +471,7 @@ void			init_main_v(t_data *data, t_b *b, char *arg);
 */
 void			ft_value_display(t_data *data);
 void			ft_crosshair(t_data *data);
+void			story_0and1(t_data *data, SDL_Rect rect);
+void			story_2and3(t_data *data, SDL_Rect rect);
+
 #endif

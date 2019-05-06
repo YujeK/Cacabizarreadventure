@@ -11,17 +11,15 @@ SRC			:=	main.c \
 				player_parsing.c \
 				vertex_parsing.c \
 				sector_parsing.c \
-				init_sdl.c	\
 				vline.c \
 				draw_screen.c \
 				mini_map.c \
 				draw_line.c\
 				display_img.c \
-				UI.c \
+				ui.c \
 				init_ressources.c \
 				draw_img.c \
-				ft_exit.c \
-				UI_comps.c \
+				ui_comps.c \
 				stand_ev.c\
 				sprites.c \
 				init_sprites.c \
@@ -30,6 +28,10 @@ SRC			:=	main.c \
 				tools4.c \
 				engine_interaction.c \
 				init.c \
+				ft_exit.c \
+				setstring_tools.c \
+				story_steps.c \
+				move_ev.c \
 				game_loop.c
 # directories :
 OBJDIR 		:=	objs
@@ -51,7 +53,7 @@ LIB			:=	$(LFT_LIB) $(LSDL_LIB)
 INC			:=	-I $(INCDIR) $(LFT_INC) $(LSDL_INC)
 # **************************************************************************** #
 CC			:=	clang
-CFLAGS		:=	-g3 #-Wall -Wextra -Werror
+#CFLAGS		:=  -Wall -Wextra -Werror
 # **************************************************************************** #
 all : $(NAME)
 .PHONY: all

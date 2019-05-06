@@ -6,12 +6,11 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 01:15:43 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 04:26:07 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 11:46:26 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
 
 void	end_game(t_data *data)
 {
@@ -23,25 +22,33 @@ void	end_game(t_data *data)
 	if (data->weapon_ammo == 0)
 		data->story_step = 4;
 }
-void    fillerect(SDL_Rect rect, int color, t_wind wind)
+
+void	fillerect(SDL_Rect rect, int color, t_wind wind)
 {
-    int x;
-    int y;
-    y = 0;
-    while (y < SCREEN_HEIGHT)
-    {
-        x = 0;
-        while (x < SCREEN_WIDTH)
-        {
-            put_pixel32(wind.screen, rect.x + x, rect.y + y, color);
-            x++;
-        }
-        y++;
-    }
+	int x;
+	int y;
+
+	y = 0;
+	while (y < SCREEN_HEIGHT)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			put_pixel32(wind.screen, rect.x + x, rect.y + y, color);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	start_menu(t_data *data)
 {
+	SDL_Event	ev;
+	Uint8		*state;
+	SDL_Rect	rect;
+
+	SDL_PollEvent(&ev);
+	state = (Uint8 *)SDL_GetKeyboardState(0);
 	data->count_frames++;
 	if (data->count_frames == 35)
 	{
@@ -51,15 +58,10 @@ void	start_menu(t_data *data)
 		else
 			data->which_menu = 0;
 	}
-	SDL_Event ev;
-	SDL_PollEvent(&ev);
-	Uint8 *state;
-	state = (Uint8 *)SDL_GetKeyboardState(0);
-		if (state[SDL_SCANCODE_RETURN])
-			data->game_start = 1;
-		if (state[SDL_SCANCODE_ESCAPE])
-			ft_exit(data);
-			SDL_Rect rect;
+	if (state[SDL_SCANCODE_RETURN])
+		data->game_start = 1;
+	if (state[SDL_SCANCODE_ESCAPE])
+		ft_exit(data);
 	rect = (SDL_Rect){0, 0, 1000, 1000};
 	fillerect(rect, WHITE, data->wind);
 	if (data->which_menu == 1)
