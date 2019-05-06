@@ -6,35 +6,45 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 20:45:44 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 02:51:04 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/06 11:16:15 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+void	draw_weapon(t_data *data)
+{
+	if (data->weapon_state == 1)
+	{
+		if (data->which_weapon == 2)
+			display_img(410 + data->wpn_y, 220 + data->wpn_x, data->wind,
+						800, data->widon.res_img);
+		else if (data->which_weapon == 1)
+			display_img(410 + data->wpn_y, 210 + data->wpn_x, data->wind,
+						800, data->handon.res_img);
+		else if (data->which_weapon == 3)
+			display_img(-25 + data->wpn_y, 300 + data->wpn_x, data->wind,
+						1050, data->akimbon.res_img);
+	}
+}
 
 void	draw_items(t_data *data)
 {
-	if (data->which_weapon == 2)
+	if (data->inventory_state == 0)
 	{
-		if (data->weapon_state == 0 && data->inventory_state == 0)
-			display_img(370 + data->wpn_y, 380 + data->wpn_x, data->wind, 800, data->widoff.res_img);
-		else if (data->weapon_state == 1 && data->inventory_state == 0)
-			display_img(410 + data->wpn_y, 220 + data->wpn_x, data->wind, 800, data->widon.res_img);
-	}
-	else if (data->which_weapon == 1 && data->inventory_state == 0)
-	{
-		if (data->weapon_state == 0 && data->inventory_state == 0)
-			display_img(370 + data->wpn_y, 380 + data->wpn_x, data->wind, 800, data->handoff.res_img);
-		else if (data->weapon_state == 1)
-			display_img(410 + data->wpn_y, 210 + data->wpn_x, data->wind, 800, data->handon.res_img);
-	}
-	else if (data->which_weapon == 3 && data->inventory_state == 0)
-	{
-		if (data->weapon_state == 0 && data->inventory_state == 0)
-			display_img(-25 + data->wpn_y, 300 + data->wpn_x, data->wind, 1050, data->akimboff.res_img);
-		else if (data->weapon_state == 1 && data->inventory_state == 0)
-			display_img(-25 + data->wpn_y, 300 + data->wpn_x, data->wind, 1050, data->akimbon.res_img);
+		if (data->weapon_state == 0)
+		{
+			if (data->which_weapon == 2)
+				display_img(370 + data->wpn_y, 380 + data->wpn_x, data->wind,
+							800, data->widoff.res_img);
+			else if (data->which_weapon == 1)
+				display_img(370 + data->wpn_y, 380 + data->wpn_x,
+							data->wind, 800, data->handoff.res_img);
+			else if (data->which_weapon == 3)
+				display_img(-25 + data->wpn_y, 300 + data->wpn_x, data->wind,
+							1050, data->akimboff.res_img);
+		}
+		draw_weapon(data);
 	}
 }
 

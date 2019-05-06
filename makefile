@@ -35,7 +35,7 @@ SRC			:=	main.c \
 OBJDIR 		:=	objs
 INCDIR  	:=	includes
 # LIBFT
-VPATH		:= ./srcs:./srcs/parsing:./srcs/render:./srcs/tools:./srcs/init:
+VPATH		:= ./srcs:./srcs/parsing:./srcs/render:./srcs/tools:./srcs/init:./srcs/ui:./srcs/events:
 LFT_NAME	:=	libft.a
 LFT_PATH	:=	./libft
 LFT_LIB		:=	-L $(LFT_PATH) -lft
