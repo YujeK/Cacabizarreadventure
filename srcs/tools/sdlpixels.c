@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 20:30:14 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/05 05:36:23 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 05:50:53 by ybouzgao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel)
 
 	alpha = pixel & 0xff000000;
 	pixels = (Uint32 *)surface->pixels;
-	if (x >= 0 && y >= 0 && x < SCREEN_WIDTH && y < SCREEN_HEIGHT && alpha != 0xff000000)
+	if (x >= 0 && y >= 0 && x < SCREEN_WIDTH &&
+			y < SCREEN_HEIGHT && alpha != 0xff000000)
 		pixels[y * surface->w + x] = pixel;
 }
 

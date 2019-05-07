@@ -6,14 +6,14 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:01:30 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 12:04:20 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 06:30:28 by ybouzgao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	        ft_set_string(SDL_Rect rect, char *text,
-		            SDL_Color color, t_data *data)
+void			ft_set_string(SDL_Rect rect, char *text,
+						SDL_Color color, t_data *data)
 {
 	SDL_Rect			sdl_rect;
 	SDL_Surface			*surface;
@@ -27,7 +27,7 @@ void	        ft_set_string(SDL_Rect rect, char *text,
 	SDL_FreeSurface(surface);
 }
 
-void	        ft_set_nbrstring(int value, SDL_Rect rect,
+void			ft_set_nbrstring(int value, SDL_Rect rect,
 					SDL_Color color, t_data *data)
 {
 	char	*str;
@@ -38,7 +38,7 @@ void	        ft_set_nbrstring(int value, SDL_Rect rect,
 	ft_strdel(&str);
 }
 
-SDL_Color   	ft_color_nb_state(int nb)
+SDL_Color		ft_color_nb_state(int nb)
 {
 	if (nb >= 0 && nb < 25)
 		return (ft_hex_to_rgb(0xFF0000FF));
