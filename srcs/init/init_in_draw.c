@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_in_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 02:38:31 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 12:42:41 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 13:37:29 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,6 @@ void clamp_coords(t_bas *bas, t_data *data)
     bas->i = -1;
 }
 
-void	recycle_vline3(t_bas *bas, t_rv *rv)
-{
-	rv->x = bas->x;
-	rv->y1 = bas->ytop[bas->x];
-	rv->y2 = bas->cya - 1;
-	rv->top = 0x111111;
-	rv->middle = 0x3f3f3f;
-	rv->bottom = 0x111111;
-}
-
-void	recycle_vline4(t_bas *bas, t_rv *rv)
-{
-	rv->x = bas->x;
-	rv->y1 =  bas->cyb + 1;
-	rv->y2 = bas->ybottom[bas->x];
-	rv->top = 0x992c42;
-	rv->middle = 0x6b3636;
-	rv->bottom = 0x992c42;
-}
-
 void draw_edges(t_bas *bas, t_data *data, t_b *b)
 {
 	t_rv rv;
@@ -68,7 +48,7 @@ void draw_edges(t_bas *bas, t_data *data, t_b *b)
             <= data->sectqueue[data->now_sect] &&
             data->sprite[bas->i].status != 2 &&
             data->sectqueue[data->sprite[bas->i].sectorno] != -1)
-            data->sprite[bas->i] = get_sprite_coords(data, &data->sprite[bas->i], &b->player, b->sectors, bas->ytop[bas->x], bas->ybottom[bas->x]);
+            data->sprite[bas->i] = get_sprite_coords(data, &data->sprite[bas->i], b, bas);
         }
 		recycle_vline3(bas, &rv);
         vline(data, bas, &rv);

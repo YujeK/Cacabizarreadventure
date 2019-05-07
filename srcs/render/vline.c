@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vline.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:11:11 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 12:36:00 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 14:00:45 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	vline(t_data *data, t_bas *bas, t_rv *rv)
 	}
 }
 
-void	vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int ya, int yb)
+void	vline2(t_data *data, t_bas *bas, t_rv *rv)
 {
 	int *pix;
 	int y;
@@ -74,26 +74,26 @@ void	vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_
 	int wall_y2;
 	double height;
 	double ratio;
-	height = yb - ya;
-	wall_y1 = y1;
-	wall_y2 = y2;
+	height = bas->yb - bas->ya;
+	wall_y1 = rv->y1;
+	wall_y2 = rv->y2;
 	ratio = 600.0 / height;
-	pix = (int *)surface->pixels;
-	y1 = clamp(y1, 0, SH - 1);
-	y2 = clamp(y2, 0, SH - 1);
-	img_y = (y1 - ya) * ratio;
+	pix = (int *)data->wind.screen->pixels;
+	rv->y1 = clamp(rv->y1, 0, SH - 1);
+	rv->y2 = clamp(rv->y2, 0, SH - 1);
+	img_y = (rv->y1 - bas->ya) * ratio;
 	//img_y = 0;
 	//height = height < 300 ? height + 200 : height;
-	if (y1 == y2)
-		pix[y1 * SCREEN_WIDTH + x] = middle;
-	else if (y2 > y1)
+	if (rv->y1 == rv->y2)
+		pix[rv->y1 * SCREEN_WIDTH + rv->x] = rv->middle;
+	else if (rv->y2 > rv->y1)
 	{
-		pix[y1 * SCREEN_WIDTH + x] = top;
-		y = y1 + 1;
-		while (y < y2 && img_y < 599)
+		pix[rv->y1 * SCREEN_WIDTH + rv->x] = rv->top;
+		y = rv->y1 + 1;
+		while (y < rv->y2 && img_y < 599)
 		{
-			pix[y * SCREEN_WIDTH + x] = img[(int)img_y * 599];
-			pix[y2 * SCREEN_WIDTH + x] = bottom;
+			pix[y * SCREEN_WIDTH + rv->x] = data->pepo.img[(int)img_y * 599];
+			pix[rv->y2 * SCREEN_WIDTH + rv->x] = rv->bottom;
 			y++;
 			img_y += ratio;
 		}

@@ -3,49 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 18:57:44 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 08:24:01 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 13:24:15 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int		render_sprite(t_plyr player, t_object *sprite, t_sector *sectors)
+int			render_sprite(t_plyr player,
+t_object *sprite, t_sector *sectors, t_bas *bas)
 {
-	t_vector		sp;
-	t_vector		sp2;
-	int				x1;
-	int				x2;
-	float			yceil;
-	float			yfloor;
-	float			xscale;
-	float			yscale;
-	float			yscale2;
-	int				y1;
-	int				y2;
-	int				sx;
-	int				i;
-	float			dist;
-	t_vector		t1;
-
-	yceil = sectors[sprite->sectorno].ceil - player.where.z;
-	yfloor = sectors[sprite->sectorno].floor - player.where.z;
-	sp.x = sprite->where.x - player.where.x;
-	sp.y = sprite->where.y - player.where.y;
-	t1.x = sp.x * player.anglesin - sp.y * player.anglecos;
-	t1.y = sp.x * player.anglecos + sp.y * player.anglesin;
-	if (t1.y <= 0)
+	bas->yc = sectors[sprite->sectorno].ceil - player.where.z;
+	bas->yf = sectors[sprite->sectorno].floor - player.where.z;
+	bas->sp.x = sprite->where.x - player.where.x;
+	bas->sp.y = sprite->where.y - player.where.y;
+	bas->t1.x = bas->sp.x * player.anglesin - bas->sp.y * player.anglecos;
+	bas->t1.y = bas->sp.x * player.anglecos + bas->sp.y * player.anglesin;
+	if (bas->t1.y <= 0)
 		return (-1);
-	xscale = hfov / t1.y;
-	yscale = vfov / t1.y;
-	x1 = SCREEN_WIDTH / 2 - (int)(t1.x * xscale);
-	x2 = x1 + sprite->size;
-	y1 = SH / 2 - (int)(yaw(yfloor, t1.y, player.yaw) * yscale);
-	y2 = SH / 2 - (int)(yaw(yceil, t1.y, player.yaw) * yscale);
-	sprite->x = x1;
-	sprite->y1 = (y1 + y2) / 2;
+	bas->xscale = hfov / bas->t1.y;
+	bas->yscale = vfov / bas->t1.y;
+	bas->xt = SCREEN_WIDTH / 2 - (int)(bas->t1.x * bas->xscale);
+	bas->y1 = SH / 2 - (int)
+	(yaw(bas->yf, bas->t1.y, player.yaw) * bas->yscale);
+	bas->y2 = SH / 2 - (int)
+	(yaw(bas->yc, bas->t1.y, player.yaw) * bas->yscale);
+	sprite->x = bas->xt;
+	sprite->y1 = (bas->y1 + bas->y2) / 2;
 	return (sprite->x);
 }
 
@@ -75,8 +61,8 @@ t_object	*sprite_size(t_object *sprite, t_plyr player, t_data data, t_b *b)
 	i = -1;
 	while (++i < data.sprite_nbr)
 	{
-		sprite[i].dist = sqrt(pow(sprite[i].where.x -
-		player.where.x, 2) + pow(sprite[i].where.y - player.where.y, 2));
+		sprite[i].dist = sqrt(pow(sprite[i].where.x
+		- player.where.x, 2) + pow(sprite[i].where.y - player.where.y, 2));
 		b->temp = sprite[i].dist / 10;
 		sprite[i].size = 250 / b->temp;
 		sprite[i].x = 0;
@@ -97,18 +83,20 @@ t_object	*sprite_size(t_object *sprite, t_plyr player, t_data data, t_b *b)
 	return (sprite);
 }
 
-t_object	get_sprite_coords(t_data *data, t_object *sprite,
-				t_plyr *player, t_sector *sectors, int ytop, int ybottom)
+t_object	get_sprite_coords(t_data *data
+, t_object *sprite, t_b *b, t_bas *bas)
 {
-	pick_up(data, player, sprite);
-	sprite->x = render_sprite(*player, sprite, sectors) - sprite->size / 2;
+	pick_up(data, &b->player, sprite);
+	sprite->x = render_sprite(b->player, sprite, b->sectors, bas)
+	- sprite->size / 2;
 	sprite->y2 = sprite->y1 + sprite->size;
-	sprite->y2 = clamp(sprite->y2, ytop, ybottom);
+	sprite->y2 = clamp(sprite->y2, bas->ytop[bas->x], bas->ybottom[bas->x]);
 	if (sprite->x_count < sprite->size && data->x_draw
 	> sprite->x && sprite->x > 0 && data->sectqueue[sprite->sectorno]
 		<= data->sectqueue[data->now_sect])
 	{
-		draw_resized_column(data, sprite, data->wind, ytop, ybottom);
+		draw_resized_column(data, sprite, data->wind
+		, bas->ytop[bas->x], bas->ybottom[bas->x]);
 		sprite->x_count++;
 	}
 	if (sprite->x_count > 0)

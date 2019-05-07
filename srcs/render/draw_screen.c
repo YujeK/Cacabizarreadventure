@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   draw_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:15:17 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 12:38:11 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 14:01:05 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void transform_vertex(t_data *data, t_b *b, t_bas *bas)
+void	transform_vertex(t_data *data, t_b *b, t_bas *bas)
 {
 	bas->vx1 = bas->sect.vertex[bas->s + 0].x - b->player.where.x;
 	bas->vy1 = bas->sect.vertex[bas->s + 0].y - b->player.where.y;
 	bas->vx2 = bas->sect.vertex[bas->s + 1].x - b->player.where.x;
 	bas->vy2 = bas->sect.vertex[bas->s + 1].y - b->player.where.y;
-	bas->pcos = b->player.anglecos, bas->psin = b->player.anglesin;
+	bas->pcos = b->player.anglecos;
+	bas->psin = b->player.anglesin;
 	bas->tx1 = bas->vx1 * bas->psin - bas->vy1 * bas->pcos;
 	bas->tz1 = bas->vx1 * bas->pcos + bas->vy1 * bas->psin;
 	bas->tx2 = bas->vx2 * bas->psin - bas->vy2 * bas->pcos;
@@ -29,7 +30,7 @@ void transform_vertex(t_data *data, t_b *b, t_bas *bas)
 	bas->ttz2 = bas->tz2;
 }
 
-void into_screen(t_data *data, t_b *b, t_bas *bas)
+void	into_screen(t_data *data, t_b *b, t_bas *bas)
 {
 	float p;
 
@@ -52,54 +53,51 @@ void into_screen(t_data *data, t_b *b, t_bas *bas)
 	bas->ny1b = SH / 2 - (int)(yaw(bas->nyfloor, bas->tz1, p) * bas->yscale1);
 	bas->ny2a = SH / 2 - (int)(yaw(bas->nyceil, bas->tz2, p) * bas->yscale2);
 	bas->ny2b = SH / 2 - (int)(yaw(bas->nyfloor, bas->tz2, p) * bas->yscale2);
-	bas->beginx = max(bas->x1, bas->now.sx1),
+	bas->beginx = max(bas->x1, bas->now.sx1);
 	bas->endx = min(bas->x2, bas->now.sx2);
 	bas->x = bas->beginx;
 }
-
-void	recycle_vline(t_bas *bas, t_rv *rv)
+void	recycle_vline21(t_bas *bas, t_rv *rv)
 {
 	rv->x = bas->x;
 	rv->y1 = bas->cya;
-	rv->y2 = bas->cnya - 1;
+	rv->y2 = bas->cyb;
 	rv->top = 0;
-	rv->middle = bas->x == bas->x1 || bas->x == bas->x2 ? 0 : bas->r1;
+	rv->middle = bas->x == bas->x1 || bas->x == bas->x2 ? 0 : bas->r;
 	rv->bottom = 0;
 }
 
-void	recycle_vline2(t_bas *bas, t_rv *rv)
-{
-	rv->x = bas->x;
-	rv->y1 =  bas->cnyb + 1;
-	rv->y2 = bas->cyb;
-	rv->top = 0;
-	rv->middle = bas->x == bas->x1 || bas->x == bas->x2 ? 0 : bas->r2;
-	rv->bottom = 0;
-}
-void draw_neighbor(t_data *data, t_b *b, t_bas *bas)
+void	draw_neighbor(t_data *data, t_b *b, t_bas *bas)
 {
 	t_rv rv;
 
 	if (bas->neighbor >= 0)
 	{
-		bas->nya = (bas->x - bas->x1) * (bas->ny2a - bas->ny1a) / (bas->x2 - bas->x1) + bas->ny1a;
+		bas->nya = (bas->x - bas->x1)
+		* (bas->ny2a - bas->ny1a) / (bas->x2 - bas->x1) + bas->ny1a;
 		bas->cnya = clamp(bas->nya, bas->ytop[bas->x], bas->ybottom[bas->x]);
-		bas->nyb = (bas->x - bas->x1) * (bas->ny2b - bas->ny1b) / (bas->x2 - bas->x1) + bas->ny1b;
+		bas->nyb = (bas->x - bas->x1)
+		* (bas->ny2b - bas->ny1b) / (bas->x2 - bas->x1) + bas->ny1b;
 		bas->cnyb = clamp(bas->nyb, bas->ytop[bas->x], bas->ybottom[bas->x]);
 		bas->r1 = luminosity(bas->r1, bas->z, data->luminosity);
 		bas->r2 = bas->r1;
 		recycle_vline(bas, &rv);
 		vline(data, bas, &rv);
-		bas->ytop[bas->x] = clamp(max(bas->cya, bas->cnya), bas->ytop[bas->x], SH - 1);
+		bas->ytop[bas->x] = clamp(max(bas->cya, bas->cnya)
+		, bas->ytop[bas->x], SH - 1);
 		recycle_vline2(bas, &rv);
 		vline(data, bas, &rv);
-		bas->ybottom[bas->x] = clamp(min(bas->cyb, bas->cnyb), 0, bas->ybottom[bas->x]);
+		bas->ybottom[bas->x] = clamp(min(bas->cyb
+		, bas->cnyb), 0, bas->ybottom[bas->x]);
 	}
 	else
-		vline2(500, bas->x, bas->cya, bas->cyb, 0, bas->x == bas->x1 || bas->x == bas->x2 ? 0 : bas->r, 0, data->wind.screen, data->pepo.img, bas->ya, bas->yb);
+	{
+		recycle_vline21(bas, &rv);
+		vline2(data, bas, &rv);
+	}
 }
 
-int init_draw_queue(t_data *data, t_b *b, t_bas *bas)
+int		init_draw_queue(t_data *data, t_b *b, t_bas *bas)
 {
 	bas->i = 0;
 	bas->now = *bas->tail;
@@ -114,9 +112,10 @@ int init_draw_queue(t_data *data, t_b *b, t_bas *bas)
 	return (0);
 }
 
-void draw_screen(t_data *data, t_b *b)
+void	draw_screen(t_data *data, t_b *b)
 {
 	t_bas bas;
+
 	bas = init_draw_vars(data, b, &bas);
 	while (bas.head != bas.tail)
 	{

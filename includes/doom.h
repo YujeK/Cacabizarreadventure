@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 12:36:55 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 14:01:22 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ typedef struct	s_data
 	int				sectqueue[33];
 	int				now_sect;
 	int				flag;
-}					t_data;
+}				t_data;
 
 typedef	struct		s_b
 {
@@ -384,6 +384,15 @@ typedef struct		s_bas
 	unsigned int *img;
 	unsigned int *res_img;
 	float dist;
+	int				y1;
+	int				xt;
+	int				y2;
+	float			yc;
+	float			yf;
+	float			xscale;
+	float			yscale;
+	t_vector		t1;
+	t_vector		sp;
 }					t_bas;
 
 void			put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel);
@@ -417,7 +426,7 @@ void        	cap_framerate(t_data *data);
 void    		fillrect(SDL_Rect rect, int color, t_wind wind);
 int             rbw(int x, unsigned int NumSectors);
 SDL_Color		ft_hex_to_rgb(int hexa);
-t_object 		get_sprite_coords(t_data *data, t_object *sprite, t_plyr *player, t_sector *sectors, int ytop, int ybotto);
+t_object 		get_sprite_coords(t_data *data, t_object *sprite, t_b *b, t_bas *bas);
 t_object 		*sprite_size(t_object *sprite, t_plyr player, t_data data, t_b *b);
 void    		pick_up(t_data *data, t_plyr *player, t_object *sprite);
 int				in_sector_full(t_sector *sectors, t_vector point, unsigned int NumSectors);
@@ -460,7 +469,11 @@ void        	init_ingame_vars(t_data *data, t_b *b);
 void			start_menu(t_data *data);
 t_bas 			init_draw_vars(t_data *data, t_b *b, t_bas *bas);
 void			init_intersect_vars2(t_data *data, t_b *b, t_bas *bas);
-
+void			recycle_vline(t_bas *bas, t_rv *rv);
+void			recycle_vline2(t_bas *bas, t_rv *rv);
+void			recycle_vline3(t_bas *bas, t_rv *rv);
+void			recycle_vline4(t_bas *bas, t_rv *rv);
+void			recycle_vline21(t_bas *bas, t_rv *rv);
 
 
 /*
@@ -474,12 +487,12 @@ void			ft_error_exit(char *str, t_data *data);
 */
 
 void			vline(t_data *data, t_bas *bas, t_rv *rv);
-void			vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int ya, int yb);
+void			vline2(t_data *data, t_bas *bas, t_rv *rv);
 void 			draw_screen(t_data *data, t_b *b);
 void			draw_map(t_b *b, t_data *data);
 void			draw_items(t_data *data);
 void			draw_inventory(t_data *data);
-int 			render_sprite(t_plyr player, t_object *sprite, t_sector *sectors);
+int 			render_sprite(t_plyr player, t_object *sprite, t_sector *sectors, t_bas *bas);
 void			draw_resized_column(t_data *data,t_object *sprite, t_wind wind, int ytop, int ybot);
 int				luminosity(int r1, double z, double luminosity);
 void			engine_interaction(t_b *b);

@@ -33,7 +33,8 @@ SRC			:=	main.c \
 				story_steps.c \
 				move_ev.c \
 				game_loop.c \
-				init_in_draw.c
+				init_in_draw.c \
+				recycle.c
 # directories :
 OBJDIR 		:=	objs
 INCDIR  	:=	includes
