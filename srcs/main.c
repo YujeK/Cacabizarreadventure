@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 08:34:12 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 10:19:38 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		main(int argc, char **argv)
 	b.player = Load_Player(b.sectors, b.map);
 	data.startgame_timer = time(0);
 	data.numsectors = b.NumSectors;
-	Mix_PlayMusic(data.menutheme, 1);
+	//Mix_PlayMusic(data.menutheme, 1);
 	game_loop(&data, &b);
 	ft_exit(&data);
 	return (0);

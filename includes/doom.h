@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 08:53:30 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 12:36:55 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,20 @@ typedef	struct		s_b
 	int			y;
 }					t_b;
 
+typedef	struct		s_rv
+{
+	int x1;
+	int x;
+	int y1;
+	int y2;
+	int top;
+	int middle;
+	int bottom;
+	int ya;
+	int yb;
+}					t_rv;
+
+
 typedef struct		s_bas
 {
 	unsigned int numsectors;
@@ -459,8 +473,8 @@ void			ft_error_exit(char *str, t_data *data);
 **  RENDER
 */
 
+void			vline(t_data *data, t_bas *bas, t_rv *rv);
 void			vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int ya, int yb);
-void			vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int color_change);
 void 			draw_screen(t_data *data, t_b *b);
 void			draw_map(t_b *b, t_data *data);
 void			draw_items(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 02:38:31 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 08:53:11 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 12:42:41 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,29 @@ void clamp_coords(t_bas *bas, t_data *data)
     bas->i = -1;
 }
 
+void	recycle_vline3(t_bas *bas, t_rv *rv)
+{
+	rv->x = bas->x;
+	rv->y1 = bas->ytop[bas->x];
+	rv->y2 = bas->cya - 1;
+	rv->top = 0x111111;
+	rv->middle = 0x3f3f3f;
+	rv->bottom = 0x111111;
+}
+
+void	recycle_vline4(t_bas *bas, t_rv *rv)
+{
+	rv->x = bas->x;
+	rv->y1 =  bas->cyb + 1;
+	rv->y2 = bas->ybottom[bas->x];
+	rv->top = 0x992c42;
+	rv->middle = 0x6b3636;
+	rv->bottom = 0x992c42;
+}
+
 void draw_edges(t_bas *bas, t_data *data, t_b *b)
 {
+	t_rv rv;
     while (++bas->x <= bas->endx)
     {
         clamp_coords(bas, data);
@@ -49,10 +70,10 @@ void draw_edges(t_bas *bas, t_data *data, t_b *b)
             data->sectqueue[data->sprite[bas->i].sectorno] != -1)
             data->sprite[bas->i] = get_sprite_coords(data, &data->sprite[bas->i], &b->player, b->sectors, bas->ytop[bas->x], bas->ybottom[bas->x]);
         }
-        vline(data, bas->x, bas->ytop[bas->x], bas->cya - 1,
-        0x111111, 0x3f3f3f, 0x111111, data->wind.screen, bas->res_img, -1);
-        vline(data, bas->x, bas->cyb + 1, bas->ybottom[bas->x],
-        0x992c42, 0x6b3636, 0x992c42, data->wind.screen, bas->res_img, -1);
+		recycle_vline3(bas, &rv);
+        vline(data, bas, &rv);
+		recycle_vline4(bas, &rv);
+        vline(data, bas, &rv);
         draw_neighbor(data, b, bas);
     }
 }

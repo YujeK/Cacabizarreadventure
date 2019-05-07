@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:11:11 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 08:24:01 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 12:36:00 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,56 +29,37 @@ int		return_grayscale(int color)
 	return (color);
 }
 
-int		return_redscale(int color)
-{
-	int r;
-	int g;
-	int b;
-	int average;
-
-	b = color % 255;
-	color /= 255;
-	g = color % 255;
-	r = color % 255;
-	average = (r + g + b) / 3;
-	color = average * 0x010000;
-	return (color);
-}
-
-void	vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int color_change)
+void	vline(t_data *data, t_bas *bas, t_rv *rv)
 {
 	int *pix;
 	int y;
 
-	pix = (int *)surface->pixels;
-	y1 = clamp(y1, 0, SH - 1);
-	y2 = clamp(y2, 0, SH - 1);
+	pix = (int *)data->wind.screen->pixels;
+	rv->y1 = clamp(rv->y1, 0, SH - 1);
+	rv->y2 = clamp(rv->y2, 0, SH - 1);
 	if (data->zawarudo == 1)
 	{
 		if (time(0) - data->stand_timer > 4)
 		{
 			data->prev_lum = data->luminosity;
 			data->luminosity = 0.999995;
-			top = return_grayscale(top);
-			middle = return_grayscale(middle);
-			bottom = return_grayscale(bottom);
+			rv->top = return_grayscale(rv->top);
+			rv->middle = return_grayscale(rv->middle);
+			rv->bottom = return_grayscale(rv->bottom);
 		}
 	}
-	if (y1 == y2)
+	if (rv->y1 == rv->y2)
 	{
-		pix[y1 * SCREEN_WIDTH + x] = middle;
+		pix[rv->y1 * SCREEN_WIDTH + rv->x] = rv->middle;
 	}
-	else if (y2 > y1)
+	else if (rv->y2 > rv->y1)
 	{
-		pix[y1 * SCREEN_WIDTH + x] = top;
-		y = y1 + 1;
-		while (y < y2)
+		pix[rv->y1 * SCREEN_WIDTH + rv->x] = rv->top;
+		y = rv->y1 + 1;
+		while (y < rv->y2)
 		{
-			if (color_change > 1)
-				pix[y * SCREEN_WIDTH + x] = rbw(color_change, data->numsectors);
-			else
-				pix[y * SCREEN_WIDTH + x] = middle;
-			pix[y2 * SCREEN_WIDTH + x] = bottom;
+			pix[y * SCREEN_WIDTH + rv->x] = rv->middle;
+			pix[rv->y2 * SCREEN_WIDTH + rv->x] = rv->bottom;
 			y++;
 		}
 	}

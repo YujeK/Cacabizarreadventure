@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:15:17 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 08:44:04 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 12:38:11 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,42 @@ void into_screen(t_data *data, t_b *b, t_bas *bas)
 	bas->x = bas->beginx;
 }
 
+void	recycle_vline(t_bas *bas, t_rv *rv)
+{
+	rv->x = bas->x;
+	rv->y1 = bas->cya;
+	rv->y2 = bas->cnya - 1;
+	rv->top = 0;
+	rv->middle = bas->x == bas->x1 || bas->x == bas->x2 ? 0 : bas->r1;
+	rv->bottom = 0;
+}
+
+void	recycle_vline2(t_bas *bas, t_rv *rv)
+{
+	rv->x = bas->x;
+	rv->y1 =  bas->cnyb + 1;
+	rv->y2 = bas->cyb;
+	rv->top = 0;
+	rv->middle = bas->x == bas->x1 || bas->x == bas->x2 ? 0 : bas->r2;
+	rv->bottom = 0;
+}
 void draw_neighbor(t_data *data, t_b *b, t_bas *bas)
 {
+	t_rv rv;
+
 	if (bas->neighbor >= 0)
 	{
-
 		bas->nya = (bas->x - bas->x1) * (bas->ny2a - bas->ny1a) / (bas->x2 - bas->x1) + bas->ny1a;
 		bas->cnya = clamp(bas->nya, bas->ytop[bas->x], bas->ybottom[bas->x]);
 		bas->nyb = (bas->x - bas->x1) * (bas->ny2b - bas->ny1b) / (bas->x2 - bas->x1) + bas->ny1b;
 		bas->cnyb = clamp(bas->nyb, bas->ytop[bas->x], bas->ybottom[bas->x]);
 		bas->r1 = luminosity(bas->r1, bas->z, data->luminosity);
 		bas->r2 = bas->r1;
-		vline(data, bas->x, bas->cya, bas->cnya - 1, 0, bas->x == bas->x1
-		|| bas->x == bas->x2 ? 0 : bas->r1, 0, data->wind.screen, bas->res_img, -1);
+		recycle_vline(bas, &rv);
+		vline(data, bas, &rv);
 		bas->ytop[bas->x] = clamp(max(bas->cya, bas->cnya), bas->ytop[bas->x], SH - 1);
-		vline(data, bas->x, bas->cnyb + 1, bas->cyb, 0, bas->x == bas->x1
-		|| bas->x == bas->x2 ? 0 : bas->r2, 0, data->wind.screen, bas->res_img, -1);
+		recycle_vline2(bas, &rv);
+		vline(data, bas, &rv);
 		bas->ybottom[bas->x] = clamp(min(bas->cyb, bas->cnyb), 0, bas->ybottom[bas->x]);
 	}
 	else
