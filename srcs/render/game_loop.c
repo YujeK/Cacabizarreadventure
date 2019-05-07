@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:47:55 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 01:19:44 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 01:34:04 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	game_loop(t_data *data, t_b *b)
 		data->starting_tick = SDL_GetTicks();
 		if (data->game_start == 1)
 		{
+			end_game(data);
 			init_ingame_vars(data, b);
 			draw_screen(data, &b->player, b->sectors, b->NumSectors);
 			draw_inventory(data);
 			draw_items(data);
-			end_game(data);
-			//draw_map(b, data); // norme S
+			draw_map(b, data);
 			ft_value_display(data);
 			engine_interaction(b);
 			event_manager(data, b);

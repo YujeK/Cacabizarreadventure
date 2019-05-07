@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 01:19:23 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 03:15:49 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ typedef struct	s_data
 	time_t			startgame_timer;
 	time_t			timer_start;
 	Mix_Chunk		*stand_warudo;
+	Mix_Chunk		*target_hit;
 	Mix_Chunk		*tp_sound;
 	Mix_Chunk		*ak;
 	Mix_Music		*menutheme;

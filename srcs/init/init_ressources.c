@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 20:50:50 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 06:18:41 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 03:17:21 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ void	init_img(t_data *data)
 		ft_error_exit("Wolf3d: Unable to load sound effect eyes", data);
 	if (!(data->ak = Mix_LoadWAV("RESSOURCES/sounds/ak.wav")))
 		ft_error_exit("Wolf3d: Unable to load sound ak", data);
+	if (!(data->target_hit = Mix_LoadWAV("RESSOURCES/sounds/target_hit.wav")))
+		ft_error_exit("Wolf3d: Unable to load sound effect eyes", data);
 
 }

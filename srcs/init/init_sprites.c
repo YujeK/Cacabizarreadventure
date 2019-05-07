@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 04:37:02 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 01:40:17 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 03:06:07 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void	load_sprites(t_data *data)
 	i = 0;
 	while (i < data->sprite_nbr)
 {
-	if (!(data->sprite[i].img = tga_load("ressources/enemies/toiletashkan.tga", &data->sprite[i].specs)))
+	if (!(data->sprite[i].img = tga_load("ressources/enemies/targuet.tga", &data->sprite[i].specs)))
 		ft_error_exit("I couldnt load tga toiletashkan", data);
-	if (!(data->sprite[i].dead_img = tga_load("ressources/enemies/dead.tga", &data->sprite[i].specs1)))
+	if (!(data->sprite[i].dead_img = tga_load("ressources/enemies/1score.tga", &data->sprite[i].specs1)))
 		ft_error_exit("I couldnt load tga +1", data);
-		data->sprite[i].res_img = resize(data->sprite[i].dead_img, data->sprite[i].specs1, 1000);
+		data->sprite[i].res_img = resize(data->sprite[i].dead_img, data->sprite[i].specs1, 600);
 	i++;
 }
 //	if (!(data->sprite[1].img = tga_load("ressources/enemies/dead.tga", &data->sprite[1].specs)))

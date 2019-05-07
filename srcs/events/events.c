@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/06 12:53:55 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 03:23:21 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void	shoot_ev(t_data *data)
 	if (data->aim >= 0 && data->which_weapon != 0 && data->weapon_ammo > 0)
 	{
 		if (data->sprite[data->aim].status == 0)
+		{
 			data->score++;
+			if (Mix_PlayChannel(3, data->target_hit, 1) == -1)
+				ft_error_exit("cant play target_hit", data);
+		}
 		data->sprite[data->aim].status = 1;
 		data->death_timer = time(0);
 	}
