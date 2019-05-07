@@ -6,13 +6,13 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 19:14:40 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/05 09:10:35 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 05:28:07 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-unsigned int *resize(unsigned int *pixels, t_tga specs, double size)
+unsigned	int *resize(unsigned int *pixels, t_tga specs, double size)
 {
 	unsigned int *res_img;
 	double prop;

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:31:33 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 05:11:37 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 05:28:46 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int             rbw(int x, unsigned int NumSectors)
 {
-    int         color;
-    int         whichcolor;
-    int         thiscolor;
-    static int  rainbow[8] = {INDIGO, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE};
-    color = 0;
-    whichcolor = (NumSectors) / 8;
-    thiscolor = 0;
-    while (color < 6)
-    {
-        thiscolor = thiscolor + whichcolor;
-        if (x <= thiscolor)
-            return (rainbow[color]);
-        color++;
-    }
-    return (rainbow[x % 7]);
+	int         color;
+	int         whichcolor;
+	int         thiscolor;
+	static int  rainbow[8] = {INDIGO, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE};
+	color = 0;
+	whichcolor = (NumSectors) / 8;
+	thiscolor = 0;
+	while (color < 6)
+	{
+		thiscolor = thiscolor + whichcolor;
+		if (x <= thiscolor)
+			return (rainbow[color]);
+		color++;
+	}
+	return (rainbow[x % 7]);
 }
 
 t_vector	Intersect(float x1, float y1, float x2, float y2, float x3, float  y3, float x4, float y4)
@@ -74,10 +74,10 @@ float       ft_iatof(char *wall, int index)
 
 int         ft_in_hitbox(t_data *data)
 {
-    if (CROSSHAIR_X > data->sprite[0].x && CROSSHAIR_X < data->sprite[0].x + data->sprite[0].size
-        && CROSSHAIR_Y > data->sprite[0].y1 && CROSSHAIR_Y < data->sprite[0].y1 + data->sprite[0].size)
-            return (1);
-    return (0);
+	if (CROSSHAIR_X > data->sprite[0].x && CROSSHAIR_X < data->sprite[0].x + data->sprite[0].size
+		&& CROSSHAIR_Y > data->sprite[0].y1 && CROSSHAIR_Y < data->sprite[0].y1 + data->sprite[0].size)
+			return (1);
+	return (0);
 }
 
 int		ft_iatoi(char *wall, int index)

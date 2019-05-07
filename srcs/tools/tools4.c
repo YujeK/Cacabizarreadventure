@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 03:29:08 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/06 11:50:01 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 05:29:54 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ int	line_intersects(t_vector p1, t_vector q1, t_vector p2, t_vector q2)
 	return (0);
 }
 
-
-
-
 int		in_sector_full(t_sector *sectors, t_vector point, unsigned int NumSectors)
 {
 	t_vector	infinite;
@@ -62,10 +59,10 @@ int		in_sector_full(t_sector *sectors, t_vector point, unsigned int NumSectors)
 		while (++j < sectors[i].npoints)
 		{
 			sector_edge.start = sectors[i].vertex[j];
-            if(j == sectors[i].npoints)
-			    sector_edge.end = sectors[i].vertex[0];
-            else
-			    sector_edge.end = sectors[i].vertex[j + 1];
+			if(j == sectors[i].npoints)
+				sector_edge.end = sectors[i].vertex[0];
+			else
+				sector_edge.end = sectors[i].vertex[j + 1];
 			if (line_intersects(point, infinite,
 						sector_edge.start, sector_edge.end))
 				intersection_count++;
