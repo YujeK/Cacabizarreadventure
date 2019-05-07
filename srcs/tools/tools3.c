@@ -6,54 +6,54 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:31:33 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 18:19:51 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 00:35:21 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-t_vector	intersect(float x1, float y1,
-				float x2, float y2, float x3, float y3, float x4, float y4)
+t_vector	intersect(t_bas *bas, float x3, float x4)
 {
 	t_vector i;
 
-	i.x = pv(pv(x1, y1, x2, y2), x1 - x2,
-		pv(x3, y3, x4, y4), x3 - x4) / pv(x1 - x2, y1 - y2, x3 - x4, y3 - y4);
-	i.y = pv(pv(x1, y1, x2, y2), y1 - y2,
-		pv(x3, y3, x4, y4), y3 - y4) / pv(x1 - x2, y1 - y2, x3 - x4, y3 - y4);
+	i.x = pv(pv(bas->tx1, bas->tz1, bas->tx2, bas->tz2), bas->tx1 - bas->tx2,
+		pv(x3, bas->nearz, x4,
+		bas->farz), x3 - x4) / pv(bas->tx1 - bas->tx2,
+			bas->tz1 - bas->tz2, x3 - x4, bas->nearz - bas->farz);
+	i.y = pv(pv(bas->tx1, bas->tz1, bas->tx2, bas->tz2), bas->tz1 - bas->tz2,
+		pv(x3, bas->nearz, x4, bas->farz),
+		bas->nearz - bas->farz) / pv(bas->tx1
+		- bas->tx2, bas->tz1 - bas->tz2, x3 - x4, bas->nearz - bas->farz);
 	return (i);
 }
 
-float		ft_iatof(char *wall, int index)
+float		ft_iatof(char *w, int index)
 {
 	float	number;
-	int		i;
-	int		negative;
-	int		d;
+	int		t[3];
 
-	d = 0;
-	i = index;
-	negative = 1;
+	t[2] = 0;
+	t[0] = index - 1;
+	t[1] = 1;
 	number = 0;
-	if (wall[index] == '-')
+	if (w[index] == '-')
 	{
-		i++;
-		negative = -1;
+		t[0]++;
+		t[1] = -1;
 	}
-	while ((wall[i] && wall[i] >= '0' && wall[i] <= '9') || wall[i] == '.')
+	while ((w[t[0]++] && w[t[0]] >= '0' && w[t[0]] <= '9') || w[t[0]] == '.')
 	{
-		if (wall[i] == '.')
+		if (w[t[0]] == '.')
 		{
-			d = 1;
-			i++;
+			t[2] = 1;
+			t[0]++;
 		}
-		if (d == 1)
-			number += (wall[i] - '0') / 10.0;
+		if (t[2] == 1)
+			number += (w[t[0]] - '0') / 10.0;
 		else
-			number = number * 10 + wall[i] - '0';
-		i++;
+			number = number * 10 + w[t[0]] - '0';
 	}
-	return (number * negative);
+	return (number * t[1]);
 }
 
 int			ft_in_hitbox(t_data *data)

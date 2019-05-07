@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 15:22:42 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 23:40:56 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_plyr	move_player(t_b *b)
 	t_vector	temp;
 	t_sector	sect;
 	t_vector	*vert;
+	t_inter		ic;
+	t_inter		ips;
 
 	b->px = b->player.where.x;
 	b->py = b->player.where.y;
@@ -44,11 +46,9 @@ t_plyr	move_player(t_b *b)
 	s = 0;
 	while (s < sect.npoints)
 	{
-		if (sect.neighbors[s] >= 0 && intersectbox(b->px,
-			b->py, b->px + b->dx, b->py + b->dy,
-			vert[s].x, vert[s].y, vert[s + 1].x,
-			vert[s + 1].y) && pointside(b->px + b->dx, b->py
-			+ b->dy, vert[s].x, vert[s].y, vert[s + 1].x, vert[s + 1].y) < 0)
+		init_inter2(b, &ic, vert, s);
+		init_pointside2(b, &ips, s, vert);
+		if (sect.neighbors[s] >= 0 && intersectbox(&ic) && pointside(&ips) < 0)
 		{
 			b->player.sector = sect.neighbors[s];
 			break ;

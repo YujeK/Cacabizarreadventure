@@ -6,16 +6,16 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:24:40 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 17:26:29 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 23:47:16 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int		intersectbox(float x0, float y0,
-			float x1, float y1, float x2, float y2, float x3, float y3)
+int		intersectbox(t_inter *ic)
 {
-	if (overlap(x0, x1, x2, x3) == 1 && overlap(y0, y1, y2, y3) == 1)
+	if (overlap(ic->x0, ic->x1, ic->x2,
+		ic->x3) == 1 && overlap(ic->y0, ic->y1, ic->y2, ic->y3) == 1)
 		return (1);
 	else
 		return (0);
@@ -26,9 +26,10 @@ float	yaw(float y, float z, float yaw)
 	return (y + z * yaw);
 }
 
-float	pointside(float px, float py, float x0, float y0, float x1, float y1)
+float	pointside(t_inter *ic)
 {
-	return (pv(x1 - x0, y1 - y0, px - x0, py - y0));
+	return (pv(ic->x1 - ic->x0,
+		ic->y1 - ic->y0, ic->px - ic->x0, ic->py - ic->y0));
 }
 
 float	clamp(float a, int min, int max)

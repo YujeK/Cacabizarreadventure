@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:15:20 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 15:04:24 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 23:39:23 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	intersoc(t_b *b)
 {
-	if (intersectbox(b->px, b->py, b->px + b->dx, b->py + b->dy,
-	b->vert[b->s + 0].x, b->vert[b->s + 0].y, b->vert[b->s + 1].x,
-	b->vert[b->s + 1].y) && pointside(b->px + b->dx, b->py + b->dy,
-	b->vert[b->s + 0].x, b->vert[b->s + 0].y, b->vert[b->s + 1].x,
-	b->vert[b->s + 1].y) < 0)
+	t_inter ic;
+	t_inter ips;
+	float pxdx = b->px + b->dx;
+	float pydy = b->py + b->dy;
+	init_inter(b, &ic);
+	init_pointside(b, &ips);
+	if (intersectbox(&ic) && pointside(&ips) < 0)
 	{
 		b->hole_low = b->sect.neighbors[b->s] < 0 ? 9e9
 		: max(b->sect.floor, b->sectors[b->sect.neighbors[b->s]].floor);

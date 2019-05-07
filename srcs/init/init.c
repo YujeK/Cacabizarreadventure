@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:40:28 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 18:19:59 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 00:15:01 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,8 @@ void init_intersect_vars(t_data *data, t_b *b, t_bas *bas)
 	bas->farz = 5;
 	bas->nearside = 1e-5f;
 	bas->farside = 20.f;
-	bas->i1 = intersect(bas->tx1, bas->tz1, bas->tx2, bas->tz2,
-	-bas->nearside, bas->nearz, -bas->farside, bas->farz);
-	bas->i2 = intersect(bas->tx1, bas->tz1, bas->tx2, bas->tz2,
-	bas->nearside, bas->nearz, bas->farside, bas->farz);
+	bas->i1 = intersect(bas, -bas->nearside, -bas->farside);
+	bas->i2 = intersect(bas, bas->nearside, bas->farside);
 	if (bas->tz1 < bas->nearz)
 	{
 		if (bas->i1.y > 0)

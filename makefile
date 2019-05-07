@@ -35,7 +35,8 @@ SRC			:=	main.c \
 				game_loop.c \
 				init_in_draw.c \
 				recycle.c \
-				tga2.c
+				tga2.c \
+				init_isec_pside.c
 # directories :
 OBJDIR 		:=	objs
 INCDIR  	:=	includes
@@ -56,7 +57,7 @@ LIB			:=	$(LFT_LIB) $(LSDL_LIB)
 INC			:=	-I $(INCDIR) $(LFT_INC) $(LSDL_INC)
 # **************************************************************************** #
 CC			:=	clang
-CFLAGS		:=  -g3 #-Wall -Wextra -Werror
+CFLAGS		:=  -O3 #-Wall -Wextra -Werror
 # **************************************************************************** #
 all : $(NAME)
 .PHONY: all
