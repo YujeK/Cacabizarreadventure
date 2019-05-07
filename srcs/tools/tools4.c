@@ -6,11 +6,19 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 03:29:08 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 05:29:54 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 06:23:24 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+int	overlap(float a1, float a2, float b1, float b2)
+{
+	if (min(a1, a2) <= max(b1, b2) && min(b1, b2) <= max(a1, a2))
+		return (1);
+	else
+		return (0);
+}
 
 int	orientation(t_vector p, t_vector q, t_vector r)
 {
@@ -41,30 +49,28 @@ int	line_intersects(t_vector p1, t_vector q1, t_vector p2, t_vector q2)
 	return (0);
 }
 
-int		in_sector_full(t_sector *sectors, t_vector point, unsigned int NumSectors)
+int	in_sector_full(t_sector *sectors,
+		t_vector point, unsigned int num_sectors)
 {
 	t_vector	infinite;
-	t_wall	sector_edge;
-	int		i;
-	int		j;
-	int		intersection_count;
+	t_wall		se;
+	int			i;
+	int			j;
+	int			intersection_count;
 
 	infinite.y = point.y;
 	infinite.x = 200000;
 	i = -1;
-	while (++i < NumSectors)
+	while (++i < num_sectors && !(intersection_count = 0))
 	{
 		j = -1;
-		intersection_count = 0;
 		while (++j < sectors[i].npoints)
 		{
-			sector_edge.start = sectors[i].vertex[j];
-			if(j == sectors[i].npoints)
-				sector_edge.end = sectors[i].vertex[0];
-			else
-				sector_edge.end = sectors[i].vertex[j + 1];
+			se.start = sectors[i].vertex[j];
+			se.end = j == sectors[i].npoints ? sectors[i].vertex[0] :
+				sectors[i].vertex[j + 1];
 			if (line_intersects(point, infinite,
-						sector_edge.start, sector_edge.end))
+						se.start, se.end))
 				intersection_count++;
 		}
 		if (intersection_count == 1)
