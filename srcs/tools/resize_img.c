@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 19:14:40 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 05:28:07 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 08:24:01 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		draw_resized_column(t_data *data, t_object *sprite, t_wind wind, int ytop,
 	{
 		if (sprite->img[(int)j * sprite->specs.width + (int)i] != 0xffffffff)
 			sprite->img[(int)j * sprite->specs.width + (int)i] -= 0xff000000;
-		if (res_j == SCREEN_HEIGHT / 2 && sprite->x + sprite->x_count == SCREEN_WIDTH / 2)
+		if (res_j == SH / 2 && sprite->x + sprite->x_count == SCREEN_WIDTH / 2)
 		{
 			data->aim = sprite->i;
 		}

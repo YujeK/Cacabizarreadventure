@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 02:59:19 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 13:06:25 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 08:24:01 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ void		ft_crosshair(t_data *data)
 	t_line		line;
 
 	pt1.x = SCREEN_WIDTH / 2 - 1;
-	pt1.y = SCREEN_HEIGHT / 2 - 12;
+	pt1.y = SH / 2 - 12;
 	pt2.x = SCREEN_WIDTH / 2 - 1;
-	pt2.y = SCREEN_HEIGHT / 2 + 12;
+	pt2.y = SH / 2 + 12;
 	line.color = 0xFF1493;
 	ft_draw_line3(data->wind, pt1, pt2, line);
 	pt1.x = SCREEN_WIDTH / 2 - 12;
-	pt1.y = SCREEN_HEIGHT / 2;
+	pt1.y = SH / 2;
 	pt2.x = SCREEN_WIDTH / 2 + 12;
-	pt2.y = SCREEN_HEIGHT / 2;
+	pt2.y = SH / 2;
 	ft_draw_line3(data->wind, pt1, pt2, line);
 }

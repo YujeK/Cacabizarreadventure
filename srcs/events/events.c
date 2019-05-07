@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 03:52:30 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 08:14:19 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ void	inv_ev(t_data *data, Uint8 *state, float *move_vec)
 void	event_manager(t_data *data, t_b *b)
 {
 	event_mouse(&b->player, data);
-	b->player = Move_player(0, 0, b->player, b->sectors, b->NumSectors);
+	b->player = move_player(b);
 	event_keyboard(&b->player, data,
 		b->move_vec, b->sectors) == 1 ? b->pushing = 1 : 0;
-	b->acceleration = b->pushing ? 0.4 : 0.2;
+	b->acceleration = b->pushing ? 0.2 : 0.1;
 	b->player.velocity.x = b->player.velocity.x * (1 - b->acceleration)
 		+ b->move_vec[0] * b->acceleration * data->sprint;
 	b->player.velocity.y = b->player.velocity.y * (1 - b->acceleration)

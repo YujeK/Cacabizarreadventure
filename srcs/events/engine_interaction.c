@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:15:20 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 13:24:30 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 08:14:19 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ void	move_interaction(t_b *b)
 		b->s = -1;
 		while (++b->s < b->sect.npoints)
 			intersect(b);
-		b->player = Move_player(b->dx,
-		b->dy, b->player, b->sectors, b->NumSectors);
+		b->player = move_player(b);
 		b->player.falling = 1;
 	}
 }

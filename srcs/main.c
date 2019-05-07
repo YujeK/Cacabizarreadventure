@@ -6,63 +6,68 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 04:42:33 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 08:34:12 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-t_plyr    Move_player(float dx, float dy, t_plyr player, t_sector *sectors, unsigned int NumSectors)
+t_plyr	move_player2(t_b *b, t_vector temp, int s)
 {
-    float px;
-    float py;
-    int s;
-    t_vector temp;
-
-    px = player.where.x;
-    py = player.where.y;
-    t_sector sect = sectors[player.sector];
-    t_vector *vert = sect.vertex;
-    s = 0;
-    while(s < sect.npoints)
-    {
-        if(sect.neighbors[s] >= 0
-        && IntersectBox(px,py, px+dx,py+dy, vert[s].x, vert[s].y, vert[s+1].x, vert[s+1].y)
-        && pointside(px+dx, py+dy, vert[s].x, vert[s].y, vert[s+1].x, vert[s+1].y) < 0)
-        {
-            player.sector = sect.neighbors[s];
-            break;
-        }
-        s++;
-    }
-    player.anglesin = sinf(player.angle);
-    player.anglecos = cosf(player.angle);
-    temp.x = player.where.x + dx * 4;
-    temp.y = player.where.y + dy * 4;
-    if((s = in_sector_full(sectors, temp, NumSectors)) == -1)
-        return(player);
-    if (sectors[s].floor > sectors[player.sector].floor + (player.where.z - sectors[player.sector].floor))
-        return (player);
-    player.where.x = temp.x - dx * 3;
-    player.where.y = temp.y - dy * 3;
-    if (sectors[player.sector].floor == 481)
-        sectors[player.sector].floor = 440;
-
-    return (player);
+	b->player.anglesin = sinf(b->player.angle);
+	b->player.anglecos = cosf(b->player.angle);
+	temp.x = b->player.where.x + b->dx * 4;
+	temp.y = b->player.where.y + b->dy * 4;
+	if ((s = in_sector_full(b->sectors, temp, b->NumSectors)) == -1)
+		return (b->player);
+	if (b->sectors[s].floor > b->sectors[b->player.sector].floor
+		+ (b->player.where.z - b->sectors[b->player.sector].floor))
+		return (b->player);
+	b->player.where.x = temp.x - b->dx * 3;
+	b->player.where.y = temp.y - b->dy * 3;
+	if (b->sectors[b->player.sector].floor == 481)
+		b->sectors[b->player.sector].floor = 440;
+	return (b->player);
 }
 
-int main(int argc, char **argv)
+t_plyr	move_player(t_b *b)
 {
-	t_b b;
-	t_data data;
+	int			s;
+	t_vector	temp;
+	t_sector	sect;
+	t_vector	*vert;
+
+	b->px = b->player.where.x;
+	b->py = b->player.where.y;
+	sect = b->sectors[b->player.sector];
+	vert = sect.vertex;
+	s = 0;
+	while (s < sect.npoints)
+	{
+		if (sect.neighbors[s] >= 0 && IntersectBox(b->px,
+			b->py, b->px + b->dx, b->py + b->dy,
+			vert[s].x, vert[s].y, vert[s + 1].x,
+			vert[s + 1].y) && pointside(b->px + b->dx, b->py
+			+ b->dy, vert[s].x, vert[s].y, vert[s + 1].x, vert[s + 1].y) < 0)
+		{
+			b->player.sector = sect.neighbors[s];
+			break ;
+		}
+		s++;
+	}
+	move_player2(b, temp, s);
+	return (b->player);
+}
+
+int		main(int argc, char **argv)
+{
+	t_b		b;
+	t_data	data;
 
 	if (argc != 2 || argv[1][0] != 'm')
 		return (0);
 	ft_bzero(&data, sizeof(t_data));
-	// INIT VAR
 	init_main_v(&data, &b, argv[1]);
-	b.map = ft_strsplit(b.str, 'z');
-	//sprites init
 	init_sprites(&data, b.map);
 	data.weapon_ammo = data.sprite_nbr;
 	init_img(&data);
@@ -74,5 +79,5 @@ int main(int argc, char **argv)
 	Mix_PlayMusic(data.menutheme, 1);
 	game_loop(&data, &b);
 	ft_exit(&data);
-	return 0;
+	return (0);
 }

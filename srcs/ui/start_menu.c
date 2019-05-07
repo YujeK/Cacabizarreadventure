@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 01:15:43 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 11:46:26 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 08:24:01 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	fillerect(SDL_Rect rect, int color, t_wind wind)
 	int y;
 
 	y = 0;
-	while (y < SCREEN_HEIGHT)
+	while (y < SH)
 	{
 		x = 0;
 		while (x < SCREEN_WIDTH)

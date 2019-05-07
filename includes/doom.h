@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 03:15:49 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 08:53:30 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 
 # define TRUE 1
 # define FALSE 0
-# define SCREEN_HEIGHT 1000
+# define SH 1000
 # define SCREEN_WIDTH 1000
 # define TEXTURE 500
 # define Eyeheight 6
 # define DuckHeight 2.5
 # define HeadMargin 1
 # define KneeHeight 2
-# define hfov (0.73f * SCREEN_HEIGHT)
-# define vfov (.2f * SCREEN_HEIGHT)
+# define hfov (0.73f * SH)
+# define vfov (.2f * SH)
 # define CROSSHAIR_X 500
 # define CROSSHAIR_Y 500
 # define FPS 60
@@ -227,12 +227,8 @@ typedef struct	s_data
 	int				weapon_ammo;
 	int				weap_cd;
 	int				is_cd;
-/* 	t_tga			lava_specs;
-	unsigned int	*lava;
-	unsigned int 	*res_lava; */
 	int				inventory_state;
 	int				which_weapon;
-	/* inventory tga load */
 	t_object		widoff;
 	t_object		menustart;
 	t_object		menu;
@@ -257,13 +253,13 @@ typedef struct	s_data
 	int				flag;
 }					t_data;
 
-//basura main
 typedef	struct		s_b
 {
 	t_plyr 		player;
 	t_sector 	*sectors;
 	t_sector 	sect;
 	t_vector	*vert;
+	t_object	temp_sprite;
 	unsigned int NumSectors;
 	unsigned int s;
 	char		*str;
@@ -281,12 +277,20 @@ typedef	struct		s_b
 	float 		dy;
 	float 		px;
 	float 		py;
+	float		temp;
 	int 		pushing;
 	float		acceleration;
 	float		move_vec[2];
+	int			i;
+	int			j;
+	t_coord		point;
+	t_coord		next_point;
+	t_line		line;
+	SDL_Rect	rect;
+	int			x;
+	int			y;
 }					t_b;
 
-//basura draw screen
 typedef struct		s_bas
 {
 	unsigned int numsectors;
@@ -377,7 +381,6 @@ unsigned int 	*resize(unsigned int *pixels, t_tga specs, double size);
 **  TOOLS
 */
 
-
 void			wpn_bobbing(t_data *data);
 float			max(float a, float b);
 int				imax(int a, int b);
@@ -400,8 +403,8 @@ void        	cap_framerate(t_data *data);
 void    		fillrect(SDL_Rect rect, int color, t_wind wind);
 int             rbw(int x, unsigned int NumSectors);
 SDL_Color		ft_hex_to_rgb(int hexa);
-t_object 		get_sprite_coords(t_data *data, t_object *sprite, t_plyr *player, t_sector *sectors, int ytop, int ybottom);
-t_object 		*sprite_size(t_object *sprite, t_plyr player, t_data data);
+t_object 		get_sprite_coords(t_data *data, t_object *sprite, t_plyr *player, t_sector *sectors, int ytop, int ybotto);
+t_object 		*sprite_size(t_object *sprite, t_plyr player, t_data data, t_b *b);
 void    		pick_up(t_data *data, t_plyr *player, t_object *sprite);
 int				in_sector_full(t_sector *sectors, t_vector point, unsigned int NumSectors);
 void	        ft_set_nbrstring(int value, SDL_Rect rect, SDL_Color color, t_data *data);
@@ -415,13 +418,12 @@ SDL_Color   	ft_color_nb_state(int nb);
 int				check_keydown(t_wind wind);
 int				event_keyboard(t_plyr *player, t_data *data, float *move_vec, t_sector *sector);
 void			event_mouse(t_plyr *player, t_data *data);
-t_plyr			Move_player(float dx, float dy, t_plyr player, t_sector *sectors, unsigned int NumSectors);
+t_plyr			move_player(t_b *b);
 void    		stand_ev(t_data *data, Uint8 *state, t_plyr *player);
 void    		stand_activation(t_data *data, t_plyr *player);
 void			event_manager(t_data *data, t_b *b);
 void			movement_ev(t_data *data, Uint8 *state, float *move_vec, t_plyr *player);
 void 			inv_ev(t_data *data, Uint8 *state, float *move_vec);
-
 
 /*
 **  Parsing
@@ -442,6 +444,9 @@ void			init_sprites(t_data *data, char **map);
 void			end_game(t_data *data);
 void        	init_ingame_vars(t_data *data, t_b *b);
 void			start_menu(t_data *data);
+t_bas 			init_draw_vars(t_data *data, t_b *b, t_bas *bas);
+void			init_intersect_vars2(t_data *data, t_b *b, t_bas *bas);
+
 
 
 /*
@@ -456,7 +461,7 @@ void			ft_error_exit(char *str, t_data *data);
 
 void			vline2(int x1, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int ya, int yb);
 void			vline(t_data *data, int x, int y1, int y2, int top, int middle, int bottom, SDL_Surface *surface, unsigned int *img, int color_change);
-void 			draw_screen(t_data *data, t_plyr *player, t_sector *sectors, unsigned int NumSectors);
+void 			draw_screen(t_data *data, t_b *b);
 void			draw_map(t_b *b, t_data *data);
 void			draw_items(t_data *data);
 void			draw_inventory(t_data *data);
@@ -466,10 +471,16 @@ int				luminosity(int r1, double z, double luminosity);
 void			engine_interaction(t_b *b);
 void    		game_loop(t_data *data, t_b *b);
 void			init_main_v(t_data *data, t_b *b, char *arg);
+void            draw_neighbor(t_data *data, t_b *b, t_bas *bas);
+void            draw_edges(t_bas *bas, t_data *data, t_b *b);
+void            while_edges(t_bas *bas, t_data *data, t_b *b);
+void            transform_vertex(t_data *data, t_b *b, t_bas *bas);
+void            into_screen(t_data *data, t_b *b, t_bas *bas);
 
 /*
 **	UI
 */
+
 void			ft_value_display(t_data *data);
 void			ft_crosshair(t_data *data);
 void			story_0and1(t_data *data, SDL_Rect rect);
