@@ -6,15 +6,15 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:15:20 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 08:14:19 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:04:24 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	intersect(t_b *b)
+void	intersoc(t_b *b)
 {
-	if (IntersectBox(b->px, b->py, b->px + b->dx, b->py + b->dy,
+	if (intersectbox(b->px, b->py, b->px + b->dx, b->py + b->dy,
 	b->vert[b->s + 0].x, b->vert[b->s + 0].y, b->vert[b->s + 1].x,
 	b->vert[b->s + 1].y) && pointside(b->px + b->dx, b->py + b->dy,
 	b->vert[b->s + 0].x, b->vert[b->s + 0].y, b->vert[b->s + 1].x,
@@ -50,7 +50,7 @@ void	move_interaction(t_b *b)
 		b->vert = b->sect.vertex;
 		b->s = -1;
 		while (++b->s < b->sect.npoints)
-			intersect(b);
+			intersoc(b);
 		b->player = move_player(b);
 		b->player.falling = 1;
 	}

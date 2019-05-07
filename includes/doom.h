@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 14:01:22 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/07 15:03:15 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -410,14 +410,14 @@ int				imax(int a, int b);
 int				imin(int a, int b);
 float 			min(float a, float b);
 float			pv(float x0, float y0, float x1, float y1);
-int 			IntersectBox(float x0, float y0, float x1, float y1, float x2, float y2,  float x3, float y3);
+int 			intersectbox(float x0, float y0, float x1, float y1, float x2, float y2,  float x3, float y3);
 float			yaw(float y, float z, float Yaw);
 float			pointside(float px, float py, float x0, float y0, float x1, float y1);
 float			ft_iatof(char *wall, int index);
 float			clamp(float a , int min, int max);
 float 			fclamp(float a , float min, float max);
 int 			overlap(float a1 ,float a2, float b1, float b2);
-t_vector		Intersect(float x1, float y1, float x2, float y2, float x3, float  y3, float x4, float y4);
+t_vector		intersect(float x1, float y1, float x2, float y2, float x3, float  y3, float x4, float y4);
 float			ft_iatof(char *wall, int index);
 int				ft_draw_line3(t_wind wind, t_coord point, t_coord next_point, t_line line);
 void   			display_img(int x, int y, t_wind wind, int size, unsigned int *res_img);

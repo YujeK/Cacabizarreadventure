@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:40:28 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 14:22:27 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/07 15:03:15 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void init_intersect_vars(t_data *data, t_b *b, t_bas *bas)
 	bas->farz = 5;
 	bas->nearside = 1e-5f;
 	bas->farside = 20.f;
-	bas->i1 = Intersect(bas->tx1, bas->tz1, bas->tx2, bas->tz2,
+	bas->i1 = intersect(bas->tx1, bas->tz1, bas->tx2, bas->tz2,
 	-bas->nearside, bas->nearz, -bas->farside, bas->farz);
-	bas->i2 = Intersect(bas->tx1, bas->tz1, bas->tx2, bas->tz2,
+	bas->i2 = intersect(bas->tx1, bas->tz1, bas->tx2, bas->tz2,
 	bas->nearside, bas->nearz, bas->farside, bas->farz);
 	if (bas->tz1 < bas->nearz)
 	{

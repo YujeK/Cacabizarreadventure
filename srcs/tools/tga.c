@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 21:41:43 by snicolet          #+#    #+#             */
-/*   Updated: 2019/05/05 09:51:50 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:12:59 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,51 +147,3 @@ unsigned int		*tga_load(const char *filepath, t_tga *specs)
 	}
 	return (load_tga_error("failed to get pixels\n", file_content));
 }
-/* 
-int                  main(int ac, char **av)
-{
-        t_tga specs;
-        unsigned int *pixels;
-        int i;
-        int j;
-        int iprime;
-        int     jprime;
-        double  size;
-        unsigned int *res_img;
-        t_wind wind;
-
-        i = -1;
-        size = 501;
-        iprime = 0;
-        wind = init_wind(wind);
-        pixels = tga_load("ressources/tt.tga", &specs);
-		tga_display(&specs);
-        res_img = resize(pixels, specs, size);
-        while (1)
-        {
-                while (SDL_PollEvent(&wind.event))
-                {
-                        if (wind.event.type == SDL_KEYDOWN)
-                        {
-                                check_keydown(wind);
-                                return (0);
-                        }
-						display_img(500,500, wind, 501, res_img);
-						
-                        while (++i < size - 1)
-                        {
-                                j = -1;
-                                jprime = size -1;
-                                while (++j < size - 1)
-                                {
-                                        put_pixel32(wind.screen, j, i, (Uint32)res_img[iprime * (int)size + jprime]);
-                                        jprime--;
-                                }
-                                iprime++;
-                        } 
-                }
-                SDL_UpdateWindowSurface(wind.window);
-        }
-
-        return (0);
-} */
