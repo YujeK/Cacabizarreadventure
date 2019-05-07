@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:40:28 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 08:53:10 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 14:22:27 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,37 +43,37 @@ void	init_main_v(t_data *data, t_b *b, char *arg)
 void        init_ingame_vars(t_data *data, t_b *b)
 {
 	b->eyeheight = b->player.ducking ? DuckHeight : Eyeheight;
-    b->move_vec[0] = 0.f;
-    b->move_vec[1] = 0.f;
-    b->player.ground = !b->player.falling;
-    stand_activation(data, &b->player);
-    data->sprint = 1;
-    data->aim = -1;
+	b->move_vec[0] = 0.f;
+	b->move_vec[1] = 0.f;
+	b->player.ground = !b->player.falling;
+	stand_activation(data, &b->player);
+	data->sprint = 1;
+	data->aim = -1;
 }
 
 t_bas init_draw_vars(t_data *data, t_b *b, t_bas *bas)
 {
-    bas->head = bas->queue;
-    bas->tail = bas->queue;
-    data->sprite = sprite_size(data->sprite, b->player, *data, b);
-    bas->i = -1;
-    while (++bas->i < 32)
-        data->sectqueue[bas->i] = -1;
-    bas->x = -1;
-    while (++bas->x < SH)
-        bas->ybottom[bas->x] = SH - 1;
-    bas->x = -1;
-    while (++bas->x < SCREEN_WIDTH)
-        bas->ytop[bas->x] = 0;
-    bas->x = -1;
-    while (++bas->x < data->numsectors)
-        bas->renderedsectors[bas->x] = 0;
-    bas->head->sectorno = b->player.sector;
-    bas->head->sx1 = 0;
-    bas->head->sx2 = SCREEN_WIDTH - 1;
-    if (++bas->head == bas->queue + 32)
-        bas->head = bas->queue;
-    return (*bas);
+	bas->head = bas->queue;
+	bas->tail = bas->queue;
+	data->sprite = sprite_size(data->sprite, b->player, *data, b);
+	bas->i = -1;
+	while (++bas->i < 32)
+		data->sectqueue[bas->i] = -1;
+	bas->x = -1;
+	while (++bas->x < SH)
+		bas->ybottom[bas->x] = SH - 1;
+	bas->x = -1;
+	while (++bas->x < SCREEN_WIDTH)
+		bas->ytop[bas->x] = 0;
+	bas->x = -1;
+	while (++bas->x < data->numsectors)
+		bas->renderedsectors[bas->x] = 0;
+	bas->head->sectorno = b->player.sector;
+	bas->head->sx1 = 0;
+	bas->head->sx2 = SCREEN_WIDTH - 1;
+	if (++bas->head == bas->queue + 32)
+		bas->head = bas->queue;
+	return (*bas);
 }
 
 void init_intersect_vars(t_data *data, t_b *b, t_bas *bas)
