@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 02:26:57 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 03:47:48 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 03:57:46 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	stand_activation(t_data *data, t_plyr *player)
 		{
 			data->luminosity = data->prev_lum;
 			data->zawarudo = 0;
-			data->timer_start += 15;
+			data->timer_start += 14;
 		}
 	}
 	if (data->eyesofthedead == 0 && data->zawarudo == 0)

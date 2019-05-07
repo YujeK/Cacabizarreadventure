@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 23:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 13:25:19 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 04:02:35 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ void			timer_ui(t_data *data, SDL_Rect rect)
 {
 	if (data->timer_start && data->zawarudo == 0)
 	{
+		if (data->story_step != 4)
+		{
 		rect = (SDL_Rect){431, 50, 60, 60};
 		data->timer = time(0) - data->timer_start;
+		}
 		ft_set_nbrstring(data->timer, rect, ft_color_nb_state(1), data);
 	}
 	if (data->zawarudo == 1 && data->timer_start)

@@ -6,47 +6,49 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/06 13:17:23 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 04:42:33 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-t_plyr	Move_player(float dx, float dy, t_plyr player,
-t_sector *sectors, unsigned int NumSectors)
+t_plyr    Move_player(float dx, float dy, t_plyr player, t_sector *sectors, unsigned int NumSectors)
 {
-	float px;
-	float py;
-	int s;
-	t_vector temp;
+    float px;
+    float py;
+    int s;
+    t_vector temp;
 
-	px = player.where.x;
-	py = player.where.y;
-	t_sector sect = sectors[player.sector];
-	t_vector *vert = sect.vertex;
-	s = 0;
-	while(s < sect.npoints)
-	{
-		if(sect.neighbors[s] >= 0
-		&& IntersectBox(px, py, px+dx,py+dy, vert[s].x, vert[s].y, vert[s+1].x, vert[s+1].y)
-		&& pointside(px+dx, py+dy, vert[s].x, vert[s].y, vert[s+1].x, vert[s+1].y) < 0)
-		{
-			player.sector = sect.neighbors[s];
-			break;
-		}
-		s++;
-	}
-	player.anglesin = sinf(player.angle);
-	player.anglecos = cosf(player.angle);
-	temp.x = player.where.x + dx * 4;
-	temp.y = player.where.y + dy * 4;
-	if(in_sector_full(sectors, temp, NumSectors) == -1)
-		return(player);
-	player.where.x = temp.x - dx * 3;
-	player.where.y = temp.y - dy * 3;
-	if (sectors[player.sector].floor == 481)
-		sectors[player.sector].floor = 440;
-	return (player);
+    px = player.where.x;
+    py = player.where.y;
+    t_sector sect = sectors[player.sector];
+    t_vector *vert = sect.vertex;
+    s = 0;
+    while(s < sect.npoints)
+    {
+        if(sect.neighbors[s] >= 0
+        && IntersectBox(px,py, px+dx,py+dy, vert[s].x, vert[s].y, vert[s+1].x, vert[s+1].y)
+        && pointside(px+dx, py+dy, vert[s].x, vert[s].y, vert[s+1].x, vert[s+1].y) < 0)
+        {
+            player.sector = sect.neighbors[s];
+            break;
+        }
+        s++;
+    }
+    player.anglesin = sinf(player.angle);
+    player.anglecos = cosf(player.angle);
+    temp.x = player.where.x + dx * 4;
+    temp.y = player.where.y + dy * 4;
+    if((s = in_sector_full(sectors, temp, NumSectors)) == -1)
+        return(player);
+    if (sectors[s].floor > sectors[player.sector].floor + (player.where.z - sectors[player.sector].floor))
+        return (player);
+    player.where.x = temp.x - dx * 3;
+    player.where.y = temp.y - dy * 3;
+    if (sectors[player.sector].floor == 481)
+        sectors[player.sector].floor = 440;
+
+    return (player);
 }
 
 int main(int argc, char **argv)
@@ -69,7 +71,7 @@ int main(int argc, char **argv)
 	b.player = Load_Player(b.sectors, b.map);
 	data.startgame_timer = time(0);
 	data.numsectors = b.NumSectors;
-	//Mix_PlayMusic(data.menutheme, 1);
+	Mix_PlayMusic(data.menutheme, 1);
 	game_loop(&data, &b);
 	ft_exit(&data);
 	return 0;

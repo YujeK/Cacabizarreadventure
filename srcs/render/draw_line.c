@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 23:58:26 by smerelo           #+#    #+#             */
-/*   Updated: 2019/04/04 00:00:29 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/07 05:02:00 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ t_line	mdx(t_wind wind, t_coord point, t_coord next_point, t_line line)
 	return (line);
 }
 
-int			ft_draw_line3(t_wind wind, t_coord point, t_coord next_point, t_line line)
+int		ft_draw_line3(t_wind wind, t_coord point,
+			t_coord next_point, t_line line)
 {
 	if (point.x == next_point.x && point.y == next_point.y)
 	{
-		if (point.x < SCREEN_WIDTH && point.y < SCREEN_HEIGHT && point.x >= 0 && point.y >= 0)
+		if (point.x < SCREEN_WIDTH && point.y
+			< SCREEN_HEIGHT && point.x >= 0 && point.y >= 0)
 			put_pixel32(wind.screen, point.x, point.y, line.color);
 		return (0);
 	}

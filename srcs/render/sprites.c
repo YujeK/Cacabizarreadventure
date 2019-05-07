@@ -6,12 +6,13 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 18:57:44 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 03:42:12 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 05:19:17 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-int		render_sprite(t_plyr player, t_object *sprite, t_sector *sectors)
+
+int			render_sprite(t_plyr player, t_object *sprite, t_sector *sectors)
 {
 	t_vector		sp;
 	t_vector		sp2;
@@ -38,7 +39,7 @@ int		render_sprite(t_plyr player, t_object *sprite, t_sector *sectors)
 	line.color = 0xff0000;
 	yceil = sectors[sprite->sectorno].ceil - player.where.z;
 	yfloor = sectors[sprite->sectorno].floor - player.where.z;
-	sp.x = sprite->where.x  - player.where.x;
+	sp.x = sprite->where.x - player.where.x;
 	sp.y = sprite->where.y - player.where.y;
 	t1.x = sp.x * player.anglesin - sp.y * player.anglecos;
 	t1.y = sp.x * player.anglecos + sp.y * player.anglesin;
@@ -59,29 +60,44 @@ int		render_sprite(t_plyr player, t_object *sprite, t_sector *sectors)
 
 t_object	*sprite_size(t_object *sprite, t_plyr player, t_data data)
 {
-	int i;
-	float temp;
+	int			i;
+	//t_object	temp_sprite;
+	float		temp;
 
 	i = -1;
 	while (++i < data.sprite_nbr)
 	{
-		sprite[i].dist = sqrt(pow(sprite[i].where.x - player.where.x, 2) + pow(sprite[i].where.y - player.where.y, 2));
+		sprite[i].dist = sqrt(pow(sprite[i].where.x
+			- player.where.x, 2) + pow(sprite[i].where.y - player.where.y, 2));
 		temp = sprite[i].dist / 10;
 		sprite[i].size = 150 / temp;
 		sprite[i].x = 0;
 		sprite[i].x_count = 0;
 	}
-	return(sprite);
+/* 	i = -1;
+	while (++i < data.sprite_nbr)
+	{
+		if(sprite[i].dist < sprite[i + 1].dist)
+		{
+			temp_sprite = sprite[i];
+			sprite[i] = sprite[i + 1];
+			sprite[i + 1] = temp_sprite;
+			i = 0;
+		}
+	} */
+	return (sprite);
 }
 
-t_object	get_sprite_coords(t_data *data, t_object *sprite, t_plyr *player, t_sector *sectors, int ytop, int ybottom)
+t_object	get_sprite_coords(t_data *data, t_object *sprite,
+				t_plyr *player, t_sector *sectors, int ytop, int ybottom)
 {
 	pick_up(data, player, sprite);
 	sprite->x = render_sprite(*player, sprite, sectors) - sprite->size / 2;
 	sprite->y2 = sprite->y1 + sprite->size;
-	//sprite->y1 = clamp(sprite->y1, ytop, 999);
 	sprite->y2 = clamp(sprite->y2, ytop, ybottom);
-	if (sprite->x_count < sprite->size && data->x_draw > sprite->x && sprite->x > 0 && data->sectqueue[sprite->sectorno] <= data->sectqueue[data->now_sect])
+	if (sprite->x_count < sprite->size && data->x_draw
+	> sprite->x && sprite->x > 0 && data->sectqueue[sprite->sectorno]
+		<= data->sectqueue[data->now_sect])
 	{
 		draw_resized_column(data, sprite, data->wind, ytop, ybottom);
 		sprite->x_count++;

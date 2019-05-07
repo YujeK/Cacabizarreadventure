@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 03:23:21 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 03:52:30 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	shoot_ev(t_data *data)
 			data->score++;
 			if (Mix_PlayChannel(3, data->target_hit, 1) == -1)
 				ft_error_exit("cant play target_hit", data);
+				Mix_Volume(3, 128 / 2);
 		}
 		data->sprite[data->aim].status = 1;
 		data->death_timer = time(0);
@@ -29,7 +30,7 @@ void	shoot_ev(t_data *data)
 	{
 		if (Mix_PlayChannel(2, data->ak, 0) == -1)
 			ft_error_exit("cant play ak", data);
-		Mix_Volume(2, 128 / 3);
+		Mix_Volume(2, 128 / 4);
 		data->weapon_ammo--;
 		data->weapon_state = 1;
 		data->is_cd = 1;
