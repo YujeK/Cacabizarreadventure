@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 19:59:28 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 08:24:01 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:22:42 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	draw_map(t_b *b, t_data *data)
 {
 	b->line.color = 0;
 	b->i = 0;
-	while (b->i < b->NumSectors)
+	while (b->i < b->numsectors)
 	{
 		b->j = 0;
 		while (b->j < b->sectors[b->i].npoints)

@@ -6,75 +6,66 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 19:14:40 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 14:53:08 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:43:21 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-unsigned int	*resize(unsigned int *pixels, t_tga specs, double size)
+unsigned int	*resize(unsigned int *p, t_tga spe, double size)
 {
-	unsigned int	*res_img;
-	double			prop;
-	double			i;
-	double			j;
-	int				res_i;
-	int				res_j;
+	unsigned int	*im;
+	double			t[3];
+	int				r[2];
 
-	j = 0;
-	res_j = size - 1;
-	prop = specs.width / size;
-	if ((res_img = (unsigned int *)malloc((sizeof(res_img))
-		* size * size)) == 0)
+	t[2] = 0;
+	r[1] = size - 1;
+	t[0] = spe.width / size;
+	if ((im = (unsigned int *)malloc((sizeof(im)) * size * size)) == 0)
 		return (0);
-	while (res_j >= 0)
+	while (r[1] >= 0)
 	{
-		res_i = size - 1;
-		i = 0;
-		while (res_i >= 0)
+		r[0] = size - 1;
+		t[1] = 0;
+		while (r[0] >= 0)
 		{
-			if (pixels[(int)j * specs.width + (int)i] != 0xffffffff)
-				pixels[(int)j * specs.width + (int)i] -= 0xff000000;
-			res_img[res_j * (int)size + res_i] = pixels[(int)j
-				* specs.width + (int)i];
-			i += prop;
-			res_i--;
+			if (p[(int)t[2] * spe.width + (int)t[1]] != 0xffffffff)
+				p[(int)t[2] * spe.width + (int)t[1]] -= 0xff000000;
+			im[r[1] * (int)size + r[0]] = p[(int)t[2] * spe.width + (int)t[1]];
+			t[1] += t[0];
+			r[0]--;
 		}
-		j += prop;
-		res_j--;
+		t[2] += t[0];
+		r[1]--;
 	}
-	return (res_img);
+	return (im);
 }
 
-void			draw_resized_column(t_data *data,
-						t_object *sprite, t_wind wind, int ytop, int ybot)
+void			draw_resized_column(t_data *d, t_object *s, int ytop, int ybot)
 {
-	double		prop;
-	double		i;
-	double		j;
+	double		t[3];
 	int			res_j;
 	double		width;
 
-	width = sprite->specs.width;
-	j = width - 1;
-	res_j = sprite->y1;
-	prop = width / sprite->size;
-	i = sprite->x_count * prop;
-	while (j > 0 && res_j < sprite->y2)
+	width = s->specs.width;
+	t[2] = width - 1;
+	res_j = s->y1;
+	t[0] = width / s->size;
+	t[1] = s->x_count * t[0];
+	while (t[2] > 0 && res_j++ < s->y2)
 	{
-		if (sprite->img[(int)j * sprite->specs.width + (int)i] != 0xffffffff)
-			sprite->img[(int)j * sprite->specs.width + (int)i] -= 0xff000000;
-		if (res_j == SH / 2 && sprite->x + sprite->x_count == SCREEN_WIDTH / 2)
+		if (s->img[(int)t[2] * s->specs.width + (int)t[1]] != 0xffffffff)
+			s->img[(int)t[2] * s->specs.width + (int)t[1]] -= 0xff000000;
+		if (res_j == SH / 2 && s->x + s->x_count == SCREEN_WIDTH / 2)
 		{
-			data->aim = sprite->i;
+			d->aim = s->i;
 		}
-		if (sprite->status == 1)
-			put_pixel32(wind.screen, sprite->x + sprite->x_count,
-				res_j, sprite->dead_img[(int)j * sprite->specs.width + (int)i]);
-		if (sprite->status == 0)
-			put_pixel32(wind.screen, sprite->x + sprite->x_count,
-				res_j, sprite->img[(int)j * sprite->specs.width + (int)i]);
-		j -= prop;
-		res_j++;
+		if (s->status == 1)
+			put_pixel32(d->wind.screen, s->x + s->x_count,
+				res_j, s->dead_img[(int)t[2] * s->specs.width + (int)t[1]]);
+		if (s->status == 0)
+			put_pixel32(d->wind.screen, s->x + s->x_count,
+				res_j, s->img[(int)t[2] * s->specs.width + (int)t[1]]);
+		t[2] -= t[0];
 	}
 }

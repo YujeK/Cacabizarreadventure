@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vline.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:11:11 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 14:00:45 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/07 17:23:56 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ int		return_grayscale(int color)
 	average = (r + g + b) / 3;
 	color = average * 0x010000 + average * 0x000100 + average;
 	return (color);
+}
+
+void	recycle_vline21(t_bas *bas, t_rv *rv)
+{
+	rv->x = bas->x;
+	rv->y1 = bas->cya;
+	rv->y2 = bas->cyb;
+	rv->top = 0;
+	rv->middle = bas->x == bas->x1 || bas->x == bas->x2 ? 0 : bas->r;
+	rv->bottom = 0;
 }
 
 void	vline(t_data *data, t_bas *bas, t_rv *rv)

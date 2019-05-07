@@ -6,11 +6,19 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 03:29:08 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 15:11:49 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:06:04 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+int		overlap(float a1, float a2, float b1, float b2)
+{
+	if (min(a1, a2) <= max(b1, b2) && min(b1, b2) <= max(a1, a2))
+		return (1);
+	else
+		return (0);
+}
 
 int		orientation(t_vector p, t_vector q, t_vector r)
 {
@@ -41,34 +49,32 @@ int		line_intersects(t_vector p1, t_vector q1, t_vector p2, t_vector q2)
 	return (0);
 }
 
-int		in_sector_full(t_sector *sectors, t_vector point, unsigned int NumSectors)
+int		in_sector_full(t_sector *sectors,
+			t_vector point, unsigned int numsectors)
 {
-	t_vector	infinite;
-	t_wall		sector_edge;
-	int			i;
-	int			j;
-	int			intersection_count;
+	t_vector	i;
+	t_wall		se;
+	int			t[3];
 
-	infinite.y = point.y;
-	infinite.x = 200000;
-	i = -1;
-	while (++i < NumSectors)
+	i.y = point.y;
+	i.x = 200000;
+	t[0] = -1;
+	while (++t[0] < numsectors)
 	{
-		j = -1;
-		intersection_count = 0;
-		while (++j < sectors[i].npoints)
+		t[1] = -1;
+		t[2] = 0;
+		while (++t[1] < sectors[t[0]].npoints)
 		{
-			sector_edge.start = sectors[i].vertex[j];
-			if (j == sectors[i].npoints)
-				sector_edge.end = sectors[i].vertex[0];
+			se.start = sectors[t[0]].vertex[t[1]];
+			if (t[1] == sectors[t[0]].npoints)
+				se.end = sectors[t[0]].vertex[0];
 			else
-				sector_edge.end = sectors[i].vertex[j + 1];
-			if (line_intersects(point, infinite,
-						sector_edge.start, sector_edge.end))
-				intersection_count++;
+				se.end = sectors[t[0]].vertex[t[1] + 1];
+			if (line_intersects(point, i, se.start, se.end))
+				t[2]++;
 		}
-		if (intersection_count == 1)
-			return (i);
+		if (t[2] == 1)
+			return (t[0]);
 	}
 	return (-1);
 }

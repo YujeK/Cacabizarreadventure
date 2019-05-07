@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 15:03:15 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 18:19:48 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ typedef struct  s_object
 
 typedef struct	s_data
 {
+	t_coord			pos;
 	int				win;
 	time_t			death_timer;
 	int				score;
@@ -260,7 +261,7 @@ typedef	struct		s_b
 	t_sector 	sect;
 	t_vector	*vert;
 	t_object	temp_sprite;
-	unsigned int NumSectors;
+	unsigned int numsectors;
 	unsigned int s;
 	char		*str;
 	int 		fd;
@@ -420,19 +421,21 @@ int 			overlap(float a1 ,float a2, float b1, float b2);
 t_vector		intersect(float x1, float y1, float x2, float y2, float x3, float  y3, float x4, float y4);
 float			ft_iatof(char *wall, int index);
 int				ft_draw_line3(t_wind wind, t_coord point, t_coord next_point, t_line line);
-void   			display_img(int x, int y, t_wind wind, int size, unsigned int *res_img);
+void   			display_img(t_coord pos, t_wind wind, int size, unsigned int *res_img);
 int         	ft_in_hitbox(t_data *data);
 void        	cap_framerate(t_data *data);
 void    		fillrect(SDL_Rect rect, int color, t_wind wind);
-int             rbw(int x, unsigned int NumSectors);
+int             rbw(int x, unsigned int numsectors);
 SDL_Color		ft_hex_to_rgb(int hexa);
 t_object 		get_sprite_coords(t_data *data, t_object *sprite, t_b *b, t_bas *bas);
 t_object 		*sprite_size(t_object *sprite, t_plyr player, t_data data, t_b *b);
 void    		pick_up(t_data *data, t_plyr *player, t_object *sprite);
-int				in_sector_full(t_sector *sectors, t_vector point, unsigned int NumSectors);
+int				in_sector_full(t_sector *sectors, t_vector point, unsigned int numsectors);
 void	        ft_set_nbrstring(int value, SDL_Rect rect, SDL_Color color, t_data *data);
 void	        ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_data *data);
 SDL_Color   	ft_color_nb_state(int nb);
+char			*ft_readfile(const char *filepath, size_t *usize);
+unsigned int	*pixels_to_rgba(unsigned int *pixels, size_t n);
 
 /*
 ** EVENTS
@@ -456,7 +459,7 @@ int 			count_vertex(char *str);
 int				ft_iatoi(char *str, int i);
 t_vector		*Load_vertex(char **map);
 t_plyr			Load_Player(t_sector *sectors, char **map);
-t_sector		*Load_sectors(char **map, unsigned int *NumSectors, t_vector *vertex);
+t_sector		*Load_sectors(char **map, unsigned int *numsectors, t_vector *vertex);
 
 /*
 **	INIT FONCTIONS
@@ -493,7 +496,7 @@ void			draw_map(t_b *b, t_data *data);
 void			draw_items(t_data *data);
 void			draw_inventory(t_data *data);
 int 			render_sprite(t_plyr player, t_object *sprite, t_sector *sectors, t_bas *bas);
-void			draw_resized_column(t_data *data,t_object *sprite, t_wind wind, int ytop, int ybot);
+void			draw_resized_column(t_data *data,t_object *sprite, int ytop, int ybot);
 int				luminosity(int r1, double z, double luminosity);
 void			engine_interaction(t_b *b);
 void    		game_loop(t_data *data, t_b *b);

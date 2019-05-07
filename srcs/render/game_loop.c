@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:47:55 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 08:48:31 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:24:48 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	game_loop(t_data *data, t_b *b)
 			draw_screen(data, b);
 			draw_inventory(data);
 			draw_items(data);
-			draw_map(b, data);
+			//draw_map(b, data);
 			ft_value_display(data);
 			engine_interaction(b);
 			event_manager(data, b);

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:49:55 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 02:01:51 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:22:42 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_sector *fill_sectors(t_sector *sectors, char *str, int *c, t_vector *vertex)
 	return (sectors);
 }
 
-t_sector	*Load_sectors(char **map, unsigned int *NumSectors, t_vector *vertex)
+t_sector	*Load_sectors(char **map, unsigned int *numsectors, t_vector *vertex)
 {
 	t_sector *sectors;
 	int i;
@@ -111,7 +111,7 @@ t_sector	*Load_sectors(char **map, unsigned int *NumSectors, t_vector *vertex)
 		}
 		i++;
 	}
-	*NumSectors = st;
+	*numsectors = st;
 	sectors = (t_sector *)malloc(sizeof(t_sector) * st);
 	st = 0;
 	i = 0;

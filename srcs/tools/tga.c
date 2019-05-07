@@ -6,13 +6,13 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 21:41:43 by snicolet          #+#    #+#             */
-/*   Updated: 2019/05/07 15:12:59 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:21:15 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static size_t			ft_filesize(const char *filepath)
+static size_t		ft_filesize(const char *filepath)
 {
 	struct stat		st;
 
@@ -21,8 +21,7 @@ static size_t			ft_filesize(const char *filepath)
 	return ((size_t)st.st_size);
 }
 
-
-char					*ft_readfile(const char *filepath, size_t *usize)
+char				*ft_readfile(const char *filepath, size_t *usize)
 {
 	const size_t	size = ft_filesize(filepath);
 	ssize_t			ret;
@@ -55,36 +54,6 @@ static void			*load_tga_error(const char *error, void *file_content)
 	return (NULL);
 }
 
-
-/* int             main(int ac, char **av)
-{
-        int             i;
-        unsigned char   c;
-
-        if (ac == 2)
-        {
-                i = 3;
-                while (i >= 1)
-                {
-                        av[1][i] = av[1][i - 1];
-                        i--;
-                }
-                c = 255;
-                av[1][0] = c;
-        }
-        return (0);
-} */
-
-static unsigned int	*pixels_to_rgba(unsigned int *pixels, size_t n)
-{
-	
-	while (n--)
-	{ 
-		pixels[n] = TGA_L(pixels[n]);
-	}
-	return (pixels);
-}
-
 static unsigned int	*tga_px3(unsigned char *pixels, const t_tga *specs)
 {
 	const size_t		pixels_total = specs->width * specs->height;
@@ -107,16 +76,6 @@ static unsigned int	*tga_px3(unsigned char *pixels, const t_tga *specs)
 	}
 	free(pixels);
 	return (buffer);
-}
-
-void		tga_display(const t_tga *specs)
-{
-	printf("id: %hhd\ncolor_map: %hhd\ntype: %hhd\nfirst_entry_index: %hu\n"
-			"color_map_len: %hu\nbpp: %hhu\nx_offset: %hu\ny_offset: %hu\n"
-			"width: %hu\nheight: %hu\ndepth: %hhu\ndescriptor: %hhu\n",
-			specs->id, specs->color_map, specs->type, specs->first_entry_index,
-			specs->color_map_len, specs->bpp, specs->x_offset, specs->y_offset,
-			specs->width, specs->height, specs->depth, specs->descriptor);
 }
 
 unsigned int		*tga_load(const char *filepath, t_tga *specs)

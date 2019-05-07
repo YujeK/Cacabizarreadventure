@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 01:15:43 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 08:24:01 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:22:15 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	start_menu(t_data *data)
 	rect = (SDL_Rect){0, 0, 1000, 1000};
 	fillerect(rect, WHITE, data->wind);
 	if (data->which_menu == 1)
-		display_img(0, 0, data->wind, 1001, data->menu.res_img);
+		display_img(data->pos, data->wind, 1001, data->menu.res_img);
 	if (data->which_menu == 0)
-		display_img(0, 0, data->wind, 1001, data->menustart.res_img);
+		display_img(data->pos, data->wind, 1001, data->menustart.res_img);
 }

@@ -6,13 +6,14 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:31:33 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 15:08:24 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 18:19:51 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-t_vector	intersect(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
+t_vector	intersect(float x1, float y1,
+				float x2, float y2, float x3, float y3, float x4, float y4)
 {
 	t_vector i;
 

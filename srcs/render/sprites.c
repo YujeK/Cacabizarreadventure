@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 18:57:44 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 14:53:43 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:40:45 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ t_object	get_sprite_coords(t_data *data
 	> sprite->x && sprite->x > 0 && data->sectqueue[sprite->sectorno]
 		<= data->sectqueue[data->now_sect])
 	{
-		draw_resized_column(data, sprite, data->wind
-		, bas->ytop[bas->x], bas->ybottom[bas->x]);
+		draw_resized_column(data, sprite,
+			bas->ytop[bas->x], bas->ybottom[bas->x]);
 		sprite->x_count++;
 	}
 	if (sprite->x_count > 0)

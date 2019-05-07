@@ -6,19 +6,11 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:24:40 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 15:02:23 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:26:29 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-int		overlap(float a1, float a2, float b1, float b2)
-{
-	if (min(a1, a2) <= max(b1, b2) && min(b1, b2) <= max(a1, a2))
-		return (1);
-	else
-		return (0);
-}
 
 int		intersectbox(float x0, float y0,
 			float x1, float y1, float x2, float y2, float x3, float y3)

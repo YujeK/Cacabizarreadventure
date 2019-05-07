@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 15:00:25 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:22:42 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_plyr	move_player2(t_b *b, t_vector temp, int s)
 	b->player.anglecos = cosf(b->player.angle);
 	temp.x = b->player.where.x + b->dx * 4;
 	temp.y = b->player.where.y + b->dy * 4;
-	if ((s = in_sector_full(b->sectors, temp, b->NumSectors)) == -1)
+	if ((s = in_sector_full(b->sectors, temp, b->numsectors)) == -1)
 		return (b->player);
 	if (b->sectors[s].floor > b->sectors[b->player.sector].floor
 		+ (b->player.where.z - b->sectors[b->player.sector].floor))
@@ -72,10 +72,10 @@ int		main(int argc, char **argv)
 	data.weapon_ammo = data.sprite_nbr;
 	init_img(&data);
 	b.vert = Load_vertex(b.map);
-	b.sectors = Load_sectors(b.map, &b.NumSectors, b.vert);
+	b.sectors = Load_sectors(b.map, &b.numsectors, b.vert);
 	b.player = Load_Player(b.sectors, b.map);
 	data.startgame_timer = time(0);
-	data.numsectors = b.NumSectors;
+	data.numsectors = b.numsectors;
 	//Mix_PlayMusic(data.menutheme, 1);
 	game_loop(&data, &b);
 	ft_exit(&data);
