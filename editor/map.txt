@@ -1,0 +1,7 @@
+vertex 200 200 400 z
+vertex 400 400 200 z
+z
+sector  480 520 0 1 2 3 c  -1 -1 -1 -1  z
+z
+player 300 300 0 0 z
+z
