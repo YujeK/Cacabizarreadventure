@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 18:49:40 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 02:17:26 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	shoot_ev(t_data *data)
 			data->score++;
 			if (Mix_PlayChannel(3, data->target_hit, 1) == -1)
 				ft_error_exit("cant play target_hit", data);
-				Mix_Volume(3, 128 / 2);
+			Mix_Volume(3, 128 / 2);
 		}
 		data->sprite[data->aim].status = 1;
 		data->death_timer = time(0);

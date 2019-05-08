@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 23:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 04:02:35 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 02:14:35 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void			timer_ui(t_data *data, SDL_Rect rect)
 	{
 		if (data->story_step != 4)
 		{
-		rect = (SDL_Rect){431, 50, 60, 60};
-		data->timer = time(0) - data->timer_start;
+			rect = (SDL_Rect){431, 50, 60, 60};
+			data->timer = time(0) - data->timer_start;
 		}
 		ft_set_nbrstring(data->timer, rect, ft_color_nb_state(1), data);
 	}

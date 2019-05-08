@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:15:17 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 17:24:33 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 03:11:38 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ void	into_screen(t_data *data, t_b *b, t_bas *bas)
 	bas->x = bas->beginx;
 }
 
-void	draw_neighbor(t_data *data, t_b *b, t_bas *bas)
+void	draw_neighbor(t_data *data, t_b *b, t_bas *bas, t_rv *rv)
 {
-	t_rv rv;
-
 	if (bas->neighbor >= 0)
 	{
 		bas->nya = (bas->x - bas->x1)
@@ -72,19 +70,19 @@ void	draw_neighbor(t_data *data, t_b *b, t_bas *bas)
 		bas->cnyb = clamp(bas->nyb, bas->ytop[bas->x], bas->ybottom[bas->x]);
 		bas->r1 = luminosity(bas->r1, bas->z, data->luminosity);
 		bas->r2 = bas->r1;
-		recycle_vline(bas, &rv);
-		vline(data, bas, &rv);
+		recycle_vline(bas, rv);
+		vline(data, bas, rv);
 		bas->ytop[bas->x] = clamp(max(bas->cya, bas->cnya)
 		, bas->ytop[bas->x], SH - 1);
-		recycle_vline2(bas, &rv);
-		vline(data, bas, &rv);
+		recycle_vline2(bas, rv);
+		vline(data, bas, rv);
 		bas->ybottom[bas->x] = clamp(min(bas->cyb
 		, bas->cnyb), 0, bas->ybottom[bas->x]);
 	}
 	else
 	{
-		recycle_vline21(bas, &rv);
-		vline2(data, bas, &rv);
+		recycle_vline21(bas, rv);
+		vline2(data, bas, rv);
 	}
 }
 

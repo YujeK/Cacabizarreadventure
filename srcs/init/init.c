@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:40:28 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 00:15:01 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 01:59:44 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	init_main_v(t_data *data, t_b *b, char *arg)
 	b->player.falling = 1;
 	b->player.moving = 0;
 	b->player.ducking = 0;
-
 	TTF_Init();
 	if (Mix_Init(MIX_INIT_MP3) < 0)
 		exit(EXIT_FAILURE);
@@ -40,7 +39,7 @@ void	init_main_v(t_data *data, t_b *b, char *arg)
 	b->map = ft_strsplit(b->str, 'z');
 }
 
-void        init_ingame_vars(t_data *data, t_b *b)
+void	init_ingame_vars(t_data *data, t_b *b)
 {
 	b->eyeheight = b->player.ducking ? DuckHeight : Eyeheight;
 	b->move_vec[0] = 0.f;
@@ -51,7 +50,7 @@ void        init_ingame_vars(t_data *data, t_b *b)
 	data->aim = -1;
 }
 
-t_bas init_draw_vars(t_data *data, t_b *b, t_bas *bas)
+t_bas	init_draw_vars(t_data *data, t_b *b, t_bas *bas)
 {
 	bas->head = bas->queue;
 	bas->tail = bas->queue;
@@ -76,7 +75,7 @@ t_bas init_draw_vars(t_data *data, t_b *b, t_bas *bas)
 	return (*bas);
 }
 
-void init_intersect_vars(t_data *data, t_b *b, t_bas *bas)
+void	init_intersect_vars(t_data *data, t_b *b, t_bas *bas)
 {
 	bas->nearz = 1e-4f;
 	bas->farz = 5;
@@ -99,7 +98,7 @@ void init_intersect_vars(t_data *data, t_b *b, t_bas *bas)
 	}
 }
 
-void init_intersect_vars2(t_data *data, t_b *b, t_bas *bas)
+void	init_intersect_vars2(t_data *data, t_b *b, t_bas *bas)
 {
 	if (bas->tz1 <= 0 || bas->tz2 <= 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   story_steps.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:05:36 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 04:33:54 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 02:13:11 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	story_0and1(t_data *data, SDL_Rect rect)
 		rect = (SDL_Rect){60, 310, 25, 25};
 		ft_set_string(rect, "Enchanté Carlos Cabrone,  \
 		te voila bloqué dans mon monde, si tu veux en sortir \
-		il faudra que tu abatte toutes les cibles et ceci avec un nombre limité de balles, bonne chance",
+		il faudra que tu abatte toutes les cibles et ceci avec \
+		un nombre limité de balles, bonne chance",
 			ft_hex_to_rgb(WHITE), data);
 	}
 	story_1(data, rect);

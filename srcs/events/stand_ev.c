@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stand_ev.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 02:26:57 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 03:57:46 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 02:19:55 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ void	stand_ev(t_data *data, Uint8 *state, t_plyr *player)
 		if (Mix_PlayChannel(0, data->stand_warudo, 0) == -1)
 			ft_error_exit("cant play zawarudo", data);
 	}
-		eyesofthedead(data, state, player);
+	eyesofthedead(data, state, player);
 }

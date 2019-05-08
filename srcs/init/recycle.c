@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:36:54 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 14:22:40 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/07 14:40:08 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	recycle_vline3(t_bas *bas, t_rv *rv)
 void	recycle_vline4(t_bas *bas, t_rv *rv)
 {
 	rv->x = bas->x;
-	rv->y1 =  bas->cyb + 1;
+	rv->y1 = bas->cyb + 1;
 	rv->y2 = bas->ybottom[bas->x];
 	rv->top = 0x992c42;
 	rv->middle = 0x6b3636;

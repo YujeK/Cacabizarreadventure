@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   player_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:46:50 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 01:20:12 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:42:55 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int	get_string(char **map)
+int		get_string(char **map)
 {
 	int i;
 	int line;
@@ -21,27 +21,55 @@ int	get_string(char **map)
 	line = 0;
 	t = ft_tablen(map);
 	i = -1;
-	while(++i < t)
+	while (++i < t)
 	{
-		if(map[i][1] == 'p')
+		if (map[i][1] == 'p')
 		{
 			line = i;
-			break;
+			break ;
 		}
 	}
-	if(line == 0)
+	if (line == 0)
 		exit(EXIT_FAILURE);
-	return(line);
+	return (line);
 }
 
-t_plyr Load_Player(t_sector *sectors, char **map)
+void	get_p_coords(char *str, t_plyr *player, int i, int f)
 {
-	t_plyr player;
-	int i;
-	int f;
-	char *str;
+	while (str[++i])
+	{
+		if (f == 0 && str[i] >= '0' && str[i] <= '9'
+			&& (str[i - 1] == ' ' || str[i - 1] == '\t'))
+		{
+			player->where.x = ft_iatof(str, i) / 10;
+			f++;
+		}
+		else if (f == 1 && str[i] >= '0' && str[i] <= '9'
+			&& (str[i - 1] == ' ' || str[i - 1] == '\t'))
+		{
+			player->where.y = ft_iatof(str, i) / 10;
+			f++;
+		}
+		else if (f == 2 && str[i] >= '0' && str[i] <= '9'
+			&& (str[i - 1] == ' ' || str[i - 1] == '\t'))
+		{
+			player->angle = ft_iatof(str, i);
+			f++;
+		}
+		else if (f == 3 && str[i] >= '0' && str[i] <= '9'
+		&& (str[i - 1] == ' ' || str[i - 1] == '\t'))
+			player->sector = (unsigned int)ft_iatof(str, i);
+	}
+}
 
-	i = 0;
+t_plyr	load_player(t_sector *sectors, char **map)
+{
+	t_plyr	player;
+	char	*str;
+	int		f;
+	int		i;
+
+	i = -1;
 	f = 0;
 	player.velocity.x = 0;
 	player.velocity.y = 0;
@@ -51,30 +79,7 @@ t_plyr Load_Player(t_sector *sectors, char **map)
 	player.yaw = 0;
 	if (map[get_string(map)])
 		str = map[get_string(map)];
-	while (str[i])
-	{
-		if(f == 0 && str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
-		{
-			player.where.x = ft_iatof(str, i) / 10;
-			f++;
-		}
-		else if (f == 1 && str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
-		{
-			player.where.y = ft_iatof(str, i) / 10;
-			f++;
-		}
-		else if (f == 2 && str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
-		{
-			player.angle = ft_iatof(str, i);
-			f++;
-		}
-		else if (f == 3 && str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
-		{
-			player.sector = (unsigned int)ft_iatof(str, i);
-		}
-		i++;
-	}
-
+	get_p_coords(str, &player, i, f);
 	player.where.z = sectors[player.sector].floor + Eyeheight;
 	return (player);
 }

@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   engine_interaction.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:15:20 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 23:39:23 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 02:21:29 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void	do_intersect(t_b *b)
+{
+	
+}
 
 void	intersoc(t_b *b)
 {
@@ -18,6 +23,7 @@ void	intersoc(t_b *b)
 	t_inter ips;
 	float pxdx = b->px + b->dx;
 	float pydy = b->py + b->dy;
+
 	init_inter(b, &ic);
 	init_pointside(b, &ips);
 	if (intersectbox(&ic) && pointside(&ips) < 0)
@@ -85,5 +91,4 @@ void	engine_interaction(t_b *b)
 			b->player.moving = 1;
 		}
 	}
-	move_interaction(b);
 }

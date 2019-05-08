@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/07 23:40:56 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 03:24:58 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ t_plyr	move_player2(t_b *b, t_vector temp, int s)
 
 t_plyr	move_player(t_b *b)
 {
-	int			s;
-	t_vector	temp;
-	t_sector	sect;
-	t_vector	*vert;
-	t_inter		ic;
-	t_inter		ips;
+	unsigned int	s;
+	t_vector		temp;
+	t_sector		sect;
+	t_vector		*vert;
+	t_inter			ic;
+	t_inter			ips;
 
 	b->px = b->player.where.x;
 	b->py = b->player.where.y;
@@ -71,12 +71,12 @@ int		main(int argc, char **argv)
 	init_sprites(&data, b.map);
 	data.weapon_ammo = data.sprite_nbr;
 	init_img(&data);
-	b.vert = Load_vertex(b.map);
+	b.vert = load_vertex(b.map);
 	b.sectors = Load_sectors(b.map, &b.numsectors, b.vert);
-	b.player = Load_Player(b.sectors, b.map);
+	b.player = load_player(b.sectors, b.map);
 	data.startgame_timer = time(0);
 	data.numsectors = b.numsectors;
-	//Mix_PlayMusic(data.menutheme, 1);
+	Mix_PlayMusic(data.menutheme, 1);
 	game_loop(&data, &b);
 	ft_exit(&data);
 	return (0);

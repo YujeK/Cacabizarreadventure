@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/08 00:14:24 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 03:24:09 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,15 +309,16 @@ typedef	struct		s_b
 
 typedef	struct		s_rv
 {
-	int x1;
-	int x;
-	int y1;
-	int y2;
-	int top;
-	int middle;
-	int bottom;
-	int ya;
-	int yb;
+	int 	x1;
+	int 	x;
+	int 	y1;
+	int 	y2;
+	int 	top;
+	int 	middle;
+	int 	bottom;
+	int 	ya;
+	int 	yb;
+	double	height;
 }					t_rv;
 
 
@@ -472,8 +473,8 @@ void 			inv_ev(t_data *data, Uint8 *state, float *move_vec);
 
 int 			count_vertex(char *str);
 int				ft_iatoi(char *str, int i);
-t_vector		*Load_vertex(char **map);
-t_plyr			Load_Player(t_sector *sectors, char **map);
+t_vector		*load_vertex(char **map);
+t_plyr			load_player(t_sector *sectors, char **map);
 t_sector		*Load_sectors(char **map, unsigned int *numsectors, t_vector *vertex);
 
 /*
@@ -496,6 +497,7 @@ void			init_pointside(t_b *b, t_inter *ips);
 void			init_inter(t_b *b, t_inter *ic);
 void			init_inter2(t_b *b, t_inter *ic, t_vector *vert, int s);
 void			init_pointside2(t_b *b, t_inter *ips, int s, t_vector *vert);
+void			move_interaction(t_b *b);
 
 /*
 ** EXIT FONCTIONS
@@ -519,7 +521,7 @@ int				luminosity(int r1, double z, double luminosity);
 void			engine_interaction(t_b *b);
 void    		game_loop(t_data *data, t_b *b);
 void			init_main_v(t_data *data, t_b *b, char *arg);
-void            draw_neighbor(t_data *data, t_b *b, t_bas *bas);
+void            draw_neighbor(t_data *data, t_b *b, t_bas *bas, t_rv *rv);
 void            draw_edges(t_bas *bas, t_data *data, t_b *b);
 void            while_edges(t_bas *bas, t_data *data, t_b *b);
 void            transform_vertex(t_data *data, t_b *b, t_bas *bas);

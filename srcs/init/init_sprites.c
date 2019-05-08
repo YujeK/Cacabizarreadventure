@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 04:37:02 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 14:22:14 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/07 14:38:29 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ int		count_sprites(char **map)
 	count = 0;
 	i = -1;
 	t = ft_tablen(map);
-	while(++i < t)
+	while (++i < t)
 	{
-		if(map[i][1] == 'o')
+		if (map[i][1] == 'o')
 			count++;
 	}
-	return(count);
+	return (count);
 }
 
-void fill_sprite(char *str, t_object *sprite)
+void	fill_sprite(char *str, t_object *sprite)
 {
 	int i;
 	int flag;
 
 	flag = 0;
 	i = -1;
-	while(str[++i])
+	while (str[++i])
 	{
 		if (flag == 0 && str[i] >= '0' && str[i] <= '9'
 		&& (str[i - 1] == ' ' || str[i - 1] == '\t'))
@@ -64,17 +64,19 @@ void	load_sprites(t_data *data)
 
 	i = 0;
 	while (i < data->sprite_nbr)
-{
-	if (!(data->sprite[i].img = tga_load("ressources/enemies/targuet.tga", &data->sprite[i].specs)))
-		ft_error_exit("I couldnt load tga toiletashkan", data);
-	if (!(data->sprite[i].dead_img = tga_load("ressources/enemies/1score.tga", &data->sprite[i].specs1)))
-		ft_error_exit("I couldnt load tga +1", data);
-		data->sprite[i].res_img = resize(data->sprite[i].dead_img, data->sprite[i].specs1, 600);
-	i++;
+	{
+		if (!(data->sprite[i].img = tga_load(
+			"ressources/enemies/targuet.tga", &data->sprite[i].specs)))
+			ft_error_exit("I couldnt load tga toiletashkan", data);
+		if (!(data->sprite[i].dead_img = tga_load(
+			"ressources/enemies/1score.tga", &data->sprite[i].specs1)))
+			ft_error_exit("I couldnt load tga +1", data);
+		data->sprite[i].res_img = resize(data->sprite[i].dead_img
+		, data->sprite[i].specs1, 600);
+		i++;
+	}
 }
-//	if (!(data->sprite[1].img = tga_load("ressources/enemies/dead.tga", &data->sprite[1].specs)))
-//		ft_error_exit("I couldnt load tga toiletashkan", data);
-}
+
 void	init_sprites(t_data *data, char **map)
 {
 	int i;
@@ -85,8 +87,9 @@ void	init_sprites(t_data *data, char **map)
 	t = ft_tablen(map);
 	i = 0;
 	data->sprite_nbr = count_sprites(map);
-	if ((data->sprite = (t_object *)malloc(sizeof(t_object) * data->sprite_nbr + 100)) == NULL)
-		ft_error_exit("quand je essaye de mallocer les sprites car le putain de ashkan ne se rien faire ta mere", data);
+	if ((data->sprite = (t_object *)malloc(sizeof(t_object)
+	* data->sprite_nbr + 100)) == NULL)
+		ft_error_exit("Fail malloc sprites", data);
 	while (i < data->sprite_nbr)
 	{
 		if (map[j][1] == 'o')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertex_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:47:49 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 02:00:56 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:58:24 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_vector	*fill_vertex(t_vector *vert, char *str, int *c)
 	{
 		if (str[i] >= '0' && str[i] <= '9' && y == -1)
 			y = i;
-		if (str[i] && str[i] >= '0' && str[i] <= '9' && (str[i + 1] == ' ' || str[i + 1] == '\0' || str[i + 1] == '\t'))
+		if (str[i] && str[i] >= '0' && str[i] <= '9'
+		&& (str[i + 1] == ' ' || str[i + 1] == '\0' || str[i + 1] == '\t'))
 			v++;
 		i++;
 	}
@@ -38,13 +39,14 @@ t_vector	*fill_vertex(t_vector *vert, char *str, int *c)
 		t++;
 	}
 	i = y + 1;
-	while(str[i])
+	while (str[i])
 	{
-		if (str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
+		if (str[i] >= '0' && str[i] <= '9'
+			&& (str[i - 1] == ' ' || str[i - 1] == '\t'))
 		{
-			vert[*c].x  = ft_iatof(str, i) / 10;
+			vert[*c].x = ft_iatof(str, i) / 10;
 			*c += 1;
-			while((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+			while ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
 				i++;
 		}
 		i++;
@@ -52,27 +54,27 @@ t_vector	*fill_vertex(t_vector *vert, char *str, int *c)
 	return (vert);
 }
 
-int 	count_vertex(char *str)
+int			count_vertex(char *str)
 {
 	int i;
 	int c;
 
 	c = 0;
 	i = 0;
-
-	while(str[i] < '0' || str[i] > '9')
+	while (str[i] < '0' || str[i] > '9')
 		i++;
-	while(str[i] >= '0' && str[i] >= '9')
+	while (str[i] >= '0' && str[i] >= '9')
 		i++;
 	i++;
-	while(str[i] >= '0' && str[i] >= '9')
+	while (str[i] >= '0' && str[i] >= '9')
 		i++;
 	i++;
 	while (str[i])
 	{
 		if (str[i] == ' ' && str[i + 1] == ' ')
-			break;
-		if(str[i] >= '0' && str[i] <= '9' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
+			break ;
+		if (str[i] >= '0' && str[i] <= '9'
+			&& (str[i - 1] == ' ' || str[i - 1] == '\t'))
 		{
 			c++;
 		}
@@ -80,20 +82,20 @@ int 	count_vertex(char *str)
 	}
 	if (c == 0)
 		exit(EXIT_FAILURE);
-	return(c);
+	return (c);
 }
 
-t_vector	*Load_vertex(char **map)
+t_vector	*load_vertex(char **map)
 {
-	int i;
-	int j;
-	int v;
-	int vt;
-	int st;
-	int s;
-	int c;
-	int t;
-	t_vector *vertex;
+	int			i;
+	int			j;
+	int			v;
+	int			vt;
+	int			st;
+	int			s;
+	int			c;
+	int			t;
+	t_vector	*vertex;
 
 	i = 0;
 	v = 0;
@@ -104,29 +106,29 @@ t_vector	*Load_vertex(char **map)
 	t = (int)ft_tablen(map);
 	while (i < t - 3)
 	{
-		j= 0;
-		while(map[i] && j < ft_strlen(map[i]))
+		j = 0;
+		while (map[i] && j < ft_strlen(map[i]))
 		{
-			if (map[i][j] && (map[i][0] == 'v' || map[i][1] == 'v' || map[i][2] == 'v') && map[i][j] >= '0'
-			&& map[i][j] <= '9' && (map[i][j - 1] == ' ' || map[i][j - 1] == '\t'))
+			if (map[i][j] && (map[i][0] == 'v' || map[i][1] == 'v'
+			|| map[i][2] == 'v') && map[i][j] >= '0' && map[i][j] <= '9'
+			&& (map[i][j - 1] == ' ' || map[i][j - 1] == '\t'))
 				vt++;
 			j++;
 		}
 		i++;
 	}
-	if(vt == 0)
+	if (vt == 0)
 		exit(EXIT_FAILURE);
-	//vt = 66;
 	i = 0;
 	vertex = (t_vector*)malloc(sizeof(t_vector) * vt);
-	while(i < vt)
+	while (i < vt)
 	{
 		vertex[i].x = 0;
 		vertex[i].y = 0;
 		i++;
 	}
 	i = 0;
-	while(i < t - 3)
+	while (i < t - 3)
 	{
 		if (map[i][0] == 'v')
 		{
