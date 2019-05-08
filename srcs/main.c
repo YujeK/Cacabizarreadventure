@@ -6,14 +6,16 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/08 08:19:27 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:35:59 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-t_plyr	move_player2(t_b *b, t_vector temp, int s)
+t_plyr	move_player2(t_b *b, int s)
 {
+	t_vector temp;
+
 	b->player.anglesin = sinf(b->player.angle);
 	b->player.anglecos = cosf(b->player.angle);
 	temp.x = b->player.where.x + b->dx * 4;
@@ -33,7 +35,6 @@ t_plyr	move_player2(t_b *b, t_vector temp, int s)
 t_plyr	move_player(t_b *b)
 {
 	unsigned int	s;
-	t_vector		temp;
 	t_sector		sect;
 	t_vector		*vert;
 	t_inter			t[2];
@@ -55,7 +56,7 @@ t_plyr	move_player(t_b *b)
 		}
 		s++;
 	}
-	move_player2(b, temp, s);
+	move_player2(b, s);
 	return (b->player);
 }
 
@@ -78,6 +79,6 @@ int		main(int argc, char **argv)
 	data.numsectors = b.numsectors;
 	Mix_PlayMusic(data.menutheme, 1);
 	game_loop(&data, &b);
-	ft_exit(&data);
+	ft_exit();
 	return (0);
 }

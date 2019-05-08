@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 19:14:40 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/08 04:49:31 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:11:05 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ unsigned int	*resize(unsigned int *p, t_tga spe, double size)
 	return (im);
 }
 
-void			draw_resized_column(t_data *d, t_object *s, int ytop, int ybot)
+void			draw_resized_column(t_data *d, t_object *s)
 {
 	double		t[3];
 	int			res_j;

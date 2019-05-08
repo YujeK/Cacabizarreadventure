@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 23:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 06:09:52 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:29:35 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void			ft_start_game(t_data *data)
 {
 	SDL_Rect		rect;
 
+	ft_bzero(&rect, sizeof(SDL_Rect));
 	timer_ui(data, rect);
 	story_0and1(data, rect);
 	story_2and3(data, rect);

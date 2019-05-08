@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:47:49 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 06:11:03 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 11:15:40 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_vector	*load_vertex(char **map)
 	while (++b.i < b.t - 3)
 	{
 		b.j = -1;
-		while (map[b.i] && ++b.j < ft_strlen(map[b.i]))
+		while (map[b.i] && ++b.j < (int)ft_strlen(map[b.i]))
 		{
 			if (map[b.i][b.j] && (map[b.i][0] == 'v' || map[b.i][1] == 'v'
 			|| map[b.i][2] == 'v') && map[b.i][b.j]

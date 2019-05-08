@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:33:22 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/06 12:48:44 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:41:33 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		event_keyboard(t_plyr *player, t_data *data,
 	movement_ev(data, state, move_vec, player);
 	wpn_bobbing(data);
 	stand_ev(data, state, player);
-	inv_ev(data, state, move_vec);
+	inv_ev(data, state);
 	if (state[SDL_SCANCODE_SPACE])
 	{
 		if (player->velocity.z + 0.05 < sector[player->sector].ceil &&

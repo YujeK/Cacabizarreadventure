@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 02:26:57 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 02:19:55 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 11:39:31 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	pick_up(t_data *data, t_plyr *player, t_object *sprite)
 	}
 }
 
-void	stand_activation(t_data *data, t_plyr *player)
+void	stand_activation(t_data *data)
 {
 	if (data->zawarudo == 1)
 	{
@@ -48,7 +48,7 @@ void	eyesofthedead(t_data *data, Uint8 *state, t_plyr *player)
 		if (state[SDL_SCANCODE_F])
 		{
 			if (Mix_PlayChannel(0, data->tp_sound, 0) == -1)
-				ft_error_exit("cant play tp", data);
+				ft_error_exit("cant play tp");
 			player->where.y = data->sprite[data->aim].where.y;
 			player->where.x = data->sprite[data->aim].where.x;
 			player->sector = data->sprite[data->aim].sectorno;
@@ -67,7 +67,7 @@ void	stand_ev(t_data *data, Uint8 *state, t_plyr *player)
 		data->zawarudo = 1;
 		data->stand_timer = time(0);
 		if (Mix_PlayChannel(0, data->stand_warudo, 0) == -1)
-			ft_error_exit("cant play zawarudo", data);
+			ft_error_exit("cant play zawarudo");
 	}
 	eyesofthedead(data, state, player);
 }

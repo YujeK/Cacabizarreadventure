@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 01:15:43 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 22:30:06 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:40:22 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	start_menu(t_data *data)
 	if (state[SDL_SCANCODE_RETURN])
 		data->game_start = 1;
 	if (state[SDL_SCANCODE_ESCAPE])
-		ft_exit(data);
+		ft_exit();
 	rect = (SDL_Rect){0, 0, 1000, 1000};
 	fillerect(rect, WHITE, data->wind);
 	if (data->which_menu == 1)

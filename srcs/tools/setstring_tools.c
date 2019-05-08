@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:01:30 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 14:55:33 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:41:11 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void			ft_set_string(SDL_Rect rect, char *text,
 
 	sdl_rect = (SDL_Rect){rect.x, rect.y, rect.w, rect.h};
 	if (!(surface = TTF_RenderText_Blended(data->font, text, color)))
-		ft_error_exit("couldnt load font", data);
+		ft_error_exit("couldnt load font");
 	sdl_rect.w = (sdl_rect.h * surface->w) / surface->h;
 	if (SDL_BlitScaled(surface, 0, data->wind.screen, &sdl_rect) == -1)
-		ft_error_exit("couldnt put string", data);
+		ft_error_exit("couldnt put string");
 	SDL_FreeSurface(surface);
 }
 
@@ -33,7 +33,7 @@ void			ft_set_nbrstring(int value, SDL_Rect rect,
 	char	*str;
 
 	if (!(str = ft_itoa(value)))
-		ft_error_exit("couldnt put nbrstring", data);
+		ft_error_exit("couldnt put nbrstring");
 	ft_set_string(rect, str, color, data);
 	ft_strdel(&str);
 }

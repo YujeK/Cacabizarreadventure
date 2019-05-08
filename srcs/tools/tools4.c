@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 03:29:08 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 17:06:04 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:32:34 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ int		in_sector_full(t_sector *sectors,
 	i.y = point.y;
 	i.x = 200000;
 	t[0] = -1;
-	while (++t[0] < numsectors)
+	while (++t[0] < (int)numsectors)
 	{
 		t[1] = -1;
 		t[2] = 0;
-		while (++t[1] < sectors[t[0]].npoints)
+		while (++t[1] < (int)sectors[t[0]].npoints)
 		{
 			se.start = sectors[t[0]].vertex[t[1]];
-			if (t[1] == sectors[t[0]].npoints)
+			if (t[1] == (int)sectors[t[0]].npoints)
 				se.end = sectors[t[0]].vertex[0];
 			else
 				se.end = sectors[t[0]].vertex[t[1] + 1];

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 02:38:31 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/08 06:55:16 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:43:05 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,26 @@ void	draw_edges(t_bas *bas, t_data *data, t_b *b)
 				, &data->sprite[bas->i], b, bas);
 		}
 		recycle_vline3(bas, &rv);
-		vline(data, bas, &rv);
+		vline(data, &rv);
 		recycle_vline4(bas, &rv);
-		vline(data, bas, &rv);
-		draw_neighbor(data, b, bas, &rv);
+		vline(data, &rv);
+		draw_neighbor(data, bas, &rv);
 	}
 }
 
 void	while_edges(t_bas *bas, t_data *data, t_b *b)
 {
-	while (++bas->s < bas->sect.npoints)
+	while (++bas->s < (int)bas->sect.npoints)
 	{
-		transform_vertex(data, b, bas);
+		transform_vertex(b, bas);
 		if (bas->tz1 <= 0 && bas->tz2 <= 0)
 			continue;
-		init_intersect_vars2(data, b, bas);
+		init_intersect_vars2(bas);
 		scale_coords(bas);
 		if (bas->x1 >= bas->x2
 		|| bas->x2 < bas->now.sx1 || bas->x1 > bas->now.sx2)
 			continue;
-		into_screen(data, b, bas);
+		into_screen(b, bas);
 		draw_edges(bas, data, b);
 		if (bas->neighbor >= 0 && bas->endx >= bas->beginx
 		&& (bas->head + 32 + 1 - bas->tail) % 32)

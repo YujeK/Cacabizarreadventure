@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/08 02:17:26 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 11:36:21 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	shoot_ev(t_data *data)
 		{
 			data->score++;
 			if (Mix_PlayChannel(3, data->target_hit, 1) == -1)
-				ft_error_exit("cant play target_hit", data);
+				ft_error_exit("cant play target_hit");
 			Mix_Volume(3, 128 / 2);
 		}
 		data->sprite[data->aim].status = 1;
@@ -29,7 +29,7 @@ void	shoot_ev(t_data *data)
 	if (data->weapon_ammo > 0 && data->is_cd == 0)
 	{
 		if (Mix_PlayChannel(2, data->ak, 0) == -1)
-			ft_error_exit("cant play ak", data);
+			ft_error_exit("cant play ak");
 		Mix_Volume(2, 128 / 4);
 		data->weapon_ammo--;
 		data->weapon_state = 1;
@@ -39,7 +39,6 @@ void	shoot_ev(t_data *data)
 
 void	event_mouse(t_plyr *player, t_data *data)
 {
-	float	t;
 	int		x;
 	int		y;
 
@@ -77,7 +76,7 @@ void	special_ev(t_data *data, Uint8 *state)
 		data->luminosity += 0.0005;
 }
 
-void	inv_ev(t_data *data, Uint8 *state, float *move_vec)
+void	inv_ev(t_data *data, Uint8 *state)
 {
 	if (data->inventory_state == 1)
 	{

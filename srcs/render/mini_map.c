@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 19:59:28 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 15:22:42 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:27:13 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	draw_sprites(t_data *data, t_wind wind, t_b *b)
 	}
 }
 
-void	fillrect(SDL_Rect rect, int color, t_wind wind)
+void	fillrect(SDL_Rect rect, t_wind wind)
 {
 	int x;
 	int y;
@@ -117,10 +117,10 @@ void	draw_map(t_b *b, t_data *data)
 {
 	b->line.color = 0;
 	b->i = 0;
-	while (b->i < b->numsectors)
+	while (b->i < (int)b->numsectors)
 	{
 		b->j = 0;
-		while (b->j < b->sectors[b->i].npoints)
+		while (b->j < (int)b->sectors[b->i].npoints)
 		{
 			if (b->sectors[b->i].neighbors[b->j] == -1)
 			{

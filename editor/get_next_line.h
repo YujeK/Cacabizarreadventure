@@ -6,10 +6,9 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 05:13:32 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/02 05:13:36 by dhorvill         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:47:01 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_GET_NEXT_LINE_H
 # define FT_GET_NEXT_LINE_H

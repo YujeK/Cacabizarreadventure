@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 06:51:46 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 08:15:32 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:35:49 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,7 +484,7 @@ void				display_img(t_coord pos,
 					t_wind wind, int size, unsigned int *res_img);
 int					ft_in_hitbox(t_data *data);
 void				cap_framerate(t_data *data);
-void				fillrect(SDL_Rect rect, int color, t_wind wind);
+void				fillrect(SDL_Rect rect, t_wind wind);
 int					rbw(int x, unsigned int numsectors);
 SDL_Color			ft_hex_to_rgb(int hexa);
 t_object			get_sprite_coords(t_data *data,
@@ -512,11 +512,11 @@ int					event_keyboard(t_plyr *player,
 void				event_mouse(t_plyr *player, t_data *data);
 t_plyr				move_player(t_b *b);
 void				stand_ev(t_data *data, Uint8 *state, t_plyr *player);
-void				stand_activation(t_data *data, t_plyr *player);
+void				stand_activation(t_data *data);
 void				event_manager(t_data *data, t_b *b);
 void				movement_ev(t_data *data, Uint8 *state,
 					float *move_vec, t_plyr *player);
-void				inv_ev(t_data *data, Uint8 *state, float *move_vec);
+void				inv_ev(t_data *data, Uint8 *state);
 
 /*
 **  Parsing
@@ -528,8 +528,7 @@ t_vector			*load_vertex(char **map);
 t_plyr				load_player(t_sector *sectors, char **map);
 t_sector			*load_sectors(char **map,
 					unsigned int *numsectors, t_vector *vertex);
-t_fls2				init_fill_sectors(char *str,
-					t_fls2 b, t_sector *sectors, int *c);
+t_fls2				init_fill_sectors(char *str, t_sector *sectors, int *c);
 
 /*
 **	INIT FONCTIONS
@@ -541,7 +540,7 @@ void				end_game(t_data *data);
 void				init_ingame_vars(t_data *data, t_b *b);
 void				start_menu(t_data *data);
 t_bas				init_draw_vars(t_data *data, t_b *b, t_bas *bas);
-void				init_intersect_vars2(t_data *data, t_b *b, t_bas *bas);
+void				init_intersect_vars2(t_bas *bas);
 void				recycle_vline(t_bas *bas, t_rv *rv);
 void				recycle_vline2(t_bas *bas, t_rv *rv);
 void				recycle_vline3(t_bas *bas, t_rv *rv);
@@ -557,14 +556,14 @@ void				move_interaction(t_b *b);
 /*
 ** EXIT FONCTIONS
 */
-void				ft_exit(t_data *data);
-void				ft_error_exit(char *str, t_data *data);
+void				ft_exit(void);
+void				ft_error_exit(char *str);
 
 /*
 **  RENDER
 */
 
-void				vline(t_data *data, t_bas *bas, t_rv *rv);
+void				vline(t_data *data, t_rv *rv);
 void				vline2(t_data *data, t_bas *bas, t_rv *rv);
 void				draw_screen(t_data *data, t_b *b);
 void				draw_map(t_b *b, t_data *data);
@@ -572,17 +571,16 @@ void				draw_items(t_data *data);
 void				draw_inventory(t_data *data);
 int					render_sprite(t_plyr player,
 					t_object *sprite, t_sector *sectors, t_bas *bas);
-void				draw_resized_column(t_data *data,
-					t_object *sprite, int ytop, int ybot);
+void				draw_resized_column(t_data *data, t_object *sprite);
 int					luminosity(int r1, double z, double luminosity);
 void				engine_interaction(t_b *b);
 void				game_loop(t_data *data, t_b *b);
 void				init_main_v(t_data *data, t_b *b, char *arg);
-void				draw_neighbor(t_data *data, t_b *b, t_bas *bas, t_rv *rv);
+void				draw_neighbor(t_data *data, t_bas *bas, t_rv *rv);
 void				draw_edges(t_bas *bas, t_data *data, t_b *b);
 void				while_edges(t_bas *bas, t_data *data, t_b *b);
-void				transform_vertex(t_data *data, t_b *b, t_bas *bas);
-void				into_screen(t_data *data, t_b *b, t_bas *bas);
+void				transform_vertex(t_b *b, t_bas *bas);
+void				into_screen(t_b *b, t_bas *bas);
 
 /*
 **	UI

@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 04:37:02 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 14:38:29 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 11:39:59 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void	load_sprites(t_data *data)
 	{
 		if (!(data->sprite[i].img = tga_load(
 			"ressources/enemies/targuet.tga", &data->sprite[i].specs)))
-			ft_error_exit("I couldnt load tga toiletashkan", data);
+			ft_error_exit("I couldnt load tga toiletashkan");
 		if (!(data->sprite[i].dead_img = tga_load(
 			"ressources/enemies/1score.tga", &data->sprite[i].specs1)))
-			ft_error_exit("I couldnt load tga +1", data);
+			ft_error_exit("I couldnt load tga +1");
 		data->sprite[i].res_img = resize(data->sprite[i].dead_img
 		, data->sprite[i].specs1, 600);
 		i++;
@@ -89,7 +89,7 @@ void	init_sprites(t_data *data, char **map)
 	data->sprite_nbr = count_sprites(map);
 	if ((data->sprite = (t_object *)malloc(sizeof(t_object)
 	* data->sprite_nbr + 100)) == NULL)
-		ft_error_exit("Fail malloc sprites", data);
+		ft_error_exit("Fail malloc sprites");
 	while (i < data->sprite_nbr)
 	{
 		if (map[j][1] == 'o')

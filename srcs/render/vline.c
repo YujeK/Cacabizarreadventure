@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:11:11 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 02:45:55 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 11:19:10 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	recycle_vline21(t_bas *bas, t_rv *rv)
 	rv->bottom = 0;
 }
 
-void	za_warudo(t_data *data, t_bas *bas, t_rv *rv)
+void	za_warudo(t_data *data, t_rv *rv)
 {
 	if (data->zawarudo == 1)
 	{
@@ -54,7 +54,7 @@ void	za_warudo(t_data *data, t_bas *bas, t_rv *rv)
 	}
 }
 
-void	vline(t_data *data, t_bas *bas, t_rv *rv)
+void	vline(t_data *data, t_rv *rv)
 {
 	int	*pix;
 	int	y;
@@ -62,7 +62,7 @@ void	vline(t_data *data, t_bas *bas, t_rv *rv)
 	pix = (int *)data->wind.screen->pixels;
 	rv->y1 = clamp(rv->y1, 0, SH - 1);
 	rv->y2 = clamp(rv->y2, 0, SH - 1);
-	za_warudo(data, bas, rv);
+	za_warudo(data, rv);
 	if (rv->y1 == rv->y2)
 	{
 		pix[rv->y1 * SCREEN_WIDTH + rv->x] = rv->middle;

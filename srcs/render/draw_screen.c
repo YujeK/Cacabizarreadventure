@@ -6,13 +6,13 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 00:15:17 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 03:11:38 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 11:21:27 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	transform_vertex(t_data *data, t_b *b, t_bas *bas)
+void	transform_vertex(t_b *b, t_bas *bas)
 {
 	bas->vx1 = bas->sect.vertex[bas->s + 0].x - b->player.where.x;
 	bas->vy1 = bas->sect.vertex[bas->s + 0].y - b->player.where.y;
@@ -30,7 +30,7 @@ void	transform_vertex(t_data *data, t_b *b, t_bas *bas)
 	bas->ttz2 = bas->tz2;
 }
 
-void	into_screen(t_data *data, t_b *b, t_bas *bas)
+void	into_screen(t_b *b, t_bas *bas)
 {
 	float p;
 
@@ -58,7 +58,7 @@ void	into_screen(t_data *data, t_b *b, t_bas *bas)
 	bas->x = bas->beginx;
 }
 
-void	draw_neighbor(t_data *data, t_b *b, t_bas *bas, t_rv *rv)
+void	draw_neighbor(t_data *data, t_bas *bas, t_rv *rv)
 {
 	if (bas->neighbor >= 0)
 	{
@@ -71,11 +71,11 @@ void	draw_neighbor(t_data *data, t_b *b, t_bas *bas, t_rv *rv)
 		bas->r1 = luminosity(bas->r1, bas->z, data->luminosity);
 		bas->r2 = bas->r1;
 		recycle_vline(bas, rv);
-		vline(data, bas, rv);
+		vline(data, rv);
 		bas->ytop[bas->x] = clamp(max(bas->cya, bas->cnya)
 		, bas->ytop[bas->x], SH - 1);
 		recycle_vline2(bas, rv);
-		vline(data, bas, rv);
+		vline(data, rv);
 		bas->ybottom[bas->x] = clamp(min(bas->cyb
 		, bas->cnyb), 0, bas->ybottom[bas->x]);
 	}
@@ -86,7 +86,7 @@ void	draw_neighbor(t_data *data, t_b *b, t_bas *bas, t_rv *rv)
 	}
 }
 
-int		init_draw_queue(t_data *data, t_b *b, t_bas *bas)
+int		init_draw_queue(t_data *data, t_bas *bas)
 {
 	bas->i = 0;
 	bas->now = *bas->tail;
@@ -109,7 +109,7 @@ void	draw_screen(t_data *data, t_b *b)
 	while (bas.head != bas.tail)
 	{
 		bas.i = -1;
-		init_draw_queue(data, b, &bas);
+		init_draw_queue(data, &bas);
 		if (bas.renderedsectors[bas.now.sectorno] & 0x21)
 			continue;
 		++bas.renderedsectors[bas.now.sectorno];

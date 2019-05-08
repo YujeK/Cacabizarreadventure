@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:40:28 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 06:50:18 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:40:48 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	init_main_v(t_data *data, t_b *b, char *arg)
 	if (Mix_Init(MIX_INIT_MP3) < 0)
 		exit(EXIT_FAILURE);
 	if (!(data->font = TTF_OpenFont("ressources/bb.ttf", 100)))
-		ft_error_exit(" I can't load font", data);
+		ft_error_exit(" I can't load font");
 	data->wind.window = SDL_CreateWindow("Doom_Nukem", SDL_WINDOWPOS_UNDEFINED,
 				SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SH, SDL_WINDOW_SHOWN);
 	data->wind.screen = SDL_GetWindowSurface(data->wind.window);
 	if (SDL_SetRelativeMouseMode(TRUE) < 0)
-		ft_error_exit("Wolf3d: Unable to set relative mode", data);
+		ft_error_exit("Doom: Unable to set relative mode");
 	b->str = ft_strnew(1);
 	b->fd = open(arg, O_CREAT | O_RDWR | O_APPEND, 0777);
 	while ((b->ret = get_next_line(b->fd, &b->buf)) == 1)
@@ -45,7 +45,7 @@ void	init_ingame_vars(t_data *data, t_b *b)
 	b->move_vec[0] = 0.f;
 	b->move_vec[1] = 0.f;
 	b->player.ground = !b->player.falling;
-	stand_activation(data, &b->player);
+	stand_activation(data);
 	data->sprint = 1;
 	data->aim = -1;
 }
@@ -75,7 +75,7 @@ t_bas	init_draw_vars(t_data *data, t_b *b, t_bas *bas)
 	return (*bas);
 }
 
-void	init_intersect_vars(t_data *data, t_b *b, t_bas *bas)
+void	init_intersect_vars(t_bas *bas)
 {
 	bas->nearz = 1e-4f;
 	bas->farz = 5;
@@ -98,11 +98,11 @@ void	init_intersect_vars(t_data *data, t_b *b, t_bas *bas)
 	}
 }
 
-void	init_intersect_vars2(t_data *data, t_b *b, t_bas *bas)
+void	init_intersect_vars2(t_bas *bas)
 {
 	if (bas->tz1 <= 0 || bas->tz2 <= 0)
 	{
-		init_intersect_vars(data, b, bas);
+		init_intersect_vars(bas);
 		if (bas->tz2 < bas->nearz)
 		{
 			if (bas->i1.y > 0)

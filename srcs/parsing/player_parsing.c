@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:46:50 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 07:53:44 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 11:15:09 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_plyr	load_player(t_sector *sectors, char **map)
 	int		f;
 	int		i;
 
+	str = NULL;
 	i = -1;
 	f = 0;
 	player.velocity.x = 0;
