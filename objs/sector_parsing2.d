@@ -1,5 +1,5 @@
-objs/tools.o: srcs/tools/tools.c includes/doom.h libft/libft.h \
-  /Users/dhorvill/.brew/include/SDL2/SDL.h \
+objs/sector_parsing2.o: srcs/parsing/sector_parsing2.c includes/doom.h \
+  libft/libft.h /Users/dhorvill/.brew/include/SDL2/SDL.h \
   /Users/dhorvill/.brew/include/SDL2/SDL_main.h \
   /Users/dhorvill/.brew/include/SDL2/SDL_stdinc.h \
   /Users/dhorvill/.brew/include/SDL2/SDL_config.h \

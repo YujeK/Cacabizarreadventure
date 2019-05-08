@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/08 06:29:44 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 07:34:42 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,6 +442,17 @@ typedef	struct	s_lsect
 	int			n;
 }				t_lsect;
 
+typedef struct	s_fls2
+{
+	int			i;
+	int			f;
+	int			part;
+	int			v;
+	int			save;
+	int			save2;
+	int			n;
+}				t_fls2;
+
 void			put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel);
 int				ft_iatoi(char *wall, int index);
 t_wind			init_wind(t_wind wind);
@@ -506,6 +517,7 @@ int				ft_iatoi(char *str, int i);
 t_vector		*load_vertex(char **map);
 t_plyr			load_player(t_sector *sectors, char **map);
 t_sector		*load_sectors(char **map, unsigned int *numsectors, t_vector *vertex);
+t_fls2			init_fill_sectors(char *str, t_fls2 b, t_sector *sectors, int *c);
 
 /*
 **	INIT FONCTIONS
