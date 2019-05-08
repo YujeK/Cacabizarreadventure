@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/08 06:51:46 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 08:15:32 by asamir-k         ###   ########.fr       */
+/*   Created: 2019/05/03 22:36:04 by dhorvill          #+#    #+#             */
+/*   Updated: 2019/05/08 06:29:44 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,16 +412,10 @@ typedef struct		s_bas
 	t_vector		sp;
 }					t_bas;
 
-typedef struct		s_fls2
-{
-	int				i;
-	int				f;
-	int				part;
-	int				v;
-	int				save;
-	int				save2;
-	int				n;
-}					t_fls2;
+void			put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel);
+int				ft_iatoi(char *wall, int index);
+t_wind			init_wind(t_wind wind);
+unsigned int 	*resize(unsigned int *pixels, t_tga specs, double size);
 
 typedef	struct		s_lsect
 {
@@ -522,14 +516,11 @@ void				inv_ev(t_data *data, Uint8 *state, float *move_vec);
 **  Parsing
 */
 
-int					count_vertex(char *str);
-int					ft_iatoi(char *str, int i);
-t_vector			*load_vertex(char **map);
-t_plyr				load_player(t_sector *sectors, char **map);
-t_sector			*load_sectors(char **map,
-					unsigned int *numsectors, t_vector *vertex);
-t_fls2				init_fill_sectors(char *str,
-					t_fls2 b, t_sector *sectors, int *c);
+int 			count_vertex(char *str);
+int				ft_iatoi(char *str, int i);
+t_vector		*load_vertex(char **map);
+t_plyr			load_player(t_sector *sectors, char **map);
+t_sector		*Load_sectors(char **map, unsigned int *numsectors, t_vector *vertex);
 
 /*
 **	INIT FONCTIONS
