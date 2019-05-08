@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 18:57:44 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 17:40:45 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 06:55:16 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_object *sprite, t_sector *sectors, t_bas *bas)
 	bas->t1.y = bas->sp.x * player.anglecos + bas->sp.y * player.anglesin;
 	if (bas->t1.y <= 0)
 		return (-1);
-	bas->xscale = hfov / bas->t1.y;
-	bas->yscale = vfov / bas->t1.y;
+	bas->xscale = HFOV / bas->t1.y;
+	bas->yscale = VFOV / bas->t1.y;
 	bas->xt = SCREEN_WIDTH / 2 - (int)(bas->t1.x * bas->xscale);
 	bas->y1 = SH / 2 - (int)
 	(yaw(bas->yf, bas->t1.y, player.yaw) * bas->yscale);

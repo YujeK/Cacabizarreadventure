@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:46:50 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 15:42:55 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 07:53:44 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ t_plyr	load_player(t_sector *sectors, char **map)
 	if (map[get_string(map)])
 		str = map[get_string(map)];
 	get_p_coords(str, &player, i, f);
-	player.where.z = sectors[player.sector].floor + Eyeheight;
+	player.where.z = sectors[player.sector].floor + EYEHEIGHT;
 	return (player);
 }

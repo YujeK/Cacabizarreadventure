@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 00:20:08 by smerelo           #+#    #+#             */
-/*   Updated: 2017/12/06 06:20:45 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 07:23:12 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ char	*ft_strtrim(char *s)
 			while (i <= j)
 				ss[++k] = s[++i];
 			ss[k] = '\0';
-			if (s)
-				ft_strdel(&s);
 			return (ss);
 		}
 	}

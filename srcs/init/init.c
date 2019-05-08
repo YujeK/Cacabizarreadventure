@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:40:28 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 01:59:44 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 06:50:18 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_main_v(t_data *data, t_b *b, char *arg)
 
 void	init_ingame_vars(t_data *data, t_b *b)
 {
-	b->eyeheight = b->player.ducking ? DuckHeight : Eyeheight;
+	b->eyeheight = b->player.ducking ? DUCKHEIGHT : EYEHEIGHT;
 	b->move_vec[0] = 0.f;
 	b->move_vec[1] = 0.f;
 	b->player.ground = !b->player.falling;

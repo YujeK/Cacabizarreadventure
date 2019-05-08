@@ -3,26 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   engine_interaction.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 09:15:20 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/08 02:21:29 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 07:17:59 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	do_intersect(t_b *b)
-{
-	
-}
-
 void	intersoc(t_b *b)
 {
 	t_inter ic;
 	t_inter ips;
-	float pxdx = b->px + b->dx;
-	float pydy = b->py + b->dy;
 
 	init_inter(b, &ic);
 	init_pointside(b, &ips);
@@ -32,8 +25,8 @@ void	intersoc(t_b *b)
 		: max(b->sect.floor, b->sectors[b->sect.neighbors[b->s]].floor);
 		b->hole_high = b->sect.neighbors[b->s] < 0 ? -9e9
 		: min(b->sect.ceil, b->sectors[b->sect.neighbors[b->s]].ceil);
-		if (b->hole_high < b->player.where.z + HeadMargin
-		|| b->hole_low > b->player.where.z - b->eyeheight + KneeHeight)
+		if (b->hole_high < b->player.where.z + HEADMARGIN
+		|| b->hole_low > b->player.where.z - b->eyeheight + KNEEHEIGHT)
 		{
 			b->xd = b->vert[b->s + 1].x - b->vert[b->s + 0].x;
 			b->yd = b->vert[b->s + 1].y - b->vert[b->s + 0].y;

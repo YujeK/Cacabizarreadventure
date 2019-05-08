@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/08 03:24:58 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 08:19:27 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ t_plyr	move_player(t_b *b)
 	t_vector		temp;
 	t_sector		sect;
 	t_vector		*vert;
-	t_inter			ic;
-	t_inter			ips;
+	t_inter			t[2];
 
 	b->px = b->player.where.x;
 	b->py = b->player.where.y;
@@ -46,9 +45,10 @@ t_plyr	move_player(t_b *b)
 	s = 0;
 	while (s < sect.npoints)
 	{
-		init_inter2(b, &ic, vert, s);
-		init_pointside2(b, &ips, s, vert);
-		if (sect.neighbors[s] >= 0 && intersectbox(&ic) && pointside(&ips) < 0)
+		init_inter2(b, &t[0], vert, s);
+		init_pointside2(b, &t[1], s, vert);
+		if (sect.neighbors[s] >= 0 && intersectbox(&t[0])
+		&& pointside(&t[1]) < 0)
 		{
 			b->player.sector = sect.neighbors[s];
 			break ;
@@ -72,7 +72,7 @@ int		main(int argc, char **argv)
 	data.weapon_ammo = data.sprite_nbr;
 	init_img(&data);
 	b.vert = load_vertex(b.map);
-	b.sectors = Load_sectors(b.map, &b.numsectors, b.vert);
+	b.sectors = load_sectors(b.map, &b.numsectors, b.vert);
 	b.player = load_player(b.sectors, b.map);
 	data.startgame_timer = time(0);
 	data.numsectors = b.numsectors;

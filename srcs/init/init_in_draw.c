@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_in_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 02:38:31 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/08 02:59:19 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 06:55:16 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	scale_coords(t_bas *bas)
 {
-	bas->xscale1 = hfov / bas->tz1;
-	bas->yscale1 = vfov / bas->tz1;
+	bas->xscale1 = HFOV / bas->tz1;
+	bas->yscale1 = VFOV / bas->tz1;
 	bas->x1 = SCREEN_WIDTH / 2 - (int)(bas->tx1 * bas->xscale1);
-	bas->xscale2 = hfov / bas->tz2;
-	bas->yscale2 = vfov / bas->tz2;
+	bas->xscale2 = HFOV / bas->tz2;
+	bas->yscale2 = VFOV / bas->tz2;
 	bas->x2 = SCREEN_WIDTH / 2 - (int)(bas->tx2 * bas->xscale2);
 }
 

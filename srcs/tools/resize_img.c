@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 19:14:40 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/07 17:43:21 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 04:49:31 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void			draw_resized_column(t_data *d, t_object *s, int ytop, int ybot)
 
 	width = s->specs.width;
 	t[2] = width - 1;
-	res_j = s->y1;
+	res_j = s->y1 - 1;
 	t[0] = width / s->size;
 	t[1] = s->x_count * t[0];
-	while (t[2] > 0 && res_j++ < s->y2)
+	while (t[2] > 0 && ++res_j < s->y2)
 	{
 		if (s->img[(int)t[2] * s->specs.width + (int)t[1]] != 0xffffffff)
 			s->img[(int)t[2] * s->specs.width + (int)t[1]] -= 0xff000000;

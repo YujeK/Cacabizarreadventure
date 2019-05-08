@@ -36,7 +36,8 @@ SRC			:=	main.c \
 				init_in_draw.c \
 				recycle.c \
 				tga2.c \
-				init_isec_pside.c
+				init_isec_pside.c \
+				sector_parsing2.c
 # directories :
 OBJDIR 		:=	objs
 INCDIR  	:=	includes
