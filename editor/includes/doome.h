@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doom.h                                             :+:      :+:    :+:   */
+/*   doome.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 21:33:46 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/08 07:45:08 by dhorvill         ###   ########.fr       */
+/*   Updated: 2019/05/08 12:17:11 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include "get_next_line.h"
 # include "SDL.h"
-# include "libft/libft.h"
+# include "libft.h"
 
 # define SCREEN_WIDTH 1000
 # define SCREEN_HEIGHT 1000
