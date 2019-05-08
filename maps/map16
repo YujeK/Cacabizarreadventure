@@ -1,0 +1,59 @@
+vertex 200 200 400 z
+vertex 400 400 200 z
+vertex 313 511 z
+vertex 135 458 z
+vertex 248 569 z
+vertex 366 554 z
+vertex 453 443 z
+vertex 79 510 z
+vertex 192 621 z
+vertex 33 613 z
+vertex 146 724 z
+vertex 439 628 z
+vertex 526 517 z
+vertex 595 447 z
+vertex 522 373 z
+vertex 686 347 z
+vertex 613 273 z
+vertex 521 820 z
+vertex 590 750 z
+vertex 607 642 z
+vertex 566 936 z
+vertex 861 61 z
+vertex 649 985 z
+vertex 944 110 z
+vertex 314 715 z
+vertex 360 612 z
+vertex 140 872 z
+vertex 308 863 z
+vertex 143 949 z
+vertex 311 940 z
+z
+sector  480 520 0 1 4 2 3 c  -1 -1 1 2 -1  z
+sector  495 535 1 5 6 4 c  0 -1 3 -1  z
+sector  465 505 4 7 8 2 c  0 -1 5 -1  z
+sector  525 565 5 9 10 6 c  1 -1 4 -1  z
+sector  540 580 9 11 12 10 c  3 -1 -1 11  z
+sector  450 490 7 13 14 8 c  2 -1 -1 6  z
+sector  435 475 14 15 16 8 c  5 8 7 -1  z
+sector  400 460 15 17 18 16 c  6 -1 -1 -1  z
+sector  435 520 14 19 20 21 15 c  6 -1 -1 9 -1  z
+sector  480 520 20 22 23 21 c  8 -1 10 -1  z
+sector  480 520 22 24 25 23 c  9 -1 -1 -1  z
+sector  480 580 12 26 27 10 c  4 12 -1 -1  z
+sector  455 525 12 28 29 26 c  11 -1 13 -1  z
+sector  480 520 28 30 31 29 c  12 -1 -1 -1  z
+z
+player 300 300 0 0 z
+z
+object  288 776 9 z
+object  689 602 9 z
+object  679 306 11 z
+object  878 251 13 z
+object  589 146 12 z
+object  541 218 3 z
+object  481 279 1 z
+object  158 909 10 z
+object  922 651 10 z
+object  494 401 2 z
+object  440 330 0 z
