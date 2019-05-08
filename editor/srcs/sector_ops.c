@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector_ops.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 20:24:46 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/08 07:49:30 by dhorvill         ###   ########.fr       */
+/*   Updated: 2019/05/08 23:04:18 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_map		extrude_sector(t_map map, int edge_to_extrude,
 	map = create_new_vertexes(map, edge_to_extrude, extrude_vector);
 	map = connect_new_edges(map, edge_to_extrude);
 	map = create_new_sector(map, edge_to_extrude);
-	if (/*(nested_extrude(map) || */!(geometry_is_valid(map)))
+	if (nested_extrude(map) || !(geometry_is_valid(map)))
 		map = remove_latest_sector(map);
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 18:57:44 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/08 11:31:54 by dhorvill         ###   ########.fr       */
+/*   Updated: 2019/05/08 22:59:00 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_object *sprite, t_sector *sectors, t_bas *bas)
 	bas->y2 = SH / 2 - (int)
 	(yaw(bas->yc, bas->t1.y, player.yaw) * bas->yscale);
 	sprite->x = bas->xt;
-	sprite->y1 = (bas->y1 + bas->y2) / 2;
+	sprite->y1 = bas->y1 - sprite->size;
 	return (sprite->x);
 }
 
@@ -59,7 +59,7 @@ t_object	*sprite_size(t_object *sprite, t_plyr player, t_data data, t_b *b)
 	int	i;
 
 	i = -1;
-	while (++i < data.sprite_nbr)
+	while (++i < data.sprite_nbr - 1)
 	{
 		sprite[i].dist = sqrt(pow(sprite[i].where.x
 		- player.where.x, 2) + pow(sprite[i].where.y - player.where.y, 2));
@@ -69,7 +69,7 @@ t_object	*sprite_size(t_object *sprite, t_plyr player, t_data data, t_b *b)
 		sprite[i].x_count = 0;
 	}
 	i = -1;
-	while (++i < data.sprite_nbr)
+	while (++i < data.sprite_nbr - 1)
 	{
 		if (sprite[i].dist < sprite[i + 1].dist)
 		{

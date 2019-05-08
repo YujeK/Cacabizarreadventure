@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 21:41:43 by snicolet          #+#    #+#             */
-/*   Updated: 2019/05/07 15:21:15 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 23:20:41 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void			*load_tga_error(const char *error, void *file_content)
 {
 	if (file_content)
 		free(file_content);
-	printf("error: %s\n", error);
+	ft_putendl(error);
 	return (NULL);
 }
 

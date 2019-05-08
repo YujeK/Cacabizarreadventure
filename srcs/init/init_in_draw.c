@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 02:38:31 by smerelo           #+#    #+#             */
-/*   Updated: 2019/05/08 11:43:05 by dhorvill         ###   ########.fr       */
+/*   Updated: 2019/05/08 23:12:40 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	draw_edges(t_bas *bas, t_data *data, t_b *b)
 		while (++bas->i < data->sprite_nbr)
 		{
 			if (data->sectqueue[data->sprite[bas->i].sectorno]
-				<= data->sectqueue[data->now_sect] &&
-				data->sprite[bas->i].status != 2 &&
-				data->sectqueue[data->sprite[bas->i].sectorno] != -1)
-				data->sprite[bas->i] = get_sprite_coords(data
-				, &data->sprite[bas->i], b, bas);
+			<= data->sectqueue[data->now_sect]
+			&& data->sprite[bas->i].status != 2
+			&& data->sectqueue[data->sprite[bas->i].sectorno] != -1)
+				data->sprite[bas->i] = get_sprite_coords(data,
+			&data->sprite[bas->i], b, bas);
 		}
 		recycle_vline3(bas, &rv);
 		vline(data, &rv);

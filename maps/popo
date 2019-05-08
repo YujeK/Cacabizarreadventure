@@ -1,0 +1,104 @@
+vertex 200 200 400 z
+vertex 400 400 200 z
+vertex 305 400 z
+vertex 321 661 z
+vertex 416 661 z
+vertex 668 542 z
+vertex 543 861 z
+vertex 795 742 z
+vertex 137 311 z
+vertex 86 118 z
+vertex 23 229 z
+vertex 229 94 z
+vertex 115 12 z
+vertex 173 53 z
+vertex 251 54 z
+vertex 195 13 z
+vertex 309 151 z
+vertex 331 111 z
+vertex 354 69 z
+vertex 274 12 z
+vertex 378 120 z
+vertex 450 69 z
+vertex 426 18 z
+vertex 513 300 z
+vertex 585 249 z
+vertex 516 157 z
+vertex 697 141 z
+vertex 628 49 z
+vertex 657 223 z
+vertex 812 330 z
+vertex 852 248 z
+vertex 739 280 z
+vertex 689 427 z
+vertex 762 477 z
+vertex 639 299 z
+vertex 667 373 z
+vertex 624 314 z
+vertex 652 388 z
+vertex 521 361 z
+vertex 605 422 z
+z
+sector  480 520 0 10 1 4 2 3 c  -1 3 -1 -1 1 -1  z
+sector  480 520 4 5 6 7 2 c  0 -1 -1 2 -1  z
+sector  480 520 6 8 9 7 c  1 -1 -1 -1  z
+sector  480 520 0 11 12 10 c  0 4 -1 -1  z
+sector  480 520 0 13 15 14 11 c  3 -1 5 -1 -1  z
+sector  480 520 13 16 17 15 c  4 6 -1 -1  z
+sector  480 520 13 18 19 16 c  5 -1 -1 7  z
+sector  480 520 19 22 20 21 16 c  6 -1 8 -1 -1  z
+sector  480 520 22 23 24 20 c  7 9 -1 -1  z
+sector  487 576 22 25 26 27 23 c  8 -1 -1 10 -1  z
+sector  480 520 26 30 28 29 27 c  9 -1 11 -1 -1  z
+sector  480 520 30 33 31 32 28 c  10 -1 12 -1 -1  z
+sector  480 520 33 36 37 34 35 31 c  11 -1 13 -1 -1 -1  z
+sector  480 520 36 38 39 37 c  12 -1 14 -1  z
+sector  480 520 38 40 41 39 c  13 -1 -1 -1  z
+z
+player 303 242 0 0 z
+z
+object  338 381 0 z
+object  267 383 0 z
+object  219 371 0 z
+object  226 259 0 z
+object  237 196 0 z
+object  309 161 0 z
+object  370 213 0 z
+object  378 289 0 z
+object  453 438 1 z
+object  497 516 1 z
+object  535 581 1 z
+object  601 615 2 z
+object  676 610 2 z
+object  757 574 2 z
+object  786 630 2 z
+object  762 711 2 z
+object  744 713 2 z
+object  711 508 2 z
+object  598 384 1 z
+object  532 373 1 z
+object  471 344 1 z
+object  424 319 1 z
+object  259 122 3 z
+object  242 81 3 z
+object  174 125 3 z
+object  186 151 3 z
+object  100 123 4 z
+object  108 169 4 z
+object  109 196 4 z
+object  51 210 5 z
+object  74 240 6 z
+object  97 290 6 z
+object  64 313 7 z
+object  86 341 7 z
+object  81 412 8 z
+object  158 478 9 z
+object  216 529 9 z
+object  190 581 10 z
+object  147 628 10 z
+object  154 682 10 z
+object  239 763 11 z
+object  312 798 11 z
+object  375 772 12 z
+object  330 673 12 z
+object  358 582 14 z

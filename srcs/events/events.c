@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/08 11:36:21 by dhorvill         ###   ########.fr       */
+/*   Updated: 2019/05/08 14:09:06 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	event_manager(t_data *data, t_b *b)
 	b->player = move_player(b);
 	event_keyboard(&b->player, data,
 		b->move_vec, b->sectors) == 1 ? b->pushing = 1 : 0;
-	b->acceleration = b->pushing ? 0.2 : 0.1;
+	b->acceleration = b->pushing ? 0.1 : 0.05;
 	b->player.velocity.x = b->player.velocity.x * (1 - b->acceleration)
 		+ b->move_vec[0] * b->acceleration * data->sprint;
 	b->player.velocity.y = b->player.velocity.y * (1 - b->acceleration)
