@@ -6,7 +6,7 @@
 /*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 22:35:38 by dhorvill          #+#    #+#             */
-/*   Updated: 2019/05/08 03:24:58 by smerelo          ###   ########.fr       */
+/*   Updated: 2019/05/08 06:19:14 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		main(int argc, char **argv)
 	data.weapon_ammo = data.sprite_nbr;
 	init_img(&data);
 	b.vert = load_vertex(b.map);
-	b.sectors = Load_sectors(b.map, &b.numsectors, b.vert);
+	b.sectors = load_sectors(b.map, &b.numsectors, b.vert);
 	b.player = load_player(b.sectors, b.map);
 	data.startgame_timer = time(0);
 	data.numsectors = b.numsectors;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sector_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smerelo <smerelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 23:49:55 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/05/07 15:22:42 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/05/08 06:37:22 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-t_sector *fill_sectors(t_sector *sectors, char *str, int *c, t_vector *vertex)
+t_sector	*fill_sectors(t_sector *sectors, char *str, int *c, t_vector *vertex)
 {
 	int i;
 	int f;
@@ -29,14 +29,13 @@ t_sector *fill_sectors(t_sector *sectors, char *str, int *c, t_vector *vertex)
 	i = 0;
 	part = 0;
 	v = count_vertex(str);
-	//printf("%d\n", v);
 	sectors[*c].npoints = v - 1;
-	//printf("%i\n\n", v);
 	if (v < 4)
 		exit(EXIT_FAILURE);
 	if (!(sectors[*c].vertex = (t_vector*)malloc(sizeof(t_vector) * v + 100)))
 		exit(EXIT_FAILURE);
-	if (!(sectors[*c].neighbors = (signed char*)malloc(sizeof(signed char) * v + 10)))
+	if (!(sectors[*c].neighbors = (signed char*)
+		malloc(sizeof(signed char) * v + 10)))
 		exit(EXIT_FAILURE);
 	while (str[i])
 	{
@@ -72,10 +71,11 @@ t_sector *fill_sectors(t_sector *sectors, char *str, int *c, t_vector *vertex)
 			i++;
 		while (str[i] && (str[i] < '0' || str[i] > '9') && str[i] != '-')
 			i++;
-		while(str[i])
+		while (str[i])
 		{
 			sectors[*c].neighbors[f] = ft_iatoi(str, i);
-			while(str[i] && ((str[i] >= '0' && str[i] <= '9') || str[i] == '-'))
+			while (str[i] && ((str[i]
+			>= '0' && str[i] <= '9') || str[i] == '-'))
 				i++;
 			i++;
 			f++;
@@ -84,48 +84,51 @@ t_sector *fill_sectors(t_sector *sectors, char *str, int *c, t_vector *vertex)
 	return (sectors);
 }
 
-t_sector	*Load_sectors(char **map, unsigned int *numsectors, t_vector *vertex)
-{
-	t_sector *sectors;
-	int i;
-	int j;
-	int t;
-	int c;
-	int st;
 
-	c = 0;
-	j = 0;
-	i = 0;
-	st = 0;
-	t = ft_tablen(map);
-	while(i < t)
+void	load_sectors2(char **map, unsigned int
+	*numsectors, t_vector *vertex, t_lsect *b)
+{
+	b->st = 0;
+	b->i = 0;
+	while (b->i < b->t)
 	{
-		j = 0;
-		while (map[i][j])
+		if (map[b->i][1] == 's')
 		{
-			if (map[i][j] == 's')
-			{
-				st++;
-			}
-			j++;
+			b->st = 1;
+			b->sect = fill_sectors(b->sect, map[b->i], &b->c, vertex);
+			b->c++;
 		}
-		i++;
+		b->i++;
 	}
-	*numsectors = st;
-	sectors = (t_sector *)malloc(sizeof(t_sector) * st);
-	st = 0;
-	i = 0;
-	while(i < t)
-	{
-		if(map[i][1] == 's')
-		{
-			st = 1;
-			sectors = fill_sectors(sectors, map[i], &c, vertex);
-			c++;
-		}
-		i++;
-	}
-	if(!st)
+	if (!b->st)
 		exit(EXIT_FAILURE);
-	return(sectors);
+}
+
+
+t_sector	*load_sectors(char **map, unsigned int *numsectors, t_vector *vertex)
+{
+	t_lsect		b;
+
+	b.c = 0;
+	b.j = 0;
+	b.i = 0;
+	b.st = 0;
+	b.t = ft_tablen(map);
+	while (b.i < b.t)
+	{
+		b.j = 0;
+		while (map[b.i][b.j])
+		{
+			if (map[b.i][b.j] == 's')
+			{
+				b.st++;
+			}
+			b.j++;
+		}
+		b.i++;
+	}
+	*numsectors = b.st;
+	b.sect = (t_sector *)malloc(sizeof(t_sector) * b.st);
+	load_sectors2(map, numsectors, vertex, &b);
+	return (b.sect);
 }
